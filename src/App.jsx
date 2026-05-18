@@ -8,19 +8,21 @@ import Qualifiers from "./components/Qualifiers";
 import Results from "./components/Results";
 import TeamDetails from "./components/TeamDetails";
 import TeamResults from "./components/TeamResults";
+import Home from "./components/Home";
 
 export default function App() {
   return (
     <BrowserRouter>
       <nav>
         <ul>
-          <li><Link to="/">Drivers</Link></li>
+          <li><Link to="/drivers">Drivers</Link></li>
           <li><Link to="/teams">Teams</Link></li>
           <li><Link to="/races">Races</Link></li>
         </ul>
       </nav>
       <Routes>
-        <Route path="/" element={<AllDrivers />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/drivers" element={<AllDrivers />} />
         <Route path="/teams" element={<AllTeams />} />
         <Route path="/races" element={<AllRaces />} />
 
