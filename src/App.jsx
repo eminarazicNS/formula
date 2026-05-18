@@ -3,16 +3,19 @@ import AllDrivers from "./components/AllDrivers";
 import AllTeams from "./components/AllTeams";
 import AllRaces from "./components/AllRaces";
 import DriverDetails from "./components/DriverDetails";
-import DriverRaces from "./components/DriverRaces";
-import Qualifiers from "./components/Qualifiers";
-import Results from "./components/Results";
 import TeamDetails from "./components/TeamDetails";
-import TeamResults from "./components/TeamResults";
-import Home from "./components/Home";
+import RaceDetails from "./components/RaceDetails";
+// import Home from "./components/Home";
+// import DriverRaces from "./components/DriverRaces";
+// import Qualifiers from "./components/Qualifiers";
+// import Results from "./components/Results";
 
 export default function App() {
   return (
     <BrowserRouter>
+      <div>
+        <img src="../img/logo.png" alt="Logo" />
+      </div>
       <nav>
         <ul>
           <li><Link to="/drivers">Drivers</Link></li>
@@ -20,18 +23,16 @@ export default function App() {
           <li><Link to="/races">Races</Link></li>
         </ul>
       </nav>
+
       <Routes>
-        <Route path="/" element={<Home />} />
+        {/* <Route path="/" element={<Home />} /> */}
         <Route path="/drivers" element={<AllDrivers />} />
         <Route path="/teams" element={<AllTeams />} />
         <Route path="/races" element={<AllRaces />} />
 
-        <Route path="/driverDetails" element={<DriverDetails />} />
-        <Route path="/driverRaces" element={<DriverRaces />} />
-        <Route path="/qualifiers" element={<Qualifiers />} />
-        <Route path="/results" element={<Results />} />
-        <Route path="/teamDetails" element={<TeamDetails />} />
-        <Route path="/teamResults" element={<TeamResults />} />
+        <Route path="/driverDetails/:id" element={<DriverDetails />} />
+        <Route path="/teamDetails/:id" element={<TeamDetails />} />
+        <Route path="/raceDetails/:id" element={<RaceDetails />} />
 
 
       </Routes>
