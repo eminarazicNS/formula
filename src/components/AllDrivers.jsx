@@ -32,10 +32,11 @@ export default function AllDrivers() {
                     </tr>
                 </thead>
                 <tbody>
-                    {drivers.map((driver) => {
+                    {drivers.map((driver, i) => {
                         return (
                             <tr key={driver.position}>
-                                <td>{driver.givenName} {driver.familyName}</td>
+                                <td>{driver.position}</td>
+                                <td>{driver.Driver.givenName} {driver.Driver.familyName}</td>
                                 <td>{driver.Constructors[0].name}</td>
                                 <td>{driver.points}</td>
                             </tr>
