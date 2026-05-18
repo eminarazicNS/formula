@@ -11,6 +11,7 @@ import RaceDetails from "./components/RaceDetails";
 // import Results from "./components/Results";
 
 export default function App() {
+
   return (
     <BrowserRouter>
       <div>
@@ -18,7 +19,7 @@ export default function App() {
       </div>
       <nav>
         <ul>
-          <li><Link to="/drivers">Drivers</Link></li>
+          <li><Link to="/">Drivers</Link></li>
           <li><Link to="/teams">Teams</Link></li>
           <li><Link to="/races">Races</Link></li>
         </ul>
@@ -26,7 +27,7 @@ export default function App() {
 
       <Routes>
         {/* <Route path="/" element={<Home />} /> */}
-        <Route path="/drivers" element={<AllDrivers />} />
+        <Route path="/" element={<AllDrivers />} />
         <Route path="/teams" element={<AllTeams />} />
         <Route path="/races" element={<AllRaces />} />
 
