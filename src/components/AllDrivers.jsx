@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-// import Loader from "./Loader";
+import Loader from "./Loader";
 
 export default function AllDrivers() {
     const [drivers, setDrivers] = useState({});
-    // const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         getDrivers();
@@ -14,15 +14,13 @@ export default function AllDrivers() {
         const url = "https://api.jolpi.ca/ergast/f1/2013/driverStandings.json";
         const response = await axios.get(url);
         console.log("response", response);
-        const p = response.data.MRData.StandingsTable.StandingsLists[0].DriverStandings[0];
-        console.log("moji podaci ", typeof p, p);
-        setDrivers(response.data.MRData.StandingsTable.StandingsLists[0].DriverStandings[0]);
-        // setLoading(false);
+        setDrivers(response.data.MRData.StandingsTable.StandingsLists[0].DriverStandings);
+        setLoading(false);
     };
 
-    // if (loading) {
-    //     return <Loader />;
-    // }
+    if (loading) {
+        return <Loader />;
+    }
 
     return (
         <div>
@@ -34,15 +32,15 @@ export default function AllDrivers() {
                     </tr>
                 </thead>
                 <tbody>
-                    {/* {drivers.map((driver) => {
+                    {drivers.map((driver) => {
                         return (
                             <tr key={driver.position}>
-                                <td>{driver.givenName} {familyName}</td>
-                                <td>{driver.Constructors[0].constructorId}</td>
+                                <td>{driver.givenName} {driver.familyName}</td>
+                                <td>{driver.Constructors[0].name}</td>
                                 <td>{driver.points}</td>
                             </tr>
                         )
-                    })} */}
+                    })}
                 </tbody>
             </table>
         </div>
