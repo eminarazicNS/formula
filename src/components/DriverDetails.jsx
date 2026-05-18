@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import Loader from "./Loader";
 import axios from "axios";
@@ -16,7 +16,7 @@ export default function DriverDetails() {
 
     const getDriverDetails = async () => {
         const url = `https://api.jolpi.ca/ergast/f1/2013/drivers/${params.id}/driverStandings.json`;
-        const response = await axios(get.url);
+        const response = await axios.get(url);
         console.log(response.data);
         setDriverDetails(response);
         setLoading(false);

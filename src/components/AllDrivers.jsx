@@ -1,10 +1,13 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Loader from "./Loader";
+import { useNavigate } from "react-router";
 
 export default function AllDrivers() {
     const [drivers, setDrivers] = useState({});
     const [loading, setLoading] = useState(true);
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         getDrivers();
@@ -17,6 +20,11 @@ export default function AllDrivers() {
         setDrivers(response.data.MRData.StandingsTable.StandingsLists[0].DriverStandings);
         setLoading(false);
     };
+
+    const handleClick = (id) => {
+        console.log("id ", id);
+        navigate(`/driverDetails/${id}`)
+    }
 
     if (loading) {
         return <Loader />;
@@ -34,7 +42,9 @@ export default function AllDrivers() {
                 <tbody>
                     {drivers.map((driver, i) => {
                         return (
-                            <tr key={driver.position}>
+                            <tr key={driver.position}
+                                onClick={() => handleClick(driver.position)}
+                            >
                                 <td>{driver.position}</td>
                                 <td>{driver.Driver.givenName} {driver.Driver.familyName}</td>
                                 <td>{driver.Constructors[0].name}</td>
