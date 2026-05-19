@@ -26,7 +26,7 @@ export default function DriverDetails() {
         const response = await axios.get(url);
         //  console.log(response.data);
         console.log(response.data.MRData.StandingsTable.StandingsLists[0].DriverStandings);
-        setDriverDetails(response.data.MRData.StandingsTable.StandingsLists[0].DriverStandings);
+        setDriverDetails(response.data.MRData.StandingsTable.StandingsLists[0].DriverStandings[0]);
 
     }
 
@@ -43,7 +43,7 @@ export default function DriverDetails() {
         return <Loader />
     }
 
-    console.log("driverDetails", driverDetails.Driver.nationality);
+
     return (
         <div className="wrapper">
             <div className="col1">
@@ -59,6 +59,8 @@ export default function DriverDetails() {
 
             <div className="col2">
                 <h2>DRIVERS DETAILS</h2>
+                <p>Data: {driverDetails.Driver.givenName}</p>
+                <p>Team: {driverDetails.Constructors[0].name}</p>
             </div>
         </div>
     );
