@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import Loader from "./Loader";
 import axios from "axios";
 import { useNavigate, Link } from "react-router";
+import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 
 export default function AllTeams() {
     const [teams, setTeams] = useState({});
@@ -16,7 +17,10 @@ export default function AllTeams() {
     const getTeams = async () => {
         const url = "https://api.jolpi.ca/ergast/f1/2013/constructorStandings.json";
         const response = await axios.get(url);
-        console.log("response", response);
+        //console.log("response", response);
+        console.log("teams",response.data.MRData.StandingsTable.StandingsLists[0].ConstructorStandings );
+
+
         setTeams(response.data.MRData.StandingsTable.StandingsLists[0].ConstructorStandings);
         setLoading(false);
     };
@@ -59,8 +63,12 @@ export default function AllTeams() {
                             return (
                                 <tr key={team.position}>
                                     <td>{team.position}</td>
-                                    <td>{team.Constructor.constructorId}</td>
-                                    <td onClick={() => handleClick(team.Constructor.constructorId)}>Details</td>
+                                    <td className="link"
+                                        onClick={() => handleClick(team.Constructor.constructorId)}
+                                    >{team.Constructor.constructorId}</td>
+                                    <td>Details
+                                        <a href={team.Constructor.url} target="_blank"><OpenInNewIcon /></a>
+                                    </td>
                                     <td>{team.points}</td>
                                 </tr>
                             )

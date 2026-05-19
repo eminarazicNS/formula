@@ -4,10 +4,11 @@ import AllTeams from "./components/AllTeams";
 import AllRaces from "./components/AllRaces";
 import DriverDetails from "./components/DriverDetails";
 import TeamDetails from "./components/TeamDetails";
+import TeamResults from "./components/TeamResults";
 import RaceDetails from "./components/RaceDetails";
 // import DriverRaces from "./components/DriverRaces";
 // import Qualifiers from "./components/Qualifiers";
-// import Results from "./components/Results";
+//import Results from "./components/Results";
 
 export default function App() {
 
@@ -21,6 +22,7 @@ export default function App() {
         <Route path="/driverDetails/:id" element={<DriverDetails />} />
         <Route path="/driverRaces/:id" element={<DriverDetails />} />
         <Route path="/teamDetails/:id" element={<TeamDetails />} />
+        <Route path="/teamResults/:id" element={<TeamResults />} />
         <Route path="/raceDetails/:id" element={<RaceDetails />} />
 
 

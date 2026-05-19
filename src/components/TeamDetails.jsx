@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams, Link } from "react-router";
+import { useParams, Link, useNavigate } from "react-router";
 import Loader from "./Loader";
 import axios from "axios";
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
@@ -11,6 +11,8 @@ export default function TeamDetails() {
     const [loading, setLoading] = useState(true);
     const [firstDriver,setFirstDriver] = useState("");
     const [secondDriver,setSecondDriver] = useState("");
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         console.log("useEffect");
@@ -33,14 +35,15 @@ export default function TeamDetails() {
 
         //console.log("teamStandingResponse ", teamStandingResponse);
 
-        //console.log(teamStandingResponse.data.MRData.StandingsTable.StandingsLists[0].ConstructorStandings[0]);
+        console.log("teamDetails ",teamStandingResponse.data.MRData.StandingsTable.StandingsLists[0].ConstructorStandings[0]);
+        setTeamDetails(teamStandingResponse.data.MRData.StandingsTable.StandingsLists[0].ConstructorStandings[0]);
+
 
         //console.log("teamRacesResponse ", teamRacesResponse);
 
-        console.log(teamRacesResponse.data.MRData.RaceTable.Races);
+        //console.log(teamRacesResponse.data.MRData.RaceTable.Races);
 
-        setTeamDetails(teamStandingResponse.data.MRData.StandingsTable.StandingsLists[0].ConstructorStandings[0]);
-
+        
         setTeamRaces(teamRacesResponse.data.MRData.RaceTable.Races);
 
         //table races header
@@ -69,7 +72,7 @@ export default function TeamDetails() {
                 </div>
             </div>
 
-            <div className="col2">
+            <div className="td-col2">
                 <div className="vNav">
                     <h2>TEAM DETAILS - vertikalna navigacija</h2>
                 </div>
@@ -79,7 +82,7 @@ export default function TeamDetails() {
                             <p>Team: {teamDetails.Constructor.name}</p>
                             <p>Country: {teamDetails.Constructor.nationality}</p>
                             <p>Points: {teamDetails.points}</p>
-                            <p>History: <a href={teamDetails.Constructor.teamStandingUrl} target="_blank"><OpenInNewIcon />
+                            <p>History: <a href={teamDetails.Constructor.url} target="_blank"><OpenInNewIcon />
                             </a></p>
                         </div>
                         <div className="about-down">
@@ -104,7 +107,7 @@ export default function TeamDetails() {
                                         return (
                                               <tr key={race.round}>
                                                 <td>{race.round}</td>
-                                                <td>{race.raceName}</td>
+                                                <td className="link">{race.raceName}</td>
                                                <td>{race.Results[0].position}</td>
                                                <td>{race.Results[1].position}</td>
                                                <td>{Number(race.Results[0].points) + Number(race.Results[1].points)}</td>

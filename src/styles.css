@@ -3,6 +3,13 @@ body {
     padding: 0;
 }
 
+/*
+//ne radi, ali radi inline stil style={{textDecoration:"none"}}
+Link {
+    text-decoration: none;
+} 
+*/
+
 .wrapper {
     width: 100%;
     height: 100vh;
@@ -13,9 +20,6 @@ body {
 .wrapper .col1 {
     width: 30%;
     border: 1px solid black;
-    /* display: flex;
-    flex-direction: row;
-    align-items: stretch; */
 }
 
 .details {
@@ -39,9 +43,23 @@ body {
     border: 1px solid black;
 }
 
-/* DriverDetails */
+ul {
+    list-style: none;
+}
 
+.link {
+    cursor: pointer;
+}
 
+.link:hover {
+    color: red;
+}
+
+a:hover {
+    color: red;
+}
+
+/* start DriverDetails */
 .wrapper .dd-col2 {
     width: 70%;
     border: 1px solid black;
@@ -60,55 +78,46 @@ body {
     text-align: center;
 }
 
-
-/* 
-.wrapper ul,li{
-   text-decoration: none;
-} */
+/* end DriverDetails */
 
 /***start Teams details */
-/* .wrapper .td-col1 {
-    width: 30%;
-    border: 1px solid black;
-} 
-
-.wrapper .td-col1 img {
-    width: 150px;
-    height: 150px;
-}
-
 
 .wrapper .td-col2 {
     width: 70%;
     border: 1px solid black;
+    display: flex;
+    flex-direction: column;
 }
-    */
 
-.wrapper .col2 .container-details {
+.wrapper .td-col2 .vNav {
+    flex: 0;
+}
+
+.wrapper .td-col2 .container-details {
     display: flex;
     flex-direction: row;
     width: 100%;
-    height: 100vh;
     border: 1px solid black;
+    flex: 1;
 }
 
 
-.wrapper .col2 .container-details .about{
-   display: flex;
+.wrapper .td-col2 .container-details .about {
+    display: flex;
     flex-direction: column;
     width: 30%;
     border: 1px solid black;
 }
 
-.wrapper .col2 .container-details .about .about-up{
+.wrapper .td-col2 .container-details .about .about-up {
     width: 100%;
     height: 50%;
-     border: 1px solid black;
+    border: 1px solid black;
 }
 
 
-.wrapper .col2 .container-details .table-details{
-   width: 70%;    
+.wrapper .td-col2 .container-details .table-details {
+    width: 70%;
     border: 1px solid black;
 }
 
