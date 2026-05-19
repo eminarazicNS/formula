@@ -18,32 +18,30 @@ export default function DriverDetails() {
     console.log("params ", params);
 
     const getDriverDetails = async () => {
+        console.log("getDriverDetails");
+        const url = `https://api.jolpi.ca/ergast/f1/2013/drivers/${params.id}/driverStandings.json`;
+        const response = await axios.get(url);
+      //  console.log(response.data);
+        console.log(response.data.MRData.StandingsTable.StandingsLists[0].DriverStandings);
+       // setDriverDetails(response);
+       
+    }
 
-        const driverStandingsUrl = `https://api.jolpi.ca/ergast/f1/2013/drivers/${params.id}/driverStandings.json`;
-
-        const driverRacesUrl = `https://api.jolpi.ca/ergast/f1/2013/drivers/${params.id}/results.json`;
-
-        const driverStandingsResponse = await axios.get(driverStandingsUrl);
-        const driverRacesResponse = await axios.get(driverRacesUrl);
-
-        console.log("DriverStandings", driverStandingsResponse.data.MRData.StandingsTable.StandingsLists[0].DriverStandings[0]);
-        console.log("DriverRaces", driverRacesResponse.data.MRData.RaceTable.Races);
-
-        setDriverDetails(driverStandingsResponse.data.MRData.StandingsTable.StandingsLists[0].DriverStandings[0]);
-        setDriverRaces(driverRacesResponse.data.MRData.RaceTable.Races);
-
-        setLoading(false);
+    const getDriverRaces = async () => {
+        //  console.log("getDriverRaces");
+        // const url = `https://api.jolpi.ca/ergast/f1/2013/drivers/${params.id}/results.json`;
+        // const response = await axios.get(url);
+        // console.log(response);
+       // setDriverRaces(response);
+       // setLoading(false);
     }
 
     if (loading) {
         return <Loader />
     }
 
-    console.log(driverDetails);
-
     return (
         <div className="wrapper">
-
             <div className="col1">
                 <img src="../img/logo.png" alt="Logo" />
                 <div className="vNav">
@@ -56,40 +54,7 @@ export default function DriverDetails() {
             </div>
 
             <div className="col2">
-                <h2>DRIVERS DETAILS</h2>
-                <img src="../img/alonso.jpg" alt="Driver picture" />
-                <p>Country: {driverDetails.Driver.nationality}</p>
-                <p>Team: {driverDetails.Constructors[0].name} </p>
-                <p>Birth: {driverDetails.Driver.dateOfBirth}</p>
-                <a href={driverDetails.Driver.url} target="blanc">History</a>
-
-                <div>
-                    <h2>Formula 1 2013 Results</h2>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Round</th>
-                                <th>Grand Prix</th>
-                                <th>Team</th>
-                                <th>Grid</th>
-                                <th>Race</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {driverRaces.map((race) => {
-                                return (
-                                    <tr key={race.round}>
-                                        <td>{race.round}</td>
-                                        <td>{race.raceName}</td>
-                                        <td>{race.Results[0].Constructor.name}</td>
-                                        <td>{race.Results[0].grid}</td>
-                                        <td>{race.Results[0].position}</td>
-                                    </tr>
-                                )
-                            })}
-                        </tbody>
-                    </table>
-                </div>
+                <h2>DRIVERS DETAILS</h2>                
             </div>
 
 
