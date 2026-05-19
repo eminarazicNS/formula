@@ -111,23 +111,6 @@ export default function TeamDetails() {
                                             </tr>
                                         );
                                     })} 
-
-
-                                    {/* 
-                                    
-                                     {teamRaces.map((race) => {
-                                        return (
-                                            <tr key={race.round}>
-                                                <td>{race.round}</td>
-                                                <td>{race.raceName}</td>
-                                                <td>{race.Results[0].Constructor.name}</td>
-                                                <td>{race.Results[0].grid}</td>
-                                                <td>{race.Results[0].position}</td>
-                                            </tr>
-                                        )
-                                    })} 
-                                    */}
-
                                 </tbody>
                             </table>
                         </div>
