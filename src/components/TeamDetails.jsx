@@ -10,12 +10,12 @@ export default function TeamDetails() {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        console.log("useEffect")
+        console.log("useEffect");
         getResults();
     }, []);
 
     const params = useParams();
-    console.log("params ", params);
+    console.log("team det params ", params);
 
     const getResults = async () => {
         console.log("getResults");
