@@ -18,16 +18,16 @@ export default function DriverDetails() {
     }, []);
 
     const params = useParams();
-    console.log("params ",params);
+    console.log("params ", params);
 
     const getDriverDetails = async () => {
         console.log("getDriverDetails");
         const url = `https://api.jolpi.ca/ergast/f1/2013/drivers/${params.id}/driverStandings.json`;
         const response = await axios.get(url);
-      //  console.log(response.data);
+        //  console.log(response.data);
         console.log(response.data.MRData.StandingsTable.StandingsLists[0].DriverStandings);
-       // setDriverDetails(response);
-       
+        setDriverDetails(response.data.MRData.StandingsTable.StandingsLists[0].DriverStandings);
+
     }
 
     const getDriverRaces = async () => {
@@ -35,17 +35,17 @@ export default function DriverDetails() {
         // const url = `https://api.jolpi.ca/ergast/f1/2013/drivers/${params.id}/results.json`;
         // const response = await axios.get(url);
         // console.log(response);
-       // setDriverRaces(response);
-       // setLoading(false);
+        // setDriverRaces(response);
+        // setLoading(false);
     }
 
     if (loading) {
         return <Loader />
     }
 
+    console.log("driverDetails", driverDetails.Driver.nationality);
     return (
         <div className="wrapper">
-
             <div className="col1">
                 <img src="../img/logo.png" alt="Logo" />
                 <div className="vNav">
@@ -58,7 +58,7 @@ export default function DriverDetails() {
             </div>
 
             <div className="col2">
-                <h2>DRIVERS DETAILS</h2>                
+                <h2>DRIVERS DETAILS</h2>
             </div>
         </div>
     );
