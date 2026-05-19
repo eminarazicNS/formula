@@ -20,10 +20,10 @@ export default function TeamDetails() {
     const getResults = async () => {
         console.log("getResults");
         const url = `https://api.jolpi.ca/ergast/f1/2013/constructors/${params.id}/constructorStandings.json`;
-        let response = await axios.get(url);
-        console.log(response.data);
-        // console.log(response.data.MRData.StandingsTable.StandingsLists[0].DriverStandings);
-        // setTeamDetails(response.data.MRData.StandingsTable.StandingsLists[0].DriverStandings);
+        const responseDetails = await axios.get(url);
+        console.log("responseDetails ", responseDetails);
+        // console.log(responseDetails.data.MRData.StandingsTable.StandingsLists[0].DriverStandings);
+        // setTeamDetails(responseDetails.data.MRData.StandingsTable.StandingsLists[0].DriverStandings);
         setLoading(false);
     }
 
