@@ -56,14 +56,16 @@ export default function DriverDetails() {
             </div>
 
             <div className="col2">
-                <h2>DRIVERS DETAILS</h2>
-                <img src="../img/alonso.jpg" alt="Driver picture" />
-                <p>Country: {driverDetails.Driver.nationality}</p>
-                <p>Team: {driverDetails.Constructors[0].name} </p>
-                <p>Birth: {driverDetails.Driver.dateOfBirth}</p>
-                <a href={driverDetails.Driver.url} target="blanc">History</a>
+                {/* <h2>DRIVERS DETAILS</h2> */}
+                <div className="details">
+                    <img src="../img/avatar.png" alt="Driver picture" style={{width: 200}}/>
+                    <p>Country: {driverDetails.Driver.nationality}</p>
+                    <p>Team: {driverDetails.Constructors[0].name} </p>
+                    <p>Birth: {driverDetails.Driver.dateOfBirth}</p>
+                    <a href={driverDetails.Driver.url} target="blanc">History</a>
+                </div>
 
-                <div>
+                <div className="results">
                     <h2>Formula 1 2013 Results</h2>
                     <table>
                         <thead>
@@ -90,9 +92,8 @@ export default function DriverDetails() {
                         </tbody>
                     </table>
                 </div>
+
             </div>
-
-
         </div>
     );
 }
