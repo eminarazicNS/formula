@@ -33,14 +33,15 @@ export default function TeamDetails() {
 
         //console.log("teamStandingResponse ", teamStandingResponse);
 
-        //console.log(teamStandingResponse.data.MRData.StandingsTable.StandingsLists[0].ConstructorStandings[0]);
+        console.log("teamDetails ",teamStandingResponse.data.MRData.StandingsTable.StandingsLists[0].ConstructorStandings[0]);
+        setTeamDetails(teamStandingResponse.data.MRData.StandingsTable.StandingsLists[0].ConstructorStandings[0]);
+
 
         //console.log("teamRacesResponse ", teamRacesResponse);
 
-        console.log(teamRacesResponse.data.MRData.RaceTable.Races);
+        //console.log(teamRacesResponse.data.MRData.RaceTable.Races);
 
-        setTeamDetails(teamStandingResponse.data.MRData.StandingsTable.StandingsLists[0].ConstructorStandings[0]);
-
+        
         setTeamRaces(teamRacesResponse.data.MRData.RaceTable.Races);
 
         //table races header
@@ -79,7 +80,7 @@ export default function TeamDetails() {
                             <p>Team: {teamDetails.Constructor.name}</p>
                             <p>Country: {teamDetails.Constructor.nationality}</p>
                             <p>Points: {teamDetails.points}</p>
-                            <p>History: <a href={teamDetails.Constructor.teamStandingUrl} target="_blank"><OpenInNewIcon />
+                            <p>History: <a href={teamDetails.Constructor.url} target="_blank"><OpenInNewIcon />
                             </a></p>
                         </div>
                         <div className="about-down">

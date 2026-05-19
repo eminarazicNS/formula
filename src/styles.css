@@ -61,29 +61,28 @@ body {
 }
 
 
-/* 
-.wrapper ul,li{
-   text-decoration: none;
-} */
 
-/***start Teams details */
-/* .wrapper .td-col1 {
-    width: 30%;
-    border: 1px solid black;
+.wrapper ul{
+   list-style: none;
 } 
 
-.wrapper .td-col1 img {
-    width: 150px;
-    height: 150px;
+ul{
+   list-style: none;
+} 
+
+.link {
+    cursor: pointer;
 }
 
-
-.wrapper .td-col2 {
-    width: 70%;
-    border: 1px solid black;
+.link:hover{
+    color:red;
 }
-    */
 
+a:hover {
+    color:red;
+}
+
+/***start Teams details */
 .wrapper .col2 .container-details {
     display: flex;
     flex-direction: row;
