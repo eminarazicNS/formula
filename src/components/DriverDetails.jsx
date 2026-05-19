@@ -55,7 +55,7 @@ export default function DriverDetails() {
                 </div>
             </div>
 
-            <div className="col2">
+            <div className="dd-col2">
                 {/* <h2>DRIVERS DETAILS</h2> */}
                 <div className="details">
                     <img src="../img/avatar.png" alt="Driver picture" style={{width: 200}}/>
