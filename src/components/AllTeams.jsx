@@ -3,6 +3,7 @@ import Loader from "./Loader";
 import axios from "axios";
 import { useNavigate, Link } from "react-router";
 
+
 export default function AllTeams() {
     const [teams, setTeams] = useState({});
     const [loading, setLoading] = useState(true);
