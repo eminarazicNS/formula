@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import Loader from "./Loader";
-import { useNavigate, Link } from "react-router";
+import { useNavigate } from "react-router";
 
 export default function AllRaces() {
     const [races, setRaces] = useState([]);
@@ -34,17 +34,7 @@ export default function AllRaces() {
         // <h2>AllRaces</h2>
         <div className="wrapper">
 
-            <div className="col1">
-                <img src="../img/logo.png" alt="Logo" />
-                <div className="vNav">
-                    <ul>
-                        <li><Link to="/">Drivers</Link></li>
-                        <li><Link to="/teams">Teams</Link></li>
-                        <li><Link to="/races">Races</Link></li>
-                    </ul>
-                </div>
-            </div>
-
+           
             <div className="col2">
                 <h2>RACE CALENDAR</h2>
                 <table>
@@ -58,7 +48,7 @@ export default function AllRaces() {
                             return (
                                 <tr key={index}>
                                     <td>{race.round}</td>
-                                    <td>{race.raceName}</td>
+                                    <td className="link" onClick={() => handleClick(race.raceName)}>{race.raceName}</td>
                                     <td>{race.Circuit.circuitName}</td>
                                     <td>{race.date}</td>
                                     <td>{race.Results[0].Driver.familyName}</td>
