@@ -62,55 +62,48 @@ export default function TeamDetails() {
     return (
         <div className="wrapper">
 
-            <div className="td-col2">
-                <div className="vNav">
-                    <h2>TEAM DETAILS - vertikalna navigacija</h2>
+            <div className="dd-col2">
+                {/* <h2>TEAM DETAILS - vertikalna navigacija</h2> */}
+                <div className="details">
+                    <img src={`../public/img/${teamDetails.Constructor.constructorId}.png`}
+                        alt={teamDetails.Constructor.name}
+                        style={{ width: 200 }} />
+                    <p>Team: {teamDetails.Constructor.name}</p>
+                    <p>Country: {teamDetails.Constructor.nationality}</p>
+                    <p>Points: {teamDetails.points}</p>
+                    <p>History: <a href={teamDetails.Constructor.url} target="_blank"><OpenInNewIcon />
+                    </a></p>
                 </div>
-                <div className="container-details">
-                    <div className="about">
-                        <div className="about-up">
-                            <p>Team: {teamDetails.Constructor.name}</p>
-                            <p>Country: {teamDetails.Constructor.nationality}</p>
-                            <p>Points: {teamDetails.points}</p>
-                            <p>History: <a href={teamDetails.Constructor.url} target="_blank"><OpenInNewIcon />
-                            </a></p>
-                        </div>
-                        <div className="about-down">
-                            about-down
-                        </div>
-                    </div>
-                    <div className="table-details">
-                        <div>
-                            <h2>Formula 1 2013 Results</h2>
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>Round</th>
-                                        <th>Grand Prix</th>
-                                        <th>{firstDriver}</th>
-                                        <th>{secondDriver}</th>
-                                        <th>Points</th>
+
+
+
+                <div className="results">
+                    <h2>Formula 1 2013 Results</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Round</th>
+                                <th>Grand Prix</th>
+                                <th>{firstDriver}</th>
+                                <th>{secondDriver}</th>
+                                <th>Points</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {teamRaces.map((race) => {
+                                return (
+                                    <tr key={race.round}>
+                                        <td>{race.round}</td>
+                                        <td>{race.raceName}</td>
+                                        <td>{race.Results[0].position}</td>
+                                        <td>{race.Results[1].position}</td>
+                                        <td>{Number(race.Results[0].points) + Number(race.Results[1].points)}</td>
                                     </tr>
-                                </thead>
-                                <tbody>
-                                    {teamRaces.map((race) => {
-                                        return (
-                                            <tr key={race.round}>
-                                                <td>{race.round}</td>
-                                                <td>{race.raceName}</td>
-                                                <td>{race.Results[0].position}</td>
-                                                <td>{race.Results[1].position}</td>
-                                                <td>{Number(race.Results[0].points) + Number(race.Results[1].points)}</td>
-                                            </tr>
-                                        );
-                                    })}
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-
+                                );
+                            })}
+                        </tbody>
+                    </table>
                 </div>
-
             </div>
         </div>
     );
