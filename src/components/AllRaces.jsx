@@ -16,20 +16,22 @@ export default function AllRaces() {
     const getRaces = async () => {
         const url = "https://api.jolpi.ca/ergast/f1/2013/results/1.json";
         const response = await axios.get(url);
-        console.log("response", response.data.MRData.RaceTable.Races[0].Results);
-        setRaces(response.data.MRData.RaceTable.Races[0].Results)
+        console.log("response", response.data.MRData.RaceTable.Races);
+        setRaces(response.data.MRData.RaceTable.Races);
         setLoading(false);
-    };
+    }
 
     const handleClick = (id) => {
         console.log("id", id);
         navigate(`/raceDetails/${id}`);
-
     }
+
     if (loading) {
         return <Loader />;
+
     }
     return (
+        // <h2>AllRaces</h2>
         <div className="wrapper">
 
             <div className="col1">
@@ -48,18 +50,18 @@ export default function AllRaces() {
                 <table>
                     <thead>
                         <tr>
-                            <td colSpan={3}>Drivers Shampionship Standings - 2013</td>
+                            <td colSpan={3}>Race Calendar - 2013</td>
                         </tr>
                     </thead>
                     <tbody>
-                        {races.map((race) => {
+                        {races.map((race, index) => {
                             return (
-                                <tr key={race.position}>
-                                    <td>{race.position}</td>
-                                    <td>{race.raceName} </td>
-                                    <td>{race.circuitName}</td>
+                                <tr key={index}>
+                                    <td>{race.round}</td>
+                                    <td>{race.raceName}</td>
+                                    <td>{race.Circuit.circuitName}</td>
                                     <td>{race.date}</td>
-                                    <td>{race.Driver.familyName}</td>
+                                    <td>{race.Results[0].Driver.familyName}</td>
                                 </tr>
                             )
                         })}
@@ -68,5 +70,6 @@ export default function AllRaces() {
             </div>
         </div>
     );
-
 }
+
+// https://api.jolpi.ca/ergast/f1/2013/results/1.json
