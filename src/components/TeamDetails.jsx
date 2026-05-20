@@ -9,8 +9,8 @@ export default function TeamDetails() {
     const [teamDetails, setTeamDetails] = useState({});
     const [teamRaces, setTeamRaces] = useState({});
     const [loading, setLoading] = useState(true);
-    const [firstDriver,setFirstDriver] = useState("");
-    const [secondDriver,setSecondDriver] = useState("");
+    const [firstDriver, setFirstDriver] = useState("");
+    const [secondDriver, setSecondDriver] = useState("");
 
     const navigate = useNavigate();
 
@@ -35,7 +35,7 @@ export default function TeamDetails() {
 
         //console.log("teamStandingResponse ", teamStandingResponse);
 
-        console.log("teamDetails ",teamStandingResponse.data.MRData.StandingsTable.StandingsLists[0].ConstructorStandings[0]);
+        console.log("teamDetails ", teamStandingResponse.data.MRData.StandingsTable.StandingsLists[0].ConstructorStandings[0]);
         setTeamDetails(teamStandingResponse.data.MRData.StandingsTable.StandingsLists[0].ConstructorStandings[0]);
 
 
@@ -43,15 +43,15 @@ export default function TeamDetails() {
 
         //console.log(teamRacesResponse.data.MRData.RaceTable.Races);
 
-        
+
         setTeamRaces(teamRacesResponse.data.MRData.RaceTable.Races);
 
         //table races header
         setFirstDriver(teamRacesResponse.data.MRData.RaceTable.Races[0].Results[0].Driver.familyName);
         setSecondDriver(teamRacesResponse.data.MRData.RaceTable.Races[0].Results[1].Driver.familyName);
         //console.log("firstDriver ",firstDriver, " secondDriver ",secondDriver);
-        
-        setLoading(false); 
+
+        setLoading(false);
     }
 
 
@@ -61,16 +61,6 @@ export default function TeamDetails() {
 
     return (
         <div className="wrapper">
-            <div className="col1">
-                <img src="../img/logo.png" alt="Logo" />
-                <div className="vNav">
-                    <ul>
-                        <li><Link to="/">Drivers</Link></li>
-                        <li><Link to="/teams">Teams</Link></li>
-                        <li><Link to="/races">Races</Link></li>
-                    </ul>
-                </div>
-            </div>
 
             <div className="td-col2">
                 <div className="vNav">
@@ -103,17 +93,17 @@ export default function TeamDetails() {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {teamRaces.map((race)=>{
+                                    {teamRaces.map((race) => {
                                         return (
-                                              <tr key={race.round}>
+                                            <tr key={race.round}>
                                                 <td>{race.round}</td>
                                                 <td className="link">{race.raceName}</td>
-                                               <td>{race.Results[0].position}</td>
-                                               <td>{race.Results[1].position}</td>
-                                               <td>{Number(race.Results[0].points) + Number(race.Results[1].points)}</td>
+                                                <td>{race.Results[0].position}</td>
+                                                <td>{race.Results[1].position}</td>
+                                                <td>{Number(race.Results[0].points) + Number(race.Results[1].points)}</td>
                                             </tr>
                                         );
-                                    })} 
+                                    })}
                                 </tbody>
                             </table>
                         </div>

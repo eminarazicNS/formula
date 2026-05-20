@@ -34,32 +34,21 @@ export default function AllDrivers() {
     return (
         <div className="wrapper">
 
-            <div className="col1">
-                <img src="../img/logo.png" alt="Logo" />
-                <div className="vNav">
-                    <ul>
-                        <li><Link to="/">Drivers</Link></li>
-                        <li><Link to="/teams">Teams</Link></li>
-                        <li><Link to="/races">Races</Link></li>
-                    </ul>
-                </div>
-            </div>
-
             <div className="col2">
                 <h2>DRIVERS CHAMPIONSHIP</h2>
-                 <table>
+                <table>
                     <thead>
                         <tr>
                             <td colSpan={3}>Drivers Shampionship Standings - 2013</td>
                         </tr>
                     </thead>
-                    <tbody>                        
+                    <tbody>
                         {drivers.map((driver) => {
                             return (
                                 <tr key={driver.position}
-                                 className="link"
-                                 onClick={() => handleClick(driver.Driver.driverId)}
-                                 >
+                                    className="link"
+                                    onClick={() => handleClick(driver.Driver.driverId)}
+                                >
                                     <td>{driver.position}</td>
                                     <td >{driver.Driver.givenName} {driver.Driver.familyName}</td>
                                     <td>{driver.Constructors[0].name}</td>
@@ -67,7 +56,7 @@ export default function AllDrivers() {
                                 </tr>
                             )
                         })}
-                    </tbody> 
+                    </tbody>
                 </table>
             </div>
         </div>
