@@ -19,7 +19,7 @@ export default function AllTeams() {
         const url = "https://api.jolpi.ca/ergast/f1/2013/constructorStandings.json";
         const response = await axios.get(url);
         //console.log("response", response);
-        console.log("teams",response.data.MRData.StandingsTable.StandingsLists[0].ConstructorStandings );
+        console.log("teams", response.data.MRData.StandingsTable.StandingsLists[0].ConstructorStandings);
 
 
         setTeams(response.data.MRData.StandingsTable.StandingsLists[0].ConstructorStandings);
@@ -39,17 +39,6 @@ export default function AllTeams() {
 
 
         <div className="wrapper">
-
-            <div className="col1">
-                <img src="../img/logo.png" alt="Logo" />
-                <div className="vNav">
-                    <ul>
-                        <li><Link to="/">Drivers</Link></li>
-                        <li><Link to="/teams">Teams</Link></li>
-                        <li><Link to="/races">Races</Link></li>
-                    </ul>
-                </div>
-            </div>
 
             <div className="col2">
                 <h2>CONSTRUCTORS CHAMPIONSHIP</h2>

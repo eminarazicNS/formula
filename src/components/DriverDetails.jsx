@@ -44,21 +44,10 @@ export default function DriverDetails() {
     return (
         <div className="wrapper">
 
-            <div className="col1">
-                <img src="../img/logo.png" alt="Logo" />
-                <div className="vNav">
-                    <ul>
-                        <li><Link to="/">Drivers</Link></li>
-                        <li><Link to="/teams">Teams</Link></li>
-                        <li><Link to="/races">Races</Link></li>
-                    </ul>
-                </div>
-            </div>
-
             <div className="dd-col2">
                 {/* <h2>DRIVERS DETAILS</h2> */}
                 <div className="details">
-                    <img src="../img/avatar.png" alt="Driver picture" style={{width: 200}}/>
+                    <img src="../img/avatar.png" alt="Driver picture" style={{ width: 200 }} />
                     <p>Country: {driverDetails.Driver.nationality}</p>
                     <p>Team: {driverDetails.Constructors[0].name} </p>
                     <p>Birth: {driverDetails.Driver.dateOfBirth}</p>
