@@ -47,14 +47,14 @@ export default function AllDrivers(props) {
                         {drivers.map((driver) => {
                             return (
                                 <tr key={driver.position}
-                                    className="link"
-                                    onClick={() => handleClick(driver.Driver.driverId)}
+                                    
                                 >
                                     <td>{driver.position}</td>
                                     <td><Flag country={getFlagByNationality(props.flags, driver.Driver.nationality)}
                                         size={30} />
                                     </td>
-                                    <td>{driver.Driver.givenName} {driver.Driver.familyName}</td>
+                                    <td className="link"
+                                    onClick={() => handleClick(driver.Driver.driverId)}>{driver.Driver.givenName} {driver.Driver.familyName}</td>
                                     <td>{driver.Constructors[0].name}</td>
                                     <td>{driver.points}</td>
                                 </tr>
