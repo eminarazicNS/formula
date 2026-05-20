@@ -3,6 +3,13 @@ body {
     padding: 0;
 }
 
+/*
+//ne radi, ali radi inline stil style={{textDecoration:"none"}}
+Link {
+    text-decoration: none;
+} 
+*/
+
 .wrapper {
     width: 100%;
     height: 100vh;
@@ -15,6 +22,16 @@ body {
     border: 1px solid black;
 }
 
+.details {
+    padding: 15px;
+    background-color: lightgray;
+}
+
+.results {
+    background-color: lightskyblue;
+    text-align: center;
+}
+
 .wrapper .col1 img {
     width: 150px;
     height: 150px;
@@ -22,6 +39,28 @@ body {
 
 
 .wrapper .col2 {
+    width: 70%;
+    border: 1px solid black;
+}
+
+ul {
+    list-style: none;
+}
+
+.link {
+    cursor: pointer;
+}
+
+.link:hover {
+    color: red;
+}
+
+a:hover {
+    color: red;
+}
+
+/* start DriverDetails */
+.wrapper .dd-col2 {
     width: 70%;
     border: 1px solid black;
     display: flex;
@@ -39,8 +78,47 @@ body {
     text-align: center;
 }
 
+/* end DriverDetails */
 
-/* 
-.wrapper ul,li{
-   text-decoration: none;
-} */
+/***start Teams details */
+
+.wrapper .td-col2 {
+    width: 70%;
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+}
+
+.wrapper .td-col2 .vNav {
+    flex: 0;
+}
+
+.wrapper .td-col2 .container-details {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    border: 1px solid black;
+    flex: 1;
+}
+
+
+.wrapper .td-col2 .container-details .about {
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+    border: 1px solid black;
+}
+
+.wrapper .td-col2 .container-details .about .about-up {
+    width: 100%;
+    height: 50%;
+    border: 1px solid black;
+}
+
+
+.wrapper .td-col2 .container-details .table-details {
+    width: 70%;
+    border: 1px solid black;
+}
+
+/***end Teams details */
