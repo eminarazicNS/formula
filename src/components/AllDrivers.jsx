@@ -45,12 +45,11 @@ export default function AllDrivers() {
                     <tbody>
                         {drivers.map((driver) => {
                             return (
-                                <tr key={driver.position}
-                                    className="link"
-                                    onClick={() => handleClick(driver.Driver.driverId)}
-                                >
-                                    <td>{driver.position}</td>
-                                    <td >{driver.Driver.givenName} {driver.Driver.familyName}</td>
+                                <tr key={driver.position}>
+                                    <td >{driver.position}</td>
+                                    <td 
+                                    className="link" 
+                                    onClick={() => handleClick(driver.Driver.driverId)}>{driver.Driver.givenName} {driver.Driver.familyName}</td>
                                     <td>{driver.Constructors[0].name}</td>
                                     <td>{driver.points}</td>
                                 </tr>
