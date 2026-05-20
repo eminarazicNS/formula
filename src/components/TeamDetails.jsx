@@ -3,9 +3,11 @@ import { useParams, Link, useNavigate } from "react-router";
 import Loader from "./Loader";
 import axios from "axios";
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
+import { getFlagByNationality } from "../helper/getFlag";
+import Flag from "react-flagkit";
 
 
-export default function TeamDetails() {
+export default function TeamDetails(props) {
     const [teamDetails, setTeamDetails] = useState({});
     const [teamRaces, setTeamRaces] = useState({});
     const [loading, setLoading] = useState(true);
@@ -41,7 +43,7 @@ export default function TeamDetails() {
 
         //console.log("teamRacesResponse ", teamRacesResponse);
 
-        //console.log(teamRacesResponse.data.MRData.RaceTable.Races);
+        //console.log("teamRaces ", teamRacesResponse.data.MRData.RaceTable.Races);
 
 
         setTeamRaces(teamRacesResponse.data.MRData.RaceTable.Races);
@@ -63,19 +65,22 @@ export default function TeamDetails() {
         <div className="wrapper">
 
             <div className="dd-col2">
-                {/* <h2>TEAM DETAILS - vertikalna navigacija</h2> */}
                 <div className="details">
-                    <img src={`../public/img/${teamDetails.Constructor.constructorId}.png`}
-                        alt={teamDetails.Constructor.name}
-                        style={{ width: 200 }} />
-                    <p>Team: {teamDetails.Constructor.name}</p>
+                    <div style={{ display: "flex" }}>
+                        <img src={`../public/img/${teamDetails.Constructor.constructorId}.png`}
+                            alt={teamDetails.Constructor.name}
+                            style={{ width: 150 }} />
+                        <div style={{ padding: "5px", textAlign: "left" }}>
+                            <Flag country={getFlagByNationality(props.flags, teamDetails.Constructor.nationality)}
+                                size={30} />
+                            <b><p>{teamDetails.Constructor.name}</p></b>
+                        </div>
+                    </div>
                     <p>Country: {teamDetails.Constructor.nationality}</p>
                     <p>Points: {teamDetails.points}</p>
                     <p>History: <a href={teamDetails.Constructor.url} target="_blank"><OpenInNewIcon />
                     </a></p>
                 </div>
-
-
 
                 <div className="results">
                     <h2>Formula 1 2013 Results</h2>
@@ -83,6 +88,7 @@ export default function TeamDetails() {
                         <thead>
                             <tr>
                                 <th>Round</th>
+                                <th></th>
                                 <th>Grand Prix</th>
                                 <th>{firstDriver}</th>
                                 <th>{secondDriver}</th>
@@ -94,6 +100,9 @@ export default function TeamDetails() {
                                 return (
                                     <tr key={race.round}>
                                         <td>{race.round}</td>
+                                        <td><Flag country={getFlagByNationality(props.flags, "",
+                                            race.Circuit.Location.country)}
+                                            size={30} /></td>
                                         <td>{race.raceName}</td>
                                         <td>{race.Results[0].position}</td>
                                         <td>{race.Results[1].position}</td>

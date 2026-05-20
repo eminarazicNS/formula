@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react";
 import Loader from "./Loader";
 import axios from "axios";
-import { useNavigate, Link } from "react-router";
+import { useNavigate } from "react-router";
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
+import { getFlagByNationality } from "../helper/getFlag";
+import Flag from "react-flagkit";
 
 
-export default function AllTeams() {
+export default function AllTeams(props) {
     const [teams, setTeams] = useState({});
     const [loading, setLoading] = useState(true);
 
@@ -19,7 +21,7 @@ export default function AllTeams() {
         const url = "https://api.jolpi.ca/ergast/f1/2013/constructorStandings.json";
         const response = await axios.get(url);
         //console.log("response", response);
-        console.log("teams", response.data.MRData.StandingsTable.StandingsLists[0].ConstructorStandings);
+        console.log("!teams", response.data.MRData.StandingsTable.StandingsLists[0].ConstructorStandings);
 
 
         setTeams(response.data.MRData.StandingsTable.StandingsLists[0].ConstructorStandings);
@@ -53,6 +55,9 @@ export default function AllTeams() {
                             return (
                                 <tr key={team.position}>
                                     <td>{team.position}</td>
+                                    <td><Flag country={getFlagByNationality(props.flags,
+                                        team.Constructor.nationality)}
+                                        size={30} /></td>
                                     <td className="link"
                                         onClick={() => handleClick(team.Constructor.constructorId)}
                                     >{team.Constructor.constructorId}</td>

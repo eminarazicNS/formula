@@ -2,9 +2,10 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Loader from "./Loader";
 import { useNavigate } from "react-router";
-import { Link } from "react-router";
+import { getFlagByNationality } from "../helper/getFlag";
+import Flag from "react-flagkit";
 
-export default function AllDrivers() {
+export default function AllDrivers(props) {
     const [drivers, setDrivers] = useState({});
     const [loading, setLoading] = useState(true);
 
@@ -50,7 +51,10 @@ export default function AllDrivers() {
                                     onClick={() => handleClick(driver.Driver.driverId)}
                                 >
                                     <td>{driver.position}</td>
-                                    <td >{driver.Driver.givenName} {driver.Driver.familyName}</td>
+                                    <td><Flag country={getFlagByNationality(props.flags, driver.Driver.nationality)}
+                                        size={30} />
+                                    </td>
+                                    <td>{driver.Driver.givenName} {driver.Driver.familyName}</td>
                                     <td>{driver.Constructors[0].name}</td>
                                     <td>{driver.points}</td>
                                 </tr>

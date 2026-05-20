@@ -2,8 +2,10 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import Loader from "./Loader";
 import { useNavigate } from "react-router";
+import { getFlagByNationality } from "../helper/getFlag";
+import Flag from "react-flagkit";
 
-export default function AllRaces() {
+export default function AllRaces(props) {
     const [races, setRaces] = useState([]);
     const [loading, setLoading] = useState(true);
 
@@ -16,7 +18,7 @@ export default function AllRaces() {
     const getRaces = async () => {
         const url = "https://api.jolpi.ca/ergast/f1/2013/results/1.json";
         const response = await axios.get(url);
-        console.log("response", response.data.MRData.RaceTable.Races);
+        //console.log("races", response.data.MRData.RaceTable.Races);
         setRaces(response.data.MRData.RaceTable.Races);
         setLoading(false);
     }
@@ -48,6 +50,9 @@ export default function AllRaces() {
                             return (
                                 <tr key={index}>
                                     <td>{race.round}</td>
+                                    <td><Flag country={getFlagByNationality(props.flags, "",
+                                        race.Circuit.Location.country)}
+                                        size={30} /></td>
                                     <td className="link" onClick={() => handleClick(race.round)}>{race.raceName}</td>
                                     <td>{race.Circuit.circuitName}</td>
                                     <td>{race.date}</td>
