@@ -28,17 +28,17 @@ export default function RaceDetails() {
         console.log("races Response", racesResponse.data.MRData.RaceTable.Races[0]);
 
         setQualifying(qualifyingResponse.data.MRData.RaceTable.Races[0]);
-        setRaces(qualifyingResponse.data.MRData.RaceTable.Races[0]);
+        setRaces(racesResponse.data.MRData.RaceTable.Races[0]);
 
         setLoading(false);
     }
 
     const bestTime = (q1, q2, q3) => {
         let min = q1;
-        if(q2 < min) {
+        if (q2 < min) {
             min = q2;
-        } 
-        if(q3 < min) {
+        }
+        if (q3 < min) {
             min = q3;
         }
         return min;
@@ -46,28 +46,17 @@ export default function RaceDetails() {
 
     // bestTime(430,200,556);
 
-    if(loading) {
+    if (loading) {
         return <Loader />
     }
 
     return (
         <div className="wrapper">
-            <div className="col1">
-                <img src="../img/logo.png" alt="Logo" />
-                <div className="vNav">
-                    <ul>
-                        <li><Link to="/">Drivers</Link></li>
-                        <li><Link to="/teams">Teams</Link></li>
-                        <li><Link to="/races">Races</Link></li>
-                    </ul>
-                </div>
-            </div>
-           
 
-            <div className="col2">
+            <div className="dd-col2">
                 {/* <h2>RaceDetails</h2> */}
                 <div className="details">
-                    <img src="../img/Kaciga.png" alt="Country picture" style={{width: 200}}/>
+                    <img src="../img/Kaciga.png" alt="Country picture" style={{ width: 200 }} />
                     <p>Country: {qualifying.raceName}</p>
                     <p>Country: {qualifying.Circuit.Location.country} </p>
                     <p>Location: {qualifying.Circuit.Location.country}</p>
@@ -101,7 +90,7 @@ export default function RaceDetails() {
                     </table>
                 </div>
 
-                   <div className="results">
+                <div className="results">
                     <h2>Race Results</h2>
                     <table>
                         <thead>
@@ -120,8 +109,8 @@ export default function RaceDetails() {
                                         <td>{race.position}</td>
                                         <td>{race.Driver.familyName}</td>
                                         <td>{race.Constructor.name}</td>
-                                        <td></td>
-                                        <td></td>
+                                        {/* <td>{race.Time.time}</td> */}
+                                        <td>{race.points}</td>
                                     </tr>
                                 )
                             })}
