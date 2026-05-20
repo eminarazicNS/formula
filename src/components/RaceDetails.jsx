@@ -8,6 +8,8 @@ export default function RaceDetails() {
     const [races, setRaces] = useState(null);
     const [loading, setLoading] = useState(true);
 
+    
+
     useEffect(() => {
         getRaceDetails();
     }, []);
