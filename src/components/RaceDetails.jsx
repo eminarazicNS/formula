@@ -107,7 +107,7 @@ export default function RaceDetails() {
                                         <td>{race.position}</td>
                                         <td>{race.Driver.familyName}</td>
                                         <td>{race.Constructor.name}</td>
-                                        {/* <td>{race.Time.time}</td> */}
+                                        <td>{race?.Time?.time || "DNQ"}</td>
                                         <td>{race.points}</td>
                                     </tr>
                                 )

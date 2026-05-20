@@ -34,7 +34,7 @@ export default function AllRaces() {
         // <h2>AllRaces</h2>
         <div className="wrapper">
 
-           
+
             <div className="col2">
                 <h2>RACE CALENDAR</h2>
                 <table>
@@ -48,7 +48,7 @@ export default function AllRaces() {
                             return (
                                 <tr key={index}>
                                     <td>{race.round}</td>
-                                    <td className="link" onClick={() => handleClick(race.raceName)}>{race.raceName}</td>
+                                    <td className="link" onClick={() => handleClick(race.round)}>{race.raceName}</td>
                                     <td>{race.Circuit.circuitName}</td>
                                     <td>{race.date}</td>
                                     <td>{race.Results[0].Driver.familyName}</td>
