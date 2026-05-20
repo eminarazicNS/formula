@@ -14,30 +14,33 @@ export default function App() {
 
   return (
     <BrowserRouter>
-      <nav className="col1">
-        <img src="../img/logo.png" alt="Logo" />
-        <div className="vNav">
-          <ul>
-            <li><Link to="/">Drivers</Link></li>
-            <li><Link to="/teams">Teams</Link></li>
-            <li><Link to="/races">Races</Link></li>
-          </ul>
+      <div className="wrapper">
+        <div className="col1">
+          <nav>
+            <img src="../img/logo.png" alt="Logo" />
+            <div className="vNav">
+              <ul>
+                <li><Link to="/">Drivers</Link></li>
+                <li><Link to="/teams">Teams</Link></li>
+                <li><Link to="/races">Races</Link></li>
+              </ul>
+            </div>
+          </nav>
         </div>
-      </nav>
+        <div className="col2">
+          <Routes>
+            <Route path="/" element={<AllDrivers />} />
+            <Route path="/teams" element={<AllTeams />} />
+            <Route path="/races" element={<AllRaces />} />
 
-      <Routes>
-        <Route path="/" element={<AllDrivers />} />
-        <Route path="/teams" element={<AllTeams />} />
-        <Route path="/races" element={<AllRaces />} />
-
-        <Route path="/driverDetails/:id" element={<DriverDetails />} />
-        <Route path="/driverRaces/:id" element={<DriverDetails />} />
-        <Route path="/teamDetails/:id" element={<TeamDetails />} />
-        <Route path="/teamResults/:id" element={<TeamResults />} />
-        <Route path="/raceDetails/:id" element={<RaceDetails />} />
-
-
-      </Routes>
+            <Route path="/driverDetails/:id" element={<DriverDetails />} />
+            <Route path="/driverRaces/:id" element={<DriverDetails />} />
+            <Route path="/teamDetails/:id" element={<TeamDetails />} />
+            <Route path="/teamResults/:id" element={<TeamResults />} />
+            <Route path="/raceDetails/:id" element={<RaceDetails />} />
+          </Routes>
+        </div>
+      </div>
     </BrowserRouter>
   );
 }

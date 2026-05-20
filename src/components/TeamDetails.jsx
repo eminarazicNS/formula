@@ -97,7 +97,7 @@ export default function TeamDetails() {
                                         return (
                                             <tr key={race.round}>
                                                 <td>{race.round}</td>
-                                                <td className="link">{race.raceName}</td>
+                                                <td>{race.raceName}</td>
                                                 <td>{race.Results[0].position}</td>
                                                 <td>{race.Results[1].position}</td>
                                                 <td>{Number(race.Results[0].points) + Number(race.Results[1].points)}</td>

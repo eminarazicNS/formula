@@ -31,6 +31,7 @@ Link {
 .wrapper .col2 {
     width: 70%;
     border: 1px solid black;
+    flex: 1;
 }
 
 ul {
@@ -56,6 +57,7 @@ a:hover {
     display: flex;
     flex-direction: row;
     align-items: stretch;
+    flex: 1;
 }
 
 .details {
@@ -77,10 +79,7 @@ a:hover {
     border: 1px solid black;
     display: flex;
     flex-direction: column;
-}
-
-.wrapper .td-col2 .vNav {
-    flex: 0;
+    flex: 1;
 }
 
 .wrapper .td-col2 .container-details {
