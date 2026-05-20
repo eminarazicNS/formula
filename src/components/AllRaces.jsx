@@ -1,14 +1,3 @@
-<<<<<<< HEAD
-import { useEffect, useState } from "react";
-import axios from "axios";
-import Loader from "./Loader";
-import { useNavigate, Link } from "react-router";
-
-
-
-export default function AllRaces() {
-    const [races, setRaces] = useState({});
-=======
 import axios from "axios";
 import { useEffect, useState } from "react";
 import Loader from "./Loader";
@@ -16,15 +5,10 @@ import { useNavigate, Link } from "react-router";
 
 export default function AllRaces() {
     const [races, setRaces] = useState([]);
->>>>>>> 07428c4ccd8767284e12ec3f14870282d604968d
     const [loading, setLoading] = useState(true);
 
     const navigate = useNavigate();
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 07428c4ccd8767284e12ec3f14870282d604968d
     useEffect(() => {
         getRaces();
     }, []);
