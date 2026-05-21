@@ -63,6 +63,6 @@ export default function AllDrivers(props) {
                     </tbody>
                 </table>
             </div>
-        </div>
+        </div >
     );
 }

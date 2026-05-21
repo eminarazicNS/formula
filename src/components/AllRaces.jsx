@@ -41,7 +41,7 @@ export default function AllRaces(props) {
                 <h2>RACE CALENDAR</h2>
                 <table>
                     <thead>
-                        <tr>
+                        <tr >
                             <td colSpan={6}>Race Calendar - 2013</td>
                         </tr>
                     </thead>
