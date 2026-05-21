@@ -5,6 +5,7 @@ import Loader from "./Loader";
 import { getFlagByNationality } from "../helper/getFlag";
 import Flag from "react-flagkit";
 import { getColorByPosition } from "../helper/getColor";
+import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 
 export default function RaceDetails(props) {
     const [qualifying, setQualifying] = useState(null);
@@ -63,7 +64,7 @@ export default function RaceDetails(props) {
                     <p><b>{qualifying.raceName}</b></p>
                     <p>Location: {qualifying.Circuit.Location.locality} </p>
                     <p>Date: {qualifying.date}</p>
-                    <a href={qualifying.url} target="blanc">Full Report</a>
+                    <p>Full Report <a href={qualifying.url} target="_blank"><OpenInNewIcon /></a></p>
                 </div>
 
                 <div className="results">

@@ -4,6 +4,8 @@ import Loader from "./Loader";
 import axios from "axios";
 import { getFlagByNationality } from "../helper/getFlag";
 import Flag from "react-flagkit";
+import { getColorByPosition } from "../helper/getColor";
+import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 
 
 export default function DriverDetails(props) {
@@ -64,7 +66,7 @@ export default function DriverDetails(props) {
                     <p>Country: {driverDetails.Driver.nationality}</p>
                     <p>Team: {driverDetails.Constructors[0].name} </p>
                     <p>Birth: {driverDetails.Driver.dateOfBirth}</p>
-                    <a href={driverDetails.Driver.url} target="blanc">History</a>
+                    <p>History: <a href={driverDetails.Driver.url} target="_blank"><OpenInNewIcon /></a></p>
                 </div>
 
                 <div className="results">
@@ -91,7 +93,9 @@ export default function DriverDetails(props) {
                                         <td>{race.raceName}</td>
                                         <td>{race.Results[0].Constructor.name}</td>
                                         <td>{race.Results[0].grid}</td>
-                                        <td>{race.Results[0].position}</td>
+                                        <td
+                                            style={{ backgroundColor: getColorByPosition(race.Results[0].position) }}
+                                        >{race.Results[0].position}</td>
                                     </tr>
                                 )
                             })}
