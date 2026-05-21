@@ -4,7 +4,6 @@ import AllTeams from "./components/AllTeams";
 import AllRaces from "./components/AllRaces";
 import DriverDetails from "./components/DriverDetails";
 import TeamDetails from "./components/TeamDetails";
-import TeamResults from "./components/TeamResults";
 import RaceDetails from "./components/RaceDetails";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -41,11 +40,9 @@ export default function App() {
             <Route path="/" element={<AllDrivers flags={flags} />} />
             <Route path="/teams" element={<AllTeams flags={flags} />} />
             <Route path="/races" element={<AllRaces flags={flags} />} />
-
             <Route path="/driverDetails/:id" element={<DriverDetails flags={flags} />} />
             <Route path="/driverRaces/:id" element={<DriverDetails flags={flags} />} />
             <Route path="/teamDetails/:id" element={<TeamDetails flags={flags} />} />
-            <Route path="/teamResults/:id" element={<TeamResults flags={flags} />} />
             <Route path="/raceDetails/:id" element={<RaceDetails flags={flags} />} />
           </Routes>
         </div>
