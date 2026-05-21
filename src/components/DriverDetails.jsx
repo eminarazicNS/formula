@@ -4,6 +4,7 @@ import Loader from "./Loader";
 import axios from "axios";
 import { getFlagByNationality } from "../helper/getFlag";
 import Flag from "react-flagkit";
+import { getColorByPosition } from "../helper/getColor";
 
 
 export default function DriverDetails(props) {
@@ -91,7 +92,9 @@ export default function DriverDetails(props) {
                                         <td>{race.raceName}</td>
                                         <td>{race.Results[0].Constructor.name}</td>
                                         <td>{race.Results[0].grid}</td>
-                                        <td>{race.Results[0].position}</td>
+                                        <td
+                                            style={{ backgroundColor: getColorByPosition(race.Results[0].position) }}
+                                        >{race.Results[0].position}</td>
                                     </tr>
                                 )
                             })}
