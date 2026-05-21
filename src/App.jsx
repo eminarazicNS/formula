@@ -8,9 +8,12 @@ import TeamResults from "./components/TeamResults";
 import RaceDetails from "./components/RaceDetails";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import BasicSelect from "./components/BasicSelect";
 
 export default function App() {
   const [flags, setFlags] = useState([]);
+  //novo
+  const [year, setYear] = useState(() => new Date().getFullYear());
 
   useEffect(() => { getFlags() }, []);
 
@@ -21,12 +24,19 @@ export default function App() {
     setFlags(response.data);
   }
 
+  //novo
+  const handleChangeYear = (e) => {
+    console.log("handleChangeYear");
+  }
+
   return (
     <BrowserRouter>
       <div className="wrapper">
         <div className="col1">
           <nav>
             <img src="../img/logo.png" alt="Logo" />
+            {/* //novo  */}
+            {/* <BasicSelect year={year} /> */}
             <div className="vNav">
               <ul>
                 <li><Link to="/">Drivers</Link></li>
