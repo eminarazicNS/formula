@@ -4,7 +4,7 @@ import { grey, lightBlue, lightGreen, orange, teal, yellow } from "@mui/material
 export function getColorByPosition(position) {
     let posColor = grey[700];
     switch (position) {
-        case "1": posColor = yellow[100];
+        case "1": posColor = yellow[300];
             break;
         case "2": posColor = grey[300];
             break;
