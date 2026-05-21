@@ -14,12 +14,13 @@ export default function AllDrivers(props) {
 
     useEffect(() => {
         getDrivers();
-    }, []);
+    }, [props.year]);
 
     const getDrivers = async () => {
-        const url = "https://api.jolpi.ca/ergast/f1/2013/driverStandings.json";
+        const url = `https://api.jolpi.ca/ergast/f1/${props.year}/driverStandings.json`;
+        console.log("drivers url ", url)
         const response = await axios.get(url);
-        console.log("response", response);
+        console.log("response.data", response.data);
         setDrivers(response.data.MRData.StandingsTable.StandingsLists[0].DriverStandings);
         setLoading(false);
     };
@@ -42,11 +43,11 @@ export default function AllDrivers(props) {
 
             <div className="col2">
                 <BasicBreadcrumbs crumbs={crumbs} />
-                <h2>DRIVERS CHAMPIONSHIP</h2>
+                <h2>DRIVERS CHAMPIONSHIP - {props.year}</h2>
                 <table>
                     <thead>
                         <tr>
-                            <td colSpan={5}>Drivers Shampionship Standings - 2013</td>
+                            <td colSpan={5}>Drivers Shampionship Standings - {props.year}</td>
                         </tr>
                     </thead>
                     <tbody>

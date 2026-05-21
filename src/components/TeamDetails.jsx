@@ -20,7 +20,7 @@ export default function TeamDetails(props) {
     useEffect(() => {
         console.log("useEffect");
         getTeams();
-    }, []);
+    }, [props.year]);
 
     const params = useParams();
     console.log("team det params ", params);
@@ -28,9 +28,9 @@ export default function TeamDetails(props) {
 
     const getTeams = async () => {
         console.log("getTeams");
-        const teamStandingUrl = `https://api.jolpi.ca/ergast/f1/2013/constructors/${params.id}/constructorStandings.json`;
+        const teamStandingUrl = `https://api.jolpi.ca/ergast/f1/${props.year}/constructors/${params.id}/constructorStandings.json`;
 
-        const teamRacesUrl = `https://api.jolpi.ca/ergast/f1/2013/constructors/${params.id}/results.json`;
+        const teamRacesUrl = `https://api.jolpi.ca/ergast/f1/${props.year}/constructors/${params.id}/results.json`;
 
         const teamStandingResponse = await axios.get(teamStandingUrl);
 
@@ -90,7 +90,7 @@ export default function TeamDetails(props) {
                 </div>
 
                 <div className="results">
-                    <h2>Formula 1 2013 Results</h2>
+                    <h2>Formula 1 - {props.year} Results</h2>
                     <table>
                         <thead>
                             <tr>

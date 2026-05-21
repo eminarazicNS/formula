@@ -15,14 +15,14 @@ export default function RaceDetails(props) {
 
     useEffect(() => {
         getRaceDetails();
-    }, []);
+    }, [props.year]);
 
     const params = useParams();
     console.log("params", params);
 
     const getRaceDetails = async () => {
-        const qualifyingUrl = `https://api.jolpi.ca/ergast/f1/2013/${params.id}/qualifying.json`;
-        const racesUrl = `https://api.jolpi.ca/ergast/f1/2013/${params.id}/results.json`;
+        const qualifyingUrl = `https://api.jolpi.ca/ergast/f1/${props.year}/${params.id}/qualifying.json`;
+        const racesUrl = `https://api.jolpi.ca/ergast/f1/${props.year}/${params.id}/results.json`;
 
         const qualifyingResponse = await axios.get(qualifyingUrl);
         const racesResponse = await axios.get(racesUrl);
@@ -76,7 +76,7 @@ export default function RaceDetails(props) {
                 </div>
 
                 <div className="results">
-                    <h2>Qualifying Results</h2>
+                    <h2>Qualifying Results - {props.year}</h2>
                     <table>
                         <thead>
                             <tr>
@@ -106,7 +106,7 @@ export default function RaceDetails(props) {
                 </div>
 
                 <div className="results">
-                    <h2>Race Results</h2>
+                    <h2>Race Results - {props.year}</h2>
                     <table>
                         <thead>
                             <tr>

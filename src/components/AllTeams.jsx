@@ -15,10 +15,10 @@ export default function AllTeams(props) {
 
     useEffect(() => {
         getTeams();
-    }, []);
+    }, [props.year]);
 
     const getTeams = async () => {
-        const url = "https://api.jolpi.ca/ergast/f1/2013/constructorStandings.json";
+        const url = `https://api.jolpi.ca/ergast/f1/${props.year}/constructorStandings.json`;
         const response = await axios.get(url);
         //console.log("response", response);
         console.log("!teams", response.data.MRData.StandingsTable.StandingsLists[0].ConstructorStandings);
@@ -49,11 +49,11 @@ export default function AllTeams(props) {
 
             <div className="col2">
                 <BasicBreadcrumbs crumbs={crumbs} />
-                <h2>CONSTRUCTORS CHAMPIONSHIP</h2>
+                <h2>CONSTRUCTORS CHAMPIONSHIP - {props.year}</h2>
                 <table>
                     <thead>
                         <tr>
-                            <td colSpan={5}>Constructors Shampionship Standings - 2013</td>
+                            <td colSpan={5}>Constructors Shampionship Standings - {props.year}</td>
                         </tr>
                     </thead>
                     <tbody>
@@ -81,4 +81,3 @@ export default function AllTeams(props) {
     );
 }
 
-// https://api.jolpi.ca/ergast/f1/2013/constructorStandings.json

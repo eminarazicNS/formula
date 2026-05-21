@@ -16,16 +16,16 @@ export default function DriverDetails(props) {
 
     useEffect(() => {
         getDriverDetails();
-    }, []);
+    }, [props.year]);
 
     const params = useParams();
     console.log("params ", params);
 
     const getDriverDetails = async () => {
 
-        const driverStandingsUrl = `https://api.jolpi.ca/ergast/f1/2013/drivers/${params.id}/driverStandings.json`;
+        const driverStandingsUrl = `https://api.jolpi.ca/ergast/f1/${props.year}/drivers/${params.id}/driverStandings.json`;
 
-        const driverRacesUrl = `https://api.jolpi.ca/ergast/f1/2013/drivers/${params.id}/results.json`;
+        const driverRacesUrl = `https://api.jolpi.ca/ergast/f1/${props.year}/drivers/${params.id}/results.json`;
 
         const driverStandingsResponse = await axios.get(driverStandingsUrl);
         const driverRacesResponse = await axios.get(driverRacesUrl);
@@ -54,7 +54,6 @@ export default function DriverDetails(props) {
     return (
         <div className="wrapper">
             <div className="dd-col2">
-                {/* <h2>DRIVERS DETAILS</h2> */}
                 <div className="details">
                     <BasicBreadcrumbs crumbs={crumbs} />
                     <div style={{ display: "flex" }}>                        
@@ -78,7 +77,7 @@ export default function DriverDetails(props) {
 
                 <div className="results">
                     {/* <BasicBreadcrumbs crumbs={crumbs} /> */}
-                    <h2>Formula 1 2013 Results</h2>
+                    <h2>Formula 1 - {props.year} Results</h2>
                     <table>
                         <thead>
                             <tr>

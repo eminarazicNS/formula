@@ -14,10 +14,10 @@ export default function AllRaces(props) {
 
     useEffect(() => {
         getRaces();
-    }, []);
+    }, [props.year]);
 
     const getRaces = async () => {
-        const url = "https://api.jolpi.ca/ergast/f1/2013/results/1.json";
+        const url = `https://api.jolpi.ca/ergast/f1/${props.year}/results/1.json`;
         const response = await axios.get(url);
         //console.log("races", response.data.MRData.RaceTable.Races);
         setRaces(response.data.MRData.RaceTable.Races);
@@ -44,11 +44,11 @@ export default function AllRaces(props) {
 
             <div className="col2">
                 <BasicBreadcrumbs crumbs={crumbs} />
-                <h2>RACE CALENDAR</h2>
+                <h2>RACE CALENDAR - {props.year}</h2>
                 <table>
                     <thead>
                         <tr >
-                            <td colSpan={6}>Race Calendar - 2013</td>
+                            <td colSpan={6}>Race Calendar - {props.year}</td>
                         </tr>
                     </thead>
                     <tbody>
@@ -73,4 +73,3 @@ export default function AllRaces(props) {
     );
 }
 
-// https://api.jolpi.ca/ergast/f1/2013/results/1.json
