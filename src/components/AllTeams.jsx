@@ -57,9 +57,9 @@ export default function AllTeams(props) {
                         </tr>
                     </thead>
                     <tbody>
-                        {teams.map((team) => {
+                        {teams.map((team,i) => {
                             return (
-                                <tr key={team.position}>
+                                <tr key={i}>
                                     <td>{team.position}</td>
                                     <td><Flag country={getFlagByNationality(props.flags,
                                         team.Constructor.nationality)}

@@ -15,9 +15,15 @@ export default function DriverDetails(props) {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
+
+        //zakomentarisi ovo kad obezbedis da se iz bilo kog Details ne moze menjati godina 
+        setDriverDetails(null);
+        setDriverRaces(null);
+        //
+
         getDriverDetails();
     }, [props.year]);
-
+    
 
     const params = useParams();
     console.log("params ", params);
