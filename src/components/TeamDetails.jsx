@@ -5,6 +5,7 @@ import axios from "axios";
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import { getFlagByNationality } from "../helper/getFlag";
 import Flag from "react-flagkit";
+import { getColorByPosition } from "../helper/getColor";
 
 
 export default function TeamDetails(props) {
@@ -104,8 +105,10 @@ export default function TeamDetails(props) {
                                             race.Circuit.Location.country)}
                                             size={30} /></td>
                                         <td>{race.raceName}</td>
-                                        <td>{race.Results[0].position}</td>
-                                        <td>{race.Results[1].position}</td>
+                                        <td style={{ backgroundColor: getColorByPosition(race.Results[0].position) }}
+                                        >{race.Results[0].position}</td>
+                                        <td style={{ backgroundColor: getColorByPosition(race.Results[1].position) }}
+                                        >{race.Results[1].position}</td>
                                         <td>{Number(race.Results[0].points) + Number(race.Results[1].points)}</td>
                                     </tr>
                                 );
