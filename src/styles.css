@@ -44,7 +44,7 @@ a {
 .col2 h2 {
     color: blue;
     font-style: italic;
-    
+
     padding: 0 15px;
 }
 
@@ -117,3 +117,23 @@ tr:nth-child(even) {
 }
 
 /* End Details */
+
+/* Start App vNav - Ivona */
+.vNav ul {
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-block: 0;
+    padding-inline: 0;
+}
+
+.vNav li {
+    border: 1px solid black;
+    width: 100%;
+    padding: 35px;
+    text-align: center;
+}
+
+/* End App vNav */
