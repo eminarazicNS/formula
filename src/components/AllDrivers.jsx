@@ -4,6 +4,7 @@ import Loader from "./Loader";
 import { useNavigate } from "react-router";
 import { getFlagByNationality } from "../helper/getFlag";
 import Flag from "react-flagkit";
+import BasicBreadcrumbs from "./BasicBreadcrumbs";
 
 export default function AllDrivers(props) {
     const [drivers, setDrivers] = useState({});
@@ -32,10 +33,15 @@ export default function AllDrivers(props) {
         return <Loader />;
     }
 
+    const crumbs = [
+        { label: "Drivers", path: "/" }
+    ];
+
     return (
         <div className="wrapper">
 
             <div className="col2">
+                <BasicBreadcrumbs crumbs={crumbs} />
                 <h2>DRIVERS CHAMPIONSHIP</h2>
                 <table>
                     <thead>

@@ -1,29 +1,26 @@
 import * as React from 'react';
 import Typography from '@mui/material/Typography';
 import Breadcrumbs from '@mui/material/Breadcrumbs';
-import Link from '@mui/material/Link';
+import { Link } from 'react-router';
 
-function handleClick(event) {
-  event.preventDefault();
-  console.info('You clicked a breadcrumb.');
-}
-
-export default function BasicBreadcrumbs() {
-  return (
-    <div role="presentation" onClick={handleClick}>
-      <Breadcrumbs aria-label="breadcrumb">
-        <Link underline="hover" color="inherit" href="/">
-          MUI
-        </Link>
-        <Link
-          underline="hover"
-          color="inherit"
-          href="/material-ui/getting-started/installation/"
-        >
-          Core
-        </Link>
-        <Typography sx={{ color: 'text.primary' }}>Breadcrumbs</Typography>
-      </Breadcrumbs>
-    </div>
-  );
+export default function BasicBreadcrumbs(props) {
+    return (
+        <div role="presentation">
+            <Breadcrumbs aria-label="breadcrumb">
+                <Link to="/">Home</Link>
+                {props.crumbs.map((item, i) => {
+                    const isLast = i === props.crumbs.length - 1;
+                    return (
+                        <>
+                        {isLast ? 
+                            <span>{item.label}</span>
+                            :
+                            <Link key={i} to={item.path}>{item.label}</Link>
+                        }
+                        </>
+                    );
+                })}
+            </Breadcrumbs>
+        </div>
+    );
 }
