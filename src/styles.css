@@ -3,23 +3,30 @@ body {
     padding: 0;
 }
 
-/*
-//ne radi, ali radi inline stil style={{textDecoration:"none"}}
-Link {
-    text-decoration: none;
-} 
-*/
-
 .wrapper {
     width: 100%;
-    height: 100vh;
+    height: 100%;
     display: flex;
     flex-direction: row;
+    flex: 1;
 }
 
 .wrapper .col1 {
-    width: 30%;
-    /* border: 1px solid black; */
+    width: 20%;
+    background-color: lightblue;
+}
+
+.col1 nav {
+    text-align: center;
+}
+
+a {
+    text-decoration: none;
+}
+
+.vNav a {
+    font-size: 20px;
+    font-family: sans-serif;
 }
 
 .wrapper .col1 img {
@@ -29,9 +36,16 @@ Link {
 
 
 .wrapper .col2 {
-    width: 70%;
-    /* border: 1px solid black; */
+    width: 80%;
+    background-color: lightgray;
     flex: 1;
+}
+
+.col2 h2 {
+    color: blue;
+    font-style: italic;
+    
+    padding: 0 15px;
 }
 
 ul {
@@ -50,19 +64,20 @@ a:hover {
     color: red;
 }
 
-/* start DriverDetails */
+/* Start Details */
 .wrapper .dd-col2 {
-    width: 70%;
-    /* border: 1px solid black; */
+    width: 80%;
     display: flex;
     flex-direction: row;
     align-items: stretch;
     flex: 1;
+    gap: 10px;
 }
 
 .details {
     padding: 15px;
     background-color: lightgray;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .results {
@@ -74,12 +89,14 @@ a:hover {
 }
 
 .results h2 {
-    text-align: center;
+    text-align: left;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
-.results table {
+table {
     border-collapse: collapse;
     background-color: lightcyan;
+    width: 100%;
 }
 
 .results th {
@@ -92,51 +109,11 @@ td {
     border: 1px solid lightblue;
     text-align: left;
     font-family: Arial, Helvetica, sans-serif;
-    padding: 2px;
+    padding: 1px;
 }
 
-.results tr:nth-child(even) {
+tr:nth-child(even) {
     background-color: #f2f2f2;
 }
 
-/* end DriverDetails */
-
-/***start Teams details */
-
-/* .wrapper .td-col2 {
-    width: 70%;
-    border: 1px solid black;
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-}
-
-.wrapper .td-col2 .container-details {
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    border: 1px solid black;
-    flex: 1;
-}
-
-
-.wrapper .td-col2 .container-details .about {
-    display: flex;
-    flex-direction: column;
-    width: 30%;
-    border: 1px solid black;
-}
-
-.wrapper .td-col2 .container-details .about .about-up {
-    width: 100%;
-    height: 50%;
-    border: 1px solid black;
-}
-
-
-.wrapper .td-col2 .container-details .table-details {
-    width: 70%;
-    border: 1px solid black;
-} */
-
-/***end Teams details */
+/* End Details */
