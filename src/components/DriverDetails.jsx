@@ -5,6 +5,7 @@ import axios from "axios";
 import { getFlagByNationality } from "../helper/getFlag";
 import Flag from "react-flagkit";
 import { getColorByPosition } from "../helper/getColor";
+import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 
 
 export default function DriverDetails(props) {
@@ -65,7 +66,7 @@ export default function DriverDetails(props) {
                     <p>Country: {driverDetails.Driver.nationality}</p>
                     <p>Team: {driverDetails.Constructors[0].name} </p>
                     <p>Birth: {driverDetails.Driver.dateOfBirth}</p>
-                    <a href={driverDetails.Driver.url} target="blanc">History</a>
+                    <p>History: <a href={driverDetails.Driver.url} target="_blank"><OpenInNewIcon /></a></p>
                 </div>
 
                 <div className="results">
