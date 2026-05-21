@@ -5,7 +5,7 @@ import { useNavigate } from "react-router";
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import { getFlagByNationality } from "../helper/getFlag";
 import Flag from "react-flagkit";
-
+import BasicBreadcrumbs from "./BasicBreadcrumbs";
 
 export default function AllTeams(props) {
     const [teams, setTeams] = useState({});
@@ -37,12 +37,18 @@ export default function AllTeams(props) {
     if (loading) {
         return <Loader />;
     }
+
+    const crumbs = [
+        { label: "Teams", path: "/teams" }
+    ];
+
     return (
 
 
         <div className="wrapper">
 
             <div className="col2">
+                <BasicBreadcrumbs crumbs={crumbs} />
                 <h2>CONSTRUCTORS CHAMPIONSHIP</h2>
                 <table>
                     <thead>
@@ -60,7 +66,7 @@ export default function AllTeams(props) {
                                         size={30} /></td>
                                     <td className="link"
                                         onClick={() => handleClick(team.Constructor.constructorId)}
-                                    >{team.Constructor.constructorId}</td>
+                                    >{team.Constructor.name}</td>
                                     <td>Details
                                         <a href={team.Constructor.url} target="_blank"><OpenInNewIcon /></a>
                                     </td>

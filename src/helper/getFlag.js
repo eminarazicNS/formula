@@ -9,7 +9,7 @@ export function getFlagByNationality(flags, nationality, country) {
             return "NL";
         }
         const flag = flags.find((flag) => flag.nationality === nationality);
-        console.log(nationality, flag?.alpha_2_code);
+        //console.log(nationality, flag?.alpha_2_code);
         return flag?.alpha_2_code;
     }
     else //by country
@@ -23,7 +23,7 @@ export function getFlagByNationality(flags, nationality, country) {
         }
 
         const flag = flags.find((flag) => flag.en_short_name === country);
-        console.log(country, flag?.alpha_2_code);
+        //console.log(country, flag?.alpha_2_code);
         return flag?.alpha_2_code;
     }
 }

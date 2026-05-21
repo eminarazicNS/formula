@@ -6,7 +6,7 @@ import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import { getFlagByNationality } from "../helper/getFlag";
 import Flag from "react-flagkit";
 import { getColorByPosition } from "../helper/getColor";
-
+import BasicBreadcrumbs from "./BasicBreadcrumbs";
 
 export default function TeamDetails(props) {
     const [teamDetails, setTeamDetails] = useState({});
@@ -62,11 +62,17 @@ export default function TeamDetails(props) {
         return <Loader />
     }
 
+    const crumbs = [
+        { label: "Teams", path: "/teams" },
+        { label: `${teamDetails.Constructor.name}`, path: `/${params.id}`}
+    ];
+
     return (
         <div className="wrapper">
 
             <div className="dd-col2">
-                <div className="details">
+                <div className="details">                    
+                    <BasicBreadcrumbs crumbs={crumbs} /> 
                     <div style={{ display: "flex" }}>
                         <img src={`../public/img/${teamDetails.Constructor.constructorId}.png`}
                             alt={teamDetails.Constructor.name}

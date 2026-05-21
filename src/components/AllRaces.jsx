@@ -4,6 +4,7 @@ import Loader from "./Loader";
 import { useNavigate } from "react-router";
 import { getFlagByNationality } from "../helper/getFlag";
 import Flag from "react-flagkit";
+import BasicBreadcrumbs from "./BasicBreadcrumbs";
 
 export default function AllRaces(props) {
     const [races, setRaces] = useState([]);
@@ -30,14 +31,19 @@ export default function AllRaces(props) {
 
     if (loading) {
         return <Loader />;
-
     }
+
+    const crumbs = [
+        { label: "Races", path: "/races" }
+    ];
+
     return (
         // <h2>AllRaces</h2>
         <div className="wrapper">
 
 
             <div className="col2">
+                <BasicBreadcrumbs crumbs={crumbs} />
                 <h2>RACE CALENDAR</h2>
                 <table>
                     <thead>

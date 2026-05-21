@@ -25,6 +25,6 @@ export function getColorByPosition(position) {
         case "10": posColor = teal[600];
             break;
     }
-    console.log("position ", position, " posColor ", posColor);
+    //console.log("position ", position, " posColor ", posColor);
     return posColor;
 }

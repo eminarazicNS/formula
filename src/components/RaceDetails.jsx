@@ -6,6 +6,7 @@ import { getFlagByNationality } from "../helper/getFlag";
 import Flag from "react-flagkit";
 import { getColorByPosition } from "../helper/getColor";
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
+import BasicBreadcrumbs from "./BasicBreadcrumbs";
 
 export default function RaceDetails(props) {
     const [qualifying, setQualifying] = useState(null);
@@ -52,12 +53,19 @@ export default function RaceDetails(props) {
         return <Loader />
     }
 
+    let crumbs = [
+        { label: "Races", path: "/races" },
+       // { label: `${qualifying.raceName}`, path: `/raceDetails/${params.id}` }
+           { label: `${qualifying.raceName}`, path: `/${params.id}` }
+    ];
+
     return (
         <div className="wrapper">
 
             <div className="dd-col2">
                 {/* <h2>RaceDetails</h2> */}
                 <div className="details">
+                    <BasicBreadcrumbs crumbs={crumbs} />
                     {/* <img src="../img/Kaciga.png" alt="Country picture" style={{ width: 200 }} /> */}
                     <Flag country={getFlagByNationality(props.flags, "", qualifying.Circuit.Location.country)}
                         size={200} />

@@ -6,6 +6,7 @@ import { getFlagByNationality } from "../helper/getFlag";
 import Flag from "react-flagkit";
 import { getColorByPosition } from "../helper/getColor";
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
+import BasicBreadcrumbs from "./BasicBreadcrumbs";
 
 
 export default function DriverDetails(props) {
@@ -44,13 +45,19 @@ export default function DriverDetails(props) {
 
     console.log(driverDetails);
 
+    
+    let crumbs = [
+        { label: "Drivers", path: "/" },
+        { label: `${driverDetails.Driver.givenName} ${driverDetails.Driver.familyName}`, path: `/${params.id}`}
+    ];
+
     return (
         <div className="wrapper">
-
             <div className="dd-col2">
                 {/* <h2>DRIVERS DETAILS</h2> */}
                 <div className="details">
-                    <div style={{ display: "flex" }}>
+                    <BasicBreadcrumbs crumbs={crumbs} />
+                    <div style={{ display: "flex" }}>                        
                         <img src={`../public/img/${driverDetails.Driver.familyName}.jpg`}
                             alt={driverDetails.Driver.familyName}
                             style={{ width: 150 }} />
@@ -70,6 +77,7 @@ export default function DriverDetails(props) {
                 </div>
 
                 <div className="results">
+                    {/* <BasicBreadcrumbs crumbs={crumbs} /> */}
                     <h2>Formula 1 2013 Results</h2>
                     <table>
                         <thead>

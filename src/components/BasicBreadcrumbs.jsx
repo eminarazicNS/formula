@@ -11,13 +11,13 @@ export default function BasicBreadcrumbs(props) {
                 {props.crumbs.map((item, i) => {
                     const isLast = i === props.crumbs.length - 1;
                     return (
-                        <>
+                        <div>
                         {isLast ? 
                             <span>{item.label}</span>
                             :
                             <Link key={i} to={item.path}>{item.label}</Link>
                         }
-                        </>
+                        </div>
                     );
                 })}
             </Breadcrumbs>
