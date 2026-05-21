@@ -40,21 +40,21 @@ export default function AllDrivers(props) {
                 <table>
                     <thead>
                         <tr>
-                            <td colSpan={3}>Drivers Shampionship Standings - 2013</td>
+                            <td colSpan={5}>Drivers Shampionship Standings - 2013</td>
                         </tr>
                     </thead>
                     <tbody>
                         {drivers.map((driver) => {
                             return (
                                 <tr key={driver.position}
-                                    
+
                                 >
                                     <td>{driver.position}</td>
                                     <td><Flag country={getFlagByNationality(props.flags, driver.Driver.nationality)}
                                         size={30} />
                                     </td>
                                     <td className="link"
-                                    onClick={() => handleClick(driver.Driver.driverId)}>{driver.Driver.givenName} {driver.Driver.familyName}</td>
+                                        onClick={() => handleClick(driver.Driver.driverId)}>{driver.Driver.givenName} {driver.Driver.familyName}</td>
                                     <td>{driver.Constructors[0].name}</td>
                                     <td>{driver.points}</td>
                                 </tr>

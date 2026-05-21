@@ -42,7 +42,7 @@ export default function AllRaces(props) {
                 <table>
                     <thead>
                         <tr>
-                            <td colSpan={3}>Race Calendar - 2013</td>
+                            <td colSpan={6}>Race Calendar - 2013</td>
                         </tr>
                     </thead>
                     <tbody>

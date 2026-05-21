@@ -47,7 +47,7 @@ export default function AllTeams(props) {
                 <table>
                     <thead>
                         <tr>
-                            <td colSpan={4}>Constructors Shampionship Standings - 2013</td>
+                            <td colSpan={5}>Constructors Shampionship Standings - 2013</td>
                         </tr>
                     </thead>
                     <tbody>
