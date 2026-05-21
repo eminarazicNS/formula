@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import Loader from "./Loader";
 import { useNavigate, Link } from "react-router";
 
+
 export default function AllRaces() {
     const [races, setRaces] = useState([]);
     const [loading, setLoading] = useState(true);
