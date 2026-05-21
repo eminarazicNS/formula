@@ -4,6 +4,7 @@ import { Link, useParams } from "react-router";
 import Loader from "./Loader";
 import { getFlagByNationality } from "../helper/getFlag";
 import Flag from "react-flagkit";
+import { getColorByPosition } from "../helper/getColor";
 
 export default function RaceDetails(props) {
     const [qualifying, setQualifying] = useState(null);
@@ -119,7 +120,7 @@ export default function RaceDetails(props) {
                                         <td>{race.Driver.familyName}</td>
                                         <td>{race.Constructor.name}</td>
                                         <td>{race?.Time?.time || "DNQ"}</td>
-                                        <td>{race.points}</td>
+                                        <td style={{ backgroundColor: getColorByPosition(race.position) }}>{race.points}</td>
                                     </tr>
                                 )
                             })}
