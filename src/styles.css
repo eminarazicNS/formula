@@ -1,6 +1,7 @@
 body {
     margin: 0;
     padding: 0;
+    background-color: lightblue;
 }
 
 .wrapper {
@@ -13,7 +14,6 @@ body {
 
 .wrapper .col1 {
     width: 20%;
-    background-color: lightblue;
 }
 
 .col1 nav {
@@ -40,11 +40,13 @@ a {
     width: 80%;
     background-color: lightgray;
     flex: 1;
+    padding: 20px;
+    border-radius: 15px;
 }
 
 .col2 h2 {
-    color: blue;
     font-style: italic;
+    font-family: sans-serif;
 
     padding: 0 15px;
 }
@@ -64,6 +66,11 @@ ul {
 a:hover {
     color: red;
 }
+
+img:hover {
+    color: red;
+}
+
 
 /* Start Details */
 .wrapper .dd-col2 {
@@ -87,6 +94,8 @@ a:hover {
     flex-direction: column;
     align-items: stretch;
     flex: 1;
+    padding: 5px 20px;
+    border-radius: 30px;
 }
 
 .results h2 {
@@ -98,10 +107,12 @@ table {
     border-collapse: collapse;
     background-color: lightcyan;
     width: 100%;
+    border-radius: 10px;
+    overflow: hidden;
 }
 
 .results th {
-    background-color: pink;
+    background-color: lightgray;
 }
 
 .results th,
@@ -121,7 +132,6 @@ tr:nth-child(even) {
 
 /* Start App vNav */
 .vNav ul {
-    background-color: darkgray;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -131,11 +141,23 @@ tr:nth-child(even) {
 }
 
 .vNav li {
-    border: 1px solid black;
-    width: 100%;
-    padding: 35px;
-    text-align: center;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 200px;
+    height: 70px;
+    background-color: darkgray;
+    margin: 5px;
+    border-radius: 15px;
+    font-size: 25px;
 }
+
+.wrapper .vNav img {
+    width: 100px;
+    height: 43.5px;
+}
+
 
 /* End App vNav */
 
