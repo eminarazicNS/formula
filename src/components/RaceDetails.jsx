@@ -12,6 +12,7 @@ export default function RaceDetails(props) {
     const [qualifying, setQualifying] = useState(null);
     const [races, setRaces] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [isError, setIsError] = useState(false);
 
     useEffect(() => {
         getRaceDetails();
@@ -21,6 +22,7 @@ export default function RaceDetails(props) {
     console.log("params", params);
 
     const getRaceDetails = async () => {
+        setIsError(false);
         try {
             const qualifyingUrl = `https://api.jolpi.ca/ergast/f1/${props.year}/${params.id}/qualifying.json`;
             const racesUrl = `https://api.jolpi.ca/ergast/f1/${props.year}/${params.id}/results.json`;
@@ -37,6 +39,9 @@ export default function RaceDetails(props) {
             setLoading(false);
         } catch (e) {
             console.error("error ", e);
+            setIsError(true);
+        } finally {
+            setLoading(false);
         }
 
     }
@@ -62,6 +67,33 @@ export default function RaceDetails(props) {
         { label: "Races", path: "/races" },
         { label: `${qualifying.raceName}`, path: "" }
     ];
+
+    if (isError) {
+        return (
+            <div className="wrapper">
+
+                <div className="dd-col2">
+                    {/* <h2>RaceDetails</h2> */}
+                    <div className="details">
+                        <BasicBreadcrumbs crumbs={crumbs} />
+                        {/* <img src="../img/Kaciga.png" alt="Country picture" style={{ width: 200 }} /> */}
+                        <Flag country={getFlagByNationality(props.flags, "", qualifying.Circuit.Location.country)}
+                            size={200} />
+                        <p><b>{qualifying.raceName}</b></p>
+                        <p>Location: {qualifying.Circuit.Location.locality} </p>
+                        <p>Date: {qualifying.date}</p>
+                        <p>Full Report <a href={qualifying.url} target="_blank"><OpenInNewIcon /></a></p>
+                    </div>
+
+                    <div className="results">
+                        <p style={{ textAlign: "center", fontSize: "50px" }}>No data found!</p>
+                    </div>
+
+                </div>
+            </div >
+
+        );
+    }
 
     return (
         <div className="wrapper">

@@ -16,8 +16,7 @@ export default function DriverDetails(props) {
     const [isError, setIsError] = useState(false);
 
     useEffect(() => {
-        console.log()
-        getDriverDetails("getDriverDetails");
+        getDriverDetails();
     }, [props.year]);
 
 

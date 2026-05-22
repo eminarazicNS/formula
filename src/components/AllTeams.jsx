@@ -43,8 +43,6 @@ export default function AllTeams(props) {
     ];
 
     return (
-
-
         <div className="wrapper">
 
             <div className="col2">
@@ -57,10 +55,11 @@ export default function AllTeams(props) {
                         </tr>
                     </thead>
                     <tbody>
-                        {teams.map((team,i) => {
+                        {teams.map((team, i) => {
                             return (
                                 <tr key={i}>
-                                    <td>{team.position}</td>
+                                    {/* <td>{team.position}</td> ne postoji u starim godinama */}
+                                    <td>{i + 1}</td>
                                     <td><Flag country={getFlagByNationality(props.flags,
                                         team.Constructor.nationality)}
                                         size={30} /></td>
