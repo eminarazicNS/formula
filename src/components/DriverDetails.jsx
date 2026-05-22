@@ -13,15 +13,11 @@ export default function DriverDetails(props) {
     const [driverDetails, setDriverDetails] = useState(null);
     const [driverRaces, setDriverRaces] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [isError, setIsError] = useState(false);
 
     useEffect(() => {
-
-        //zakomentarisi ovo kad obezbedis da se iz bilo kog Details ne moze menjati godina 
-        // setDriverDetails(null);
-        // setDriverRaces(null);
-        //
-
-        getDriverDetails();
+        console.log()
+        getDriverDetails("getDriverDetails");
     }, [props.year]);
 
 
@@ -29,22 +25,28 @@ export default function DriverDetails(props) {
     console.log("params ", params);
 
     const getDriverDetails = async () => {
+        setIsError(false);
+        try {
+            const driverStandingsUrl = `https://api.jolpi.ca/ergast/f1/${props.year}/drivers/${params.id}/driverStandings.json`;
 
-        const driverStandingsUrl = `https://api.jolpi.ca/ergast/f1/${props.year}/drivers/${params.id}/driverStandings.json`;
+            const driverRacesUrl = `https://api.jolpi.ca/ergast/f1/${props.year}/drivers/${params.id}/results.json`;
 
-        const driverRacesUrl = `https://api.jolpi.ca/ergast/f1/${props.year}/drivers/${params.id}/results.json`;
+            const driverStandingsResponse = await axios.get(driverStandingsUrl);
+            const driverRacesResponse = await axios.get(driverRacesUrl);
 
-        const driverStandingsResponse = await axios.get(driverStandingsUrl);
-        const driverRacesResponse = await axios.get(driverRacesUrl);
+            //console.log("DriverStandings", driverStandingsResponse.data.MRData.StandingsTable.StandingsLists[0].DriverStandings[0]);
+            //console.log("DriverRaces", driverRacesResponse.data.MRData.RaceTable.Races);
 
-        //console.log("DriverStandings", driverStandingsResponse.data.MRData.StandingsTable.StandingsLists[0].DriverStandings[0]);
-        //console.log("DriverRaces", driverRacesResponse.data.MRData.RaceTable.Races);
-
-        setDriverDetails(driverStandingsResponse.data.MRData.StandingsTable.StandingsLists[0].DriverStandings[0]);
-        setDriverRaces(driverRacesResponse.data.MRData.RaceTable.Races);
-
-        setLoading(false);
+            setDriverDetails(driverStandingsResponse.data.MRData.StandingsTable.StandingsLists[0].DriverStandings[0]);
+            setDriverRaces(driverRacesResponse.data.MRData.RaceTable.Races);
+        } catch (e) {
+            console.error("error ", e);
+            setIsError(true);
+        } finally {
+            setLoading(false);
+        }
     }
+
 
     if (loading) {
         return <Loader />
@@ -55,6 +57,47 @@ export default function DriverDetails(props) {
         { label: "Drivers", path: "/" },
         { label: `${driverDetails.Driver.givenName} ${driverDetails.Driver.familyName}`, path: `/${params.id}` }
     ];
+
+    if (isError) {
+        return (
+            <div className="wrapper">
+                <div className="dd-col2">
+                    <div className="details">
+                        <BasicBreadcrumbs crumbs={crumbs} />
+                        <div style={{ display: "flex" }}>
+                            <img src={`../public/img/${driverDetails.Driver.familyName}.jpg`}
+                                onError={(e) => {
+                                    if (e.target.src !== `../public/img/${driverDetails.Driver.familyName}.jpg`) {
+                                        e.target.src = "../public/img/avatar.png";
+                                    }
+                                }}
+                                alt={driverDetails.Driver.familyName}
+                                style={{ width: 150 }} />
+                            <div style={{ padding: "5px", textAlign: "left" }}>
+                                <Flag country={getFlagByNationality(props.flags, driverDetails.Driver.nationality)}
+                                    size={30} />
+                                <b> <p>{driverDetails.Driver.givenName}</p>
+                                    <p>{driverDetails.Driver.familyName}</p>
+                                </b>
+                            </div>
+                        </div>
+
+                        <p>Country: {driverDetails.Driver.nationality}</p>
+                        <p>Team: {driverDetails.Constructors[0].name} </p>
+                        <p>Birth: {driverDetails.Driver.dateOfBirth}</p>
+                        <p>History: <a href={driverDetails.Driver.url} target="_blank"><OpenInNewIcon /></a></p>
+                    </div>
+
+                    <div className="results">
+                        <p style={{ textAlign: "center", fontSize: "50px" }}>No data found!</p>
+                    </div>
+
+
+                </div>
+            </div >
+
+        );
+    }
 
     return (
 
@@ -119,6 +162,7 @@ export default function DriverDetails(props) {
                         </tbody>
                     </table>
                 </div>
+
 
             </div>
         </div >

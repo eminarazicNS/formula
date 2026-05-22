@@ -21,19 +21,24 @@ export default function RaceDetails(props) {
     console.log("params", params);
 
     const getRaceDetails = async () => {
-        const qualifyingUrl = `https://api.jolpi.ca/ergast/f1/${props.year}/${params.id}/qualifying.json`;
-        const racesUrl = `https://api.jolpi.ca/ergast/f1/${props.year}/${params.id}/results.json`;
+        try {
+            const qualifyingUrl = `https://api.jolpi.ca/ergast/f1/${props.year}/${params.id}/qualifying.json`;
+            const racesUrl = `https://api.jolpi.ca/ergast/f1/${props.year}/${params.id}/results.json`;
 
-        const qualifyingResponse = await axios.get(qualifyingUrl);
-        const racesResponse = await axios.get(racesUrl);
+            const qualifyingResponse = await axios.get(qualifyingUrl);
+            const racesResponse = await axios.get(racesUrl);
 
-        console.log("qualifying Response", qualifyingResponse.data.MRData.RaceTable.Races[0]);
-        console.log("races Response", racesResponse.data.MRData.RaceTable.Races[0]);
+            console.log("qualifying Response", qualifyingResponse.data.MRData.RaceTable.Races[0]);
+            console.log("races Response", racesResponse.data.MRData.RaceTable.Races[0]);
 
-        setQualifying(qualifyingResponse.data.MRData.RaceTable.Races[0]);
-        setRaces(racesResponse.data.MRData.RaceTable.Races[0]);
+            setQualifying(qualifyingResponse.data.MRData.RaceTable.Races[0]);
+            setRaces(racesResponse.data.MRData.RaceTable.Races[0]);
 
-        setLoading(false);
+            setLoading(false);
+        } catch (e) {
+            console.error("error ", e);
+        }
+
     }
 
     const bestTime = (q1, q2, q3) => {
@@ -55,8 +60,8 @@ export default function RaceDetails(props) {
 
     let crumbs = [
         { label: "Races", path: "/races" },
-       // { label: `${qualifying.raceName}`, path: `/raceDetails/${params.id}` }
-           { label: `${qualifying.raceName}`, path: `/${params.id}` }
+        // { label: `${qualifying.raceName}`, path: `/raceDetails/${params.id}` }
+        { label: `${qualifying.raceName}`, path: `/${params.id}` }
     ];
 
     return (
