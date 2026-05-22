@@ -45,13 +45,17 @@ export default function AllTeams(props) {
     return (
         <div className="wrapper">
 
-            <div className="col2">
+            <div className="col2" className="results">
                 <BasicBreadcrumbs crumbs={crumbs} />
                 <h2>CONSTRUCTORS CHAMPIONSHIP - {props.year}</h2>
                 <table>
                     <thead>
                         <tr>
-                            <td colSpan={5}>Constructors Shampionship Standings - {props.year}</td>
+                            <th>Position</th>
+                            <th></th>
+                            <th>Team</th>
+                            <th>Details</th>
+                            <th>Points</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -60,7 +64,7 @@ export default function AllTeams(props) {
                                 <tr key={i}>
                                     {/* <td>{team.position}</td> ne postoji u starim godinama */}
                                     <td>{i + 1}</td>
-                                    <td><Flag country={getFlagByNationality(props.flags,
+                                    <td style={{textAlign: "right"}}><Flag country={getFlagByNationality(props.flags,
                                         team.Constructor.nationality)}
                                         size={30} /></td>
                                     <td className="link"

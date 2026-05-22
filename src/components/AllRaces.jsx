@@ -42,13 +42,18 @@ export default function AllRaces(props) {
         <div className="wrapper">
 
 
-            <div className="col2">
+            <div className="col2" className="results">
                 <BasicBreadcrumbs crumbs={crumbs} />
                 <h2>RACE CALENDAR - {props.year}</h2>
                 <table>
                     <thead>
                         <tr >
-                            <td colSpan={6}>Race Calendar - {props.year}</td>
+                            <th>Round</th>
+                            <th></th>
+                            <th>Grand Prix</th>
+                            <th>Circuit</th>
+                            <th>Date</th>
+                            <th>Winner</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -56,7 +61,7 @@ export default function AllRaces(props) {
                             return (
                                 <tr key={index}>
                                     <td>{race.round}</td>
-                                    <td><Flag country={getFlagByNationality(props.flags, "",
+                                    <td style={{textAlign: "right"}}><Flag country={getFlagByNationality(props.flags, "",
                                         race.Circuit.Location.country)}
                                         size={30} /></td>
                                     <td className="link" onClick={() => handleClick(race.round)}>{race.raceName}</td>

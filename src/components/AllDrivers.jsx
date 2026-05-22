@@ -41,13 +41,17 @@ export default function AllDrivers(props) {
     return (
         <div className="wrapper">
 
-            <div className="col2">
+            <div className="col2" className="results">
                 <BasicBreadcrumbs crumbs={crumbs} />
                 <h2>DRIVERS CHAMPIONSHIP - {props.year}</h2>
                 <table>
                     <thead>
                         <tr>
-                            <td colSpan={5}>Drivers Shampionship Standings - {props.year}</td>
+                            <th>Position</th>
+                            <th></th>
+                            <th>Driver</th>
+                            <th>Team</th>        
+                            <th>Points</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -57,7 +61,7 @@ export default function AllDrivers(props) {
 
                                 >
                                     <td>{driver.position}</td>
-                                    <td><Flag country={getFlagByNationality(props.flags, driver.Driver.nationality)}
+                                    <td style={{textAlign: "right"}}><Flag country={getFlagByNationality(props.flags, driver.Driver.nationality)}
                                         size={30} />
                                     </td>
                                     <td className="link"
