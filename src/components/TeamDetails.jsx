@@ -42,12 +42,13 @@ export default function TeamDetails(props) {
             //console.log("teamStandingResponse ", teamStandingResponse);
 
             console.log("teamDetails ", teamStandingResponse.data.MRData.StandingsTable.StandingsLists[0].ConstructorStandings[0]);
+
             setTeamDetails(teamStandingResponse.data.MRData.StandingsTable.StandingsLists[0].ConstructorStandings[0]);
 
 
             //console.log("teamRacesResponse ", teamRacesResponse);
 
-            //console.log("teamRaces ", teamRacesResponse.data.MRData.RaceTable.Races);
+            console.log("teamRaces ", teamRacesResponse.data.MRData.RaceTable.Races);
 
 
             setTeamRaces(teamRacesResponse.data.MRData.RaceTable.Races);

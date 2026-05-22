@@ -21,7 +21,7 @@ export default function AllTeams(props) {
         const url = `https://api.jolpi.ca/ergast/f1/${props.year}/constructorStandings.json`;
         const response = await axios.get(url);
         //console.log("response", response);
-        console.log("!teams", response.data.MRData.StandingsTable.StandingsLists[0].ConstructorStandings);
+        console.log("teams", response.data.MRData.StandingsTable.StandingsLists[0].ConstructorStandings);
 
 
         setTeams(response.data.MRData.StandingsTable.StandingsLists[0].ConstructorStandings);
