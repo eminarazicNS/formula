@@ -7,7 +7,7 @@ import TeamDetails from "./components/TeamDetails";
 import RaceDetails from "./components/RaceDetails";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { TextField, Box, InputLabel, MenuItem, FormControl, Select } from "@mui/material";
+import { TextField, Box, InputLabel, MenuItem, FormControl, Select, colors } from "@mui/material";
 
 export default function App() {
   const [flags, setFlags] = useState([]);
@@ -68,9 +68,9 @@ export default function App() {
 
             <div className="vNav">
               <ul>
-                <li><Link to="/">Drivers</Link></li>
-                <li><Link to="/teams">Teams</Link></li>
-                <li><Link to="/races">Races</Link></li>
+                <Link to="/"><li><div><img src="../img/Kaciga.png" alt="Drivers logo" /></div><div>Drivers</div></li></Link>
+                <Link to="/teams"><li><img src="../img/Teams.png" alt="Teams logo" />Teams</li></Link>
+                <Link to="/races"><li><img src="../img/Races1.png" alt="Races logo" />Races</li></Link>
               </ul>
             </div>
           </nav>
