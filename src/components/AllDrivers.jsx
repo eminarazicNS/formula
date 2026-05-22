@@ -55,9 +55,9 @@ export default function AllDrivers(props) {
                         </tr>
                     </thead>
                     <tbody>
-                        {drivers.map((driver) => {
+                        {drivers.map((driver,i) => {
                             return (
-                                <tr key={driver.position}
+                                <tr key={i}
 
                                 >
                                     <td>{driver.position}</td>

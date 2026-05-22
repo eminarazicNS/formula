@@ -89,6 +89,10 @@ img:hover {
     background-color: lightgray;
     font-family: Arial, Helvetica, sans-serif;
 }
+/* rd - RaceDetails */
+.rd-details {
+    padding:5px;
+}
 
 .results {
     background-color: lightskyblue;
@@ -104,6 +108,11 @@ img:hover {
     text-align: left;
     font-family: Arial, Helvetica, sans-serif;
      text-transform: uppercase;
+}
+
+/* rd - RaceDetails */
+.rd-results h2 {
+    font-size: 20px;
 }
 
 table {
@@ -126,6 +135,14 @@ td {
     font-family: Arial, Helvetica, sans-serif;
     padding: 1px;
 }
+
+/* rd - RaceDetails */
+.rd-results th {    
+    /* font-size: 15px; */
+    white-space: nowrap;
+    overflow: hidden;
+}
+
 
 tr:nth-child(even) {
     background-color: #f2f2f2;
@@ -173,6 +190,7 @@ tr:nth-child(even) {
     border-radius: 10px;
     padding: 5px;
     margin: 5px 0;
+    font-size: 12px;
 }
 
 

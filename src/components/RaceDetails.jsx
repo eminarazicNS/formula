@@ -110,7 +110,7 @@ export default function RaceDetails(props) {
 
             <div className="dd-col2">
                 {/* <h2>RaceDetails</h2> */}
-                <div className="details">
+                <div className="details rd-details">
                     <BasicBreadcrumbs crumbs={crumbs} />
                     {/* <img src="../img/Kaciga.png" alt="Country picture" style={{ width: 200 }} /> */}
                     <Flag country={getFlagByNationality(props.flags, "", qualifying.Circuit.Location.country)}
@@ -122,7 +122,7 @@ export default function RaceDetails(props) {
                     <p>Full Report <a href={qualifying.url} target="_blank"><OpenInNewIcon /></a></p>
                 </div>
 
-                <div className="results">
+                <div className="results rd-results">
                     <h2>Qualifying Results - {props.year}</h2>
                     <table>
                         <thead>
@@ -152,7 +152,7 @@ export default function RaceDetails(props) {
                     </table>
                 </div>
 
-                <div className="results">
+                <div className="results rd-results">
                     <h2>Race Results - {props.year}</h2>
                     <table>
                         <thead>
