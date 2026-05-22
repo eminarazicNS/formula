@@ -14,6 +14,7 @@ export default function TeamDetails(props) {
     const [loading, setLoading] = useState(true);
     const [firstDriver, setFirstDriver] = useState("");
     const [secondDriver, setSecondDriver] = useState("");
+    const [isError, setIsError] = useState(false);
 
     const navigate = useNavigate();
 
@@ -28,33 +29,41 @@ export default function TeamDetails(props) {
 
     const getTeams = async () => {
         console.log("getTeams");
-        const teamStandingUrl = `https://api.jolpi.ca/ergast/f1/${props.year}/constructors/${params.id}/constructorStandings.json`;
+        setIsError(false);
+        try {
+            const teamStandingUrl = `https://api.jolpi.ca/ergast/f1/${props.year}/constructors/${params.id}/constructorStandings.json`;
 
-        const teamRacesUrl = `https://api.jolpi.ca/ergast/f1/${props.year}/constructors/${params.id}/results.json`;
+            const teamRacesUrl = `https://api.jolpi.ca/ergast/f1/${props.year}/constructors/${params.id}/results.json`;
 
-        const teamStandingResponse = await axios.get(teamStandingUrl);
+            const teamStandingResponse = await axios.get(teamStandingUrl);
 
-        const teamRacesResponse = await axios.get(teamRacesUrl);
+            const teamRacesResponse = await axios.get(teamRacesUrl);
 
-        //console.log("teamStandingResponse ", teamStandingResponse);
+            //console.log("teamStandingResponse ", teamStandingResponse);
 
-        console.log("teamDetails ", teamStandingResponse.data.MRData.StandingsTable.StandingsLists[0].ConstructorStandings[0]);
-        setTeamDetails(teamStandingResponse.data.MRData.StandingsTable.StandingsLists[0].ConstructorStandings[0]);
-
-
-        //console.log("teamRacesResponse ", teamRacesResponse);
-
-        //console.log("teamRaces ", teamRacesResponse.data.MRData.RaceTable.Races);
+            console.log("teamDetails ", teamStandingResponse.data.MRData.StandingsTable.StandingsLists[0].ConstructorStandings[0]);
+            setTeamDetails(teamStandingResponse.data.MRData.StandingsTable.StandingsLists[0].ConstructorStandings[0]);
 
 
-        setTeamRaces(teamRacesResponse.data.MRData.RaceTable.Races);
+            //console.log("teamRacesResponse ", teamRacesResponse);
 
-        //table races header
-        setFirstDriver(teamRacesResponse.data.MRData.RaceTable.Races[0].Results[0].Driver.familyName);
-        setSecondDriver(teamRacesResponse.data.MRData.RaceTable.Races[0].Results[1].Driver.familyName);
-        //console.log("firstDriver ",firstDriver, " secondDriver ",secondDriver);
+            //console.log("teamRaces ", teamRacesResponse.data.MRData.RaceTable.Races);
 
-        setLoading(false);
+
+            setTeamRaces(teamRacesResponse.data.MRData.RaceTable.Races);
+
+            //table races header
+            setFirstDriver(teamRacesResponse.data.MRData.RaceTable.Races[0].Results[0].Driver.familyName);
+            setSecondDriver(teamRacesResponse.data.MRData.RaceTable.Races[0].Results[1].Driver.familyName);
+            //console.log("firstDriver ",firstDriver, " secondDriver ",secondDriver);
+
+            setLoading(false);
+        } catch (e) {
+            console.error("error ", e);
+            setIsError(true);
+        } finally {
+            setLoading(false);
+        }
     }
 
 
@@ -64,15 +73,50 @@ export default function TeamDetails(props) {
 
     const crumbs = [
         { label: "Teams", path: "/teams" },
-        { label: `${teamDetails.Constructor.name}`, path: `/${params.id}`}
+        { label: `${teamDetails.Constructor.name}`, path: "" }
     ];
+
+
+    if (isError) {
+        return (
+            <div className="wrapper">
+
+                <div className="dd-col2">
+                    <div className="details">
+                        <BasicBreadcrumbs crumbs={crumbs} />
+                        <div style={{ display: "flex" }}>
+                            <img src={`../public/img/${teamDetails.Constructor.constructorId}.png`}
+                                alt={teamDetails.Constructor.name}
+                                style={{ width: 150 }} />
+                            <div style={{ padding: "5px", textAlign: "left" }}>
+                                <Flag country={getFlagByNationality(props.flags, teamDetails.Constructor.nationality)}
+                                    size={30} />
+                                <b><p>{teamDetails.Constructor.name}</p></b>
+                            </div>
+                        </div>
+                        <p>Country: {teamDetails.Constructor.nationality}</p>
+                        <p>History: <a href={teamDetails.Constructor.url} target="_blank"><OpenInNewIcon />
+                        </a></p>
+                    </div>
+
+                    <div className="results">
+                        <p style={{ textAlign: "center", fontSize: "50px" }}>No data found!</p>
+                    </div>
+
+
+                </div>
+            </div >
+
+        );
+    }
+
 
     return (
         <div className="wrapper">
 
             <div className="dd-col2">
-                <div className="details">                    
-                    <BasicBreadcrumbs crumbs={crumbs} /> 
+                <div className="details">
+                    <BasicBreadcrumbs crumbs={crumbs} />
                     <div style={{ display: "flex" }}>
                         <img src={`../public/img/${teamDetails.Constructor.constructorId}.png`}
                             alt={teamDetails.Constructor.name}
