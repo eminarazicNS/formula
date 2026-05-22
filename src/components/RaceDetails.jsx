@@ -63,10 +63,19 @@ export default function RaceDetails(props) {
         return <Loader />
     }
 
-    let crumbs = [
-        { label: "Races", path: "/races" },
-        { label: `${qualifying.raceName}`, path: "" }
-    ];
+    let crumbs = [];
+    try {
+        crumbs = [
+            { label: "Races", path: "/races" },
+            { label: `${qualifying.raceName}`, path: "" }
+        ];
+    } catch (e) {
+        console.error("error ", e);
+        crumbs = [
+            { label: "Races", path: "/races" }
+        ];
+    }
+
 
     if (isError) {
         return (
@@ -79,6 +88,7 @@ export default function RaceDetails(props) {
                         {/* <img src="../img/Kaciga.png" alt="Country picture" style={{ width: 200 }} /> */}
                         <Flag country={getFlagByNationality(props.flags, "", qualifying.Circuit.Location.country)}
                             size={200} />
+                        <p><b>Race round: {params.id}</b></p>
                         <p><b>{qualifying.raceName}</b></p>
                         <p>Location: {qualifying.Circuit.Location.locality} </p>
                         <p>Date: {qualifying.date}</p>
@@ -105,6 +115,7 @@ export default function RaceDetails(props) {
                     {/* <img src="../img/Kaciga.png" alt="Country picture" style={{ width: 200 }} /> */}
                     <Flag country={getFlagByNationality(props.flags, "", qualifying.Circuit.Location.country)}
                         size={200} />
+                    <p><b>Race round: {params.id}</b></p>
                     <p><b>{qualifying.raceName}</b></p>
                     <p>Location: {qualifying.Circuit.Location.locality} </p>
                     <p>Date: {qualifying.date}</p>
