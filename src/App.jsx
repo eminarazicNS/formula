@@ -43,24 +43,28 @@ export default function App() {
       <div className="wrapper">
         <div className="col1">
           <nav>
-            <img src="../img/logo.png" alt="Logo" />
+            <div>
+              <img src="../img/logo.png" alt="Logo" />
+            </div>
 
-            <FormControl sx={{ m: 1, minWidth: 120 }} >
-              <InputLabel id="selectLabelId">Season</InputLabel>
-              <Select
-                labelId="selectId"
-                value={selectedYear}
-                label="Season"
-                onChange={(e) => setSelectedYear(e.target.value)}
-              >
+            <div>
+              <FormControl sx={{ m: 1, minWidth: 120 }} >
+                <InputLabel id="selectLabelId">Season</InputLabel>
+                <Select
+                  labelId="selectId"
+                  value={selectedYear}
+                  label="Season"
+                  onChange={(e) => setSelectedYear(e.target.value)}
+                >
 
-                {years.map((year) => {
-                  return (
-                    <MenuItem value={year}>{year}</MenuItem>
-                  );
-                })}
-              </Select>
-            </FormControl>
+                  {years.map((year) => {
+                    return (
+                      <MenuItem value={year}>{year}</MenuItem>
+                    );
+                  })}
+                </Select>
+              </FormControl>
+            </div>
 
             <div className="vNav">
               <ul>
