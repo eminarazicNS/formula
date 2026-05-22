@@ -64,15 +64,15 @@ export default function TeamDetails(props) {
 
     const crumbs = [
         { label: "Teams", path: "/teams" },
-        { label: `${teamDetails.Constructor.name}`, path: `/${params.id}`}
+        { label: `${teamDetails.Constructor.name}`, path: "" }
     ];
 
     return (
         <div className="wrapper">
 
             <div className="dd-col2">
-                <div className="details">                    
-                    <BasicBreadcrumbs crumbs={crumbs} /> 
+                <div className="details">
+                    <BasicBreadcrumbs crumbs={crumbs} />
                     <div style={{ display: "flex" }}>
                         <img src={`../public/img/${teamDetails.Constructor.constructorId}.png`}
                             alt={teamDetails.Constructor.name}

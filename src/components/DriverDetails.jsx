@@ -55,7 +55,7 @@ export default function DriverDetails(props) {
 
     let crumbs = [
         { label: "Drivers", path: "/" },
-        { label: `${driverDetails.Driver.givenName} ${driverDetails.Driver.familyName}`, path: `/${params.id}` }
+        { label: `${driverDetails.Driver.givenName} ${driverDetails.Driver.familyName}`, path: "" }
     ];
 
     if (isError) {

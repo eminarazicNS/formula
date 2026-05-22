@@ -60,8 +60,7 @@ export default function RaceDetails(props) {
 
     let crumbs = [
         { label: "Races", path: "/races" },
-        // { label: `${qualifying.raceName}`, path: `/raceDetails/${params.id}` }
-        { label: `${qualifying.raceName}`, path: `/${params.id}` }
+        { label: `${qualifying.raceName}`, path: "" }
     ];
 
     return (
