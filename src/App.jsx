@@ -13,6 +13,7 @@ export default function App() {
   const [flags, setFlags] = useState([]);
   const [years, setYears] = useState([]);
   const [selectedYear, setSelectedYear] = useState(new Date().getFullYear()); //defoltna godina
+  const [search, setSearch] = useState(""); //za input text
 
   useEffect(() => {
     getFlags();
@@ -47,24 +48,31 @@ export default function App() {
               <img src="../img/logo.png" alt="Logo" />
             </div>
 
-            <div>
-              <FormControl sx={{ m: 1, minWidth: 120 }} >
-                <InputLabel id="selectLabelId">Season</InputLabel>
-                <Select
-                  labelId="selectId"
-                  value={selectedYear}
-                  label="Season"
-                  onChange={(e) => setSelectedYear(e.target.value)}
-                >
 
-                  {years.map((year) => {
-                    return (
-                      <MenuItem value={year}>{year}</MenuItem>
-                    );
-                  })}
-                </Select>
-              </FormControl>
-            </div>
+            <FormControl sx={{ m: 1, minWidth: 120 }} >
+              <InputLabel id="selectLabelId">Season</InputLabel>
+              <Select
+                labelId="selectId"
+                value={selectedYear}
+                label="Season"
+                onChange={(e) => setSelectedYear(e.target.value)}
+              >
+                {years.map((year) => {
+                  return (
+                    <MenuItem value={year}>{year}</MenuItem>
+                  );
+                })}
+              </Select>
+            </FormControl>
+
+
+            <FormControl sx={{ m: 1, minWidth: 120 }} >
+              <TextField id="searchId"
+                label="Search table:" type="search"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+              />
+            </FormControl>
 
             <div className="vNav">
               <ul>
@@ -77,13 +85,20 @@ export default function App() {
         </div>
         <div className="col2">
           <Routes>
-            <Route path="/" element={<AllDrivers flags={flags} year={selectedYear} />} />
-            <Route path="/teams" element={<AllTeams flags={flags} year={selectedYear} />} />
-            <Route path="/races" element={<AllRaces flags={flags} year={selectedYear} />} />
-            <Route path="/driverDetails/:id" element={<DriverDetails flags={flags} year={selectedYear} />} />
-            <Route path="/driverRaces/:id" element={<DriverDetails flags={flags} year={selectedYear} />} />
-            <Route path="/teamDetails/:id" element={<TeamDetails flags={flags} year={selectedYear} />} />
-            <Route path="/raceDetails/:id" element={<RaceDetails flags={flags} year={selectedYear} />} />
+            <Route path="/" element={<AllDrivers flags={flags} year={selectedYear} 
+                search={search} setSearch={setSearch} />} />
+            <Route path="/teams" element={<AllTeams flags={flags} year={selectedYear}
+                search={search} setSearch={setSearch} />} />
+            <Route path="/races" element={<AllRaces flags={flags} year={selectedYear}
+                search={search} setSearch={setSearch} />} />
+            <Route path="/driverDetails/:id" element={<DriverDetails flags={flags} year={selectedYear} 
+                search={search} setSearch={setSearch} />} />
+            <Route path="/driverRaces/:id" element={<DriverDetails flags={flags} year={selectedYear} 
+                search={search} setSearch={setSearch} />} />
+            <Route path="/teamDetails/:id" element={<TeamDetails flags={flags} year={selectedYear}
+                search={search} setSearch={setSearch} />} />
+            <Route path="/raceDetails/:id" element={<RaceDetails flags={flags} year={selectedYear}
+                search={search} setSearch={setSearch} />} />
           </Routes>
         </div>
       </div>

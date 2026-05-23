@@ -9,23 +9,30 @@ import { getColorByPosition } from "../helper/getColor";
 import BasicBreadcrumbs from "./BasicBreadcrumbs";
 
 export default function TeamDetails(props) {
-    const [teamDetails, setTeamDetails] = useState({});
-    const [teamRaces, setTeamRaces] = useState({});
+    const [teamDetails, setTeamDetails] = useState(null);
+    const [teamRaces, setTeamRaces] = useState(null);
     const [loading, setLoading] = useState(true);
     const [firstDriver, setFirstDriver] = useState("");
     const [secondDriver, setSecondDriver] = useState("");
     const [isError, setIsError] = useState(false);
+    const [filteredData, setFilteredData] = useState([]);
 
     const navigate = useNavigate();
 
     useEffect(() => {
-        console.log("useEffect");
+        props.setSearch("");
+    }, []);   
+
+    useEffect(() => {
         getTeams();
     }, [props.year]);
 
+    useEffect(() => {        
+        getFilteredData();            
+    }, [teamRaces, props.search]);
+
     const params = useParams();
     console.log("team det params ", params);
-
 
     const getTeams = async () => {
         console.log("getTeams");
@@ -67,6 +74,14 @@ export default function TeamDetails(props) {
         }
     }
 
+    
+    const getFilteredData = () => {    
+        if(teamRaces!=null){
+           const result = teamRaces.filter((item) => item.raceName.toLowerCase().includes( props.search.toLowerCase() ) );
+           setFilteredData(result);      
+        }             
+    }
+    
 
     if (loading) {
         return <Loader />
@@ -77,8 +92,7 @@ export default function TeamDetails(props) {
         { label: `${teamDetails.Constructor.name}`, path: "" }
     ];
 
-
-    if (isError) {
+    if (isError || (filteredData===null)) {  
         return (
             <div className="wrapper">
 
@@ -148,7 +162,7 @@ export default function TeamDetails(props) {
                             </tr>
                         </thead>
                         <tbody>
-                            {teamRaces.map((race) => {
+                            {filteredData.map((race) => {
                                 return (
                                     <tr key={race.round}>
                                         <td>{race.round}</td>

@@ -14,11 +14,20 @@ export default function DriverDetails(props) {
     const [driverRaces, setDriverRaces] = useState(null);
     const [loading, setLoading] = useState(true);
     const [isError, setIsError] = useState(false);
+    const [filteredData, setFilteredData] = useState([]);
+
+    
+    useEffect(() => {
+        props.setSearch("");
+    }, []);    
 
     useEffect(() => {
         getDriverDetails();
     }, [props.year]);
-
+    
+    useEffect(() => {        
+        getFilteredData();            
+    }, [driverRaces, props.search]);
 
     const params = useParams();
     console.log("params ", params);
@@ -46,6 +55,18 @@ export default function DriverDetails(props) {
         }
     }
 
+    
+    const getFilteredData = () => {       
+        //console.log("getFilteredData driverRaces", driverRaces);
+        if(driverRaces!=null){
+            const result = driverRaces.filter((item) =>  
+                  item.raceName.toLowerCase().includes( props.search.toLowerCase() ) ||
+                  item.Results[0].Constructor.name.toLowerCase().includes( props.search.toLowerCase() ) 
+             );
+           setFilteredData(result);      
+        }             
+    }
+
 
     if (loading) {
         return <Loader />
@@ -57,7 +78,7 @@ export default function DriverDetails(props) {
         { label: `${driverDetails.Driver.givenName} ${driverDetails.Driver.familyName}`, path: "" }
     ];
 
-    if (isError) {
+    if (isError || (filteredData===null)) {        
         return (
             <div className="wrapper">
                 <div className="dd-col2">
@@ -142,7 +163,7 @@ export default function DriverDetails(props) {
                             </tr>
                         </thead>
                         <tbody>
-                            {driverRaces.map((race) => {
+                            {filteredData.map((race) => {
                                 return (
                                     <tr key={race.round}>
                                         <td>{race.round}</td>

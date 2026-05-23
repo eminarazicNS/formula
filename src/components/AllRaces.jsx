@@ -9,12 +9,23 @@ import BasicBreadcrumbs from "./BasicBreadcrumbs";
 export default function AllRaces(props) {
     const [races, setRaces] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [filteredData, setFilteredData] = useState([]);
 
     const navigate = useNavigate();
+
+     useEffect(() => {
+        props.setSearch("");
+    }, []);    
 
     useEffect(() => {
         getRaces();
     }, [props.year]);
+
+    
+    useEffect(() => {
+         getFilteredData();
+    }, [races, props.search]);
+
 
     const getRaces = async () => {
         const url = `https://api.jolpi.ca/ergast/f1/${props.year}/results/1.json`;
@@ -22,6 +33,19 @@ export default function AllRaces(props) {
         //console.log("races", response.data.MRData.RaceTable.Races);
         setRaces(response.data.MRData.RaceTable.Races);
         setLoading(false);
+    }
+    
+      const getFilteredData = () => {
+        console.log("getFilteredData");
+        let result = races;
+        //console.log("getFilteredData result ", result);
+        result = result.filter((item) =>  
+            item.raceName.toLowerCase().includes( props.search.toLowerCase() ) ||
+            item.Circuit.circuitName.toLowerCase().includes( props.search.toLowerCase() ) ||
+            item.Results[0].Driver.familyName.toLowerCase().includes( props.search.toLowerCase() )
+        );
+        
+        setFilteredData(result);
     }
 
     const handleClick = (id) => {
@@ -57,7 +81,7 @@ export default function AllRaces(props) {
                         </tr>
                     </thead>
                     <tbody>
-                        {races.map((race, index) => {
+                        {filteredData.map((race, index) => {
                             return (
                                 <tr key={index}>
                                     <td>{race.round}</td>

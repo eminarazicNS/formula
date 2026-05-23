@@ -7,15 +7,25 @@ import Flag from "react-flagkit";
 import BasicBreadcrumbs from "./BasicBreadcrumbs";
 
 export default function AllDrivers(props) {
-    const [drivers, setDrivers] = useState({});
+    const [drivers, setDrivers] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [filteredData, setFilteredData] = useState([]);
 
     const navigate = useNavigate();
+
+    useEffect(() => {
+        props.setSearch("");
+    }, []);    
 
     useEffect(() => {
         getDrivers();
     }, [props.year]);
 
+    useEffect(() => {
+         getFilteredData();
+    }, [drivers, props.search]);
+
+   
     const getDrivers = async () => {
         const url = `https://api.jolpi.ca/ergast/f1/${props.year}/driverStandings.json`;
         console.log("drivers url ", url)
@@ -24,6 +34,20 @@ export default function AllDrivers(props) {
         setDrivers(response.data.MRData.StandingsTable.StandingsLists[0].DriverStandings);
         setLoading(false);
     };
+
+
+    const getFilteredData = () => {
+        console.log("getFilteredData");
+        let result = drivers;
+        //console.log("getFilteredData result ", result);
+        result = result.filter((item) =>  
+            item.Driver.givenName.toLowerCase().includes( props.search.toLowerCase() ) ||
+            item.Driver.familyName.toLowerCase().includes( props.search.toLowerCase() ) ||
+            item.Constructors[0].name.toLowerCase().includes( props.search.toLowerCase() )
+        );
+        
+        setFilteredData(result);
+    }
 
     const handleClick = (id) => {
         console.log("id ", id);
@@ -50,22 +74,23 @@ export default function AllDrivers(props) {
                             <th>Position</th>
                             <th></th>
                             <th>Driver</th>
-                            <th>Team</th>        
-                            <th>Points</th>
+                            <th>Team</th>
+                            <th>Points</th>                           
                         </tr>
                     </thead>
-                    <tbody>
-                        {drivers.map((driver,i) => {
+                    <tbody>                        
+                        {filteredData.map((driver,i) => {                        
                             return (
-                                <tr key={i}
-
-                                >
+                                <tr key={i}>
                                     <td>{driver.position}</td>
-                                    <td style={{textAlign: "right"}}><Flag country={getFlagByNationality(props.flags, driver.Driver.nationality)}
-                                        size={30} />
+                                    <td style={{textAlign: "right"}}>
+                                        <Flag country={
+                                            getFlagByNationality(props.flags, driver.Driver.nationality)}
+                                            size={30} />
                                     </td>
                                     <td className="link"
-                                        onClick={() => handleClick(driver.Driver.driverId)}>{driver.Driver.givenName} {driver.Driver.familyName}</td>
+                                        onClick={() => handleClick(driver.Driver.driverId)}>
+                                        {driver.Driver.givenName} {driver.Driver.familyName}</td>
                                     <td>{driver.Constructors[0].name}</td>
                                     <td>{driver.points}</td>
                                 </tr>

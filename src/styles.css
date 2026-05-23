@@ -129,9 +129,9 @@ table {
 
 .results th,
 td {
-    text-align: center;
-    border: 1px solid lightblue;
+    /* text-align: center; */    
     text-align: left;
+    border: 1px solid lightblue;
     font-family: Arial, Helvetica, sans-serif;
     padding: 1px;
 }
@@ -199,3 +199,5 @@ tr:nth-child(even) {
 }
 
 /* end Breadcrumbs */
+
+
