@@ -21,6 +21,7 @@ export default function TeamDetails(props) {
 
     useEffect(() => {
         props.setSearch("");
+        props.setSearchIsVisible(true);
     }, []);   
 
     useEffect(() => {

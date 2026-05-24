@@ -14,6 +14,7 @@ export default function App() {
   const [years, setYears] = useState([]);
   const [selectedYear, setSelectedYear] = useState(new Date().getFullYear()); //defoltna godina
   const [search, setSearch] = useState(""); //za input text
+  const [searchIsVisible, setSearchIsVisible] = useState(true);
 
   useEffect(() => {
     getFlags();
@@ -65,14 +66,29 @@ export default function App() {
               </Select>
             </FormControl>
 
-
+            {searchIsVisible && 
+            (
             <FormControl sx={{ m: 1, minWidth: 120 }} >
               <TextField id="searchId"
                 label="Search table:" type="search"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
+                
               />
             </FormControl>
+            )}
+
+            {/* 
+            <FormControl sx={{ m: 1, minWidth: 120 }} >
+              <TextField id="searchId"
+                label="Search table:" type="search"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                
+              />
+            </FormControl>
+            
+            */}
 
             <div className="vNav">
               <ul>
@@ -86,19 +102,19 @@ export default function App() {
         <div className="col2">
           <Routes>
             <Route path="/" element={<AllDrivers flags={flags} year={selectedYear} 
-                search={search} setSearch={setSearch} />} />
+                search={search} setSearch={setSearch} setSearchIsVisible={setSearchIsVisible} />} />
             <Route path="/teams" element={<AllTeams flags={flags} year={selectedYear}
-                search={search} setSearch={setSearch} />} />
+                search={search} setSearch={setSearch}  setSearchIsVisible={setSearchIsVisible} />} />
             <Route path="/races" element={<AllRaces flags={flags} year={selectedYear}
-                search={search} setSearch={setSearch} />} />
+                search={search} setSearch={setSearch} setSearchIsVisible={setSearchIsVisible} />} />
             <Route path="/driverDetails/:id" element={<DriverDetails flags={flags} year={selectedYear} 
-                search={search} setSearch={setSearch} />} />
+                search={search} setSearch={setSearch} setSearchIsVisible={setSearchIsVisible} />} />
             <Route path="/driverRaces/:id" element={<DriverDetails flags={flags} year={selectedYear} 
-                search={search} setSearch={setSearch} />} />
+                search={search} setSearch={setSearch} setSearchIsVisible={setSearchIsVisible} />} />
             <Route path="/teamDetails/:id" element={<TeamDetails flags={flags} year={selectedYear}
-                search={search} setSearch={setSearch} />} />
+                search={search} setSearch={setSearch} setSearchIsVisible={setSearchIsVisible} />} />
             <Route path="/raceDetails/:id" element={<RaceDetails flags={flags} year={selectedYear}
-                search={search} setSearch={setSearch} />} />
+                search={search} setSearch={setSearch} setSearchIsVisible={setSearchIsVisible} />} />
           </Routes>
         </div>
       </div>

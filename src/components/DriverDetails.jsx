@@ -19,6 +19,7 @@ export default function DriverDetails(props) {
     
     useEffect(() => {
         props.setSearch("");
+        props.setSearchIsVisible(true);
     }, []);    
 
     useEffect(() => {

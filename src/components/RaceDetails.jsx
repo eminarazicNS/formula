@@ -1,3 +1,4 @@
+//Ne radi pretraga po Search polju, pa je taj deo zakomentarisan.
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router";
@@ -13,10 +14,23 @@ export default function RaceDetails(props) {
     const [races, setRaces] = useState(null);
     const [loading, setLoading] = useState(true);
     const [isError, setIsError] = useState(false);
+/*    const [filteredQualifying, setFilteredQualifying] = useState([]);
+    const [filteredRaces, setFilteredRaces] = useState([]);
+*/    
+
+   useEffect(() => {
+        props.setSearch("");
+        props.setSearchIsVisible(false);
+    }, []);   
 
     useEffect(() => {
         getRaceDetails();
     }, [props.year]);
+/*
+    useEffect(() => {        
+        getFilteredData();            
+    }, [props.search]);
+*/    
 
     const params = useParams();
     console.log("params", params);
@@ -58,6 +72,37 @@ export default function RaceDetails(props) {
     };
 
     // bestTime(430,200,556);
+/*
+    const getFilteredData = () => {  
+
+        setFilteredQualifying(qualifying);
+        setFilteredRaces(races);
+
+        console.log("getFilteredData qualifying ",qualifying);
+
+        if(props.search===""){
+            return;
+        }
+
+        if(qualifying!=null){
+            const resultQ = resultQ.filter((item) =>  
+                  item.Driver.familyName.toLowerCase().includes( props.search.toLowerCase() ) ||
+                  item.Constructor.name.toLowerCase().includes( props.search.toLowerCase() ) 
+             );   
+           setFilteredQualifying(resultQ);
+        }    
+        
+        console.log("getFilteredData races ",races);
+
+        if(races!=null){
+            const resultR = resultR.filter((item) =>  
+                  item.Driver.familyName.toLowerCase().includes( props.search.toLowerCase() ) ||
+                  item.Constructor.name.toLowerCase().includes( props.search.toLowerCase() ) 
+             );               
+            setFilteredRaces(resultR);
+        }           
+    }
+*/
 
     if (loading) {
         return <Loader />
@@ -77,7 +122,8 @@ export default function RaceDetails(props) {
     }
 
 
-    if (isError) {
+//    if (isError || (filteredQualifying.QualifyingResults===null) || (filteredRaces.Results===null)) {  
+    if (isError) {  
         return (
             <div className="wrapper">
 
@@ -123,7 +169,7 @@ export default function RaceDetails(props) {
                 </div>
 
                 <div className="results rd-results">
-                    <h2>Qualifying Results - {props.year}</h2>
+                    <h2 style={{textWrap:"nowrap"}}>Qualifying Results - {props.year}</h2>
                     <table>
                         <thead>
                             <tr>
@@ -135,7 +181,8 @@ export default function RaceDetails(props) {
                             </tr>
                         </thead>
                         <tbody>
-                            {qualifying.QualifyingResults.map((qualifier) => {
+                            {/* {filteredQualifying.QualifyingResults.map((qualifier) => { */}
+                             {qualifying.QualifyingResults.map((qualifier) => {
                                 return (
                                     <tr key={qualifier.position}>
                                         <td>{qualifier.position}</td>
@@ -166,7 +213,8 @@ export default function RaceDetails(props) {
                             </tr>
                         </thead>
                         <tbody>
-                            {races.Results.map((race) => {
+                            {/* {filteredRaces.Results.map((race) => { */}
+                              {races.Results.map((race) => {    
                                 return (
                                     <tr key={race.position}>
                                         <td>{race.position}</td>

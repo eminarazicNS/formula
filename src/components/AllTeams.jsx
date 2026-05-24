@@ -16,6 +16,7 @@ export default function AllTeams(props) {
 
     useEffect(() => {
         props.setSearch("");
+        props.setSearchIsVisible(true);
     }, []);    
 
     useEffect(() => {
@@ -60,7 +61,8 @@ export default function AllTeams(props) {
 
     const crumbs = [
         { label: "Teams", path: "/teams" }
-    ];
+    ];  
+
 
     return (
         <div className="wrapper">

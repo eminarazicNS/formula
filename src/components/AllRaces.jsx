@@ -15,6 +15,7 @@ export default function AllRaces(props) {
 
      useEffect(() => {
         props.setSearch("");
+        props.setSearchIsVisible(true);
     }, []);    
 
     useEffect(() => {
