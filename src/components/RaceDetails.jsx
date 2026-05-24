@@ -8,6 +8,7 @@ import Flag from "react-flagkit";
 import { getColorByPosition } from "../helper/getColor";
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import BasicBreadcrumbs from "./BasicBreadcrumbs";
+import { DashboardRounded } from "@mui/icons-material";
 
 export default function RaceDetails(props) {
     const [qualifying, setQualifying] = useState(null);
@@ -128,17 +129,18 @@ export default function RaceDetails(props) {
             <div className="wrapper">
 
                 <div className="dd-col2">
-                    {/* <h2>RaceDetails</h2> */}
                     <div className="details">
                         <BasicBreadcrumbs crumbs={crumbs} />
-                        {/* <img src="../img/Kaciga.png" alt="Country picture" style={{ width: 200 }} /> */}
-                        <Flag country={getFlagByNationality(props.flags, "", qualifying.Circuit.Location.country)}
-                            size={200} />
-                        <p><b>Race round: {params.id}</b></p>
-                        <p><b>{qualifying.raceName}</b></p>
+                       
+                        {/* <Flag 
+                        country={getFlagByNationality(props.flags, "", qualifying.Circuit.Location.country)}
+                        size={200} /> */}
+                        <p><b>Race round: <span className="race-round">{params.id}</span></b></p>
+                        {/* <p><b>{qualifying.raceName}</b></p>
                         <p>Location: {qualifying.Circuit.Location.locality} </p>
                         <p>Date: {qualifying.date}</p>
-                        <p>Full Report <a href={qualifying.url} target="_blank"><OpenInNewIcon /></a></p>
+                        <p>Full Report <a href={qualifying?.url} target="_blank"><OpenInNewIcon /></a></p> */}
+                       
                     </div>
 
                     <div className="results">                       
@@ -163,7 +165,8 @@ export default function RaceDetails(props) {
                     {/* <img src="../img/Kaciga.png" alt="Country picture" style={{ width: 200 }} /> */}
                     <Flag country={getFlagByNationality(props.flags, "", qualifying.Circuit.Location.country)}
                         size={200} />
-                    <p><b>Race round: {params.id}</b></p>
+                    {/* <p><b>Race round: {params.id}</b></p> */}
+                    <p><b>Race round: <span className="race-round">{params.id}</span></b></p>
                     <p><b>{qualifying.raceName}</b></p>
                     <p>Location: {qualifying.Circuit.Location.locality} </p>
                     <p>Date: {qualifying.date}</p>

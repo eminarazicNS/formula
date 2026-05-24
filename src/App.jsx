@@ -49,7 +49,7 @@ export default function App() {
               <img src="../img/logo.png" alt="Logo" />
             </div>
 
-
+           <div>
             <FormControl sx={{ m: 1, minWidth: 120 }} >
               <InputLabel id="selectLabelId">Season</InputLabel>
               <Select
@@ -65,9 +65,9 @@ export default function App() {
                 })}
               </Select>
             </FormControl>
-
+            </div>
             {searchIsVisible && 
-            (
+            ( 
             <FormControl sx={{ m: 1, minWidth: 120 }} >
               <TextField id="searchId"
                 label="Search table:" type="search"
@@ -76,19 +76,7 @@ export default function App() {
                 
               />
             </FormControl>
-            )}
-
-            {/* 
-            <FormControl sx={{ m: 1, minWidth: 120 }} >
-              <TextField id="searchId"
-                label="Search table:" type="search"
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-                
-              />
-            </FormControl>
-            
-            */}
+            )}          
 
             <div className="vNav">
               <ul>
