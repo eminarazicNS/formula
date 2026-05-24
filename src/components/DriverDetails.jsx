@@ -110,7 +110,9 @@ export default function DriverDetails(props) {
                     </div>
 
                     <div className="results">
-                        <p style={{ textAlign: "center", fontSize: "50px" }}>No data found!</p>
+                        <div className="no-data-div">
+                            <img src="../img/emoji-faces-sad-emoji.png" alt="sad-emoji" />
+                       </div>                        
                     </div>
 
 
