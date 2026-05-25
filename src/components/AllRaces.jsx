@@ -85,10 +85,12 @@ export default function AllRaces(props) {
                             return (
                                 <tr key={index}>
                                     <td>{race.round}</td>
-                                    <td className="link" onClick={() => handleClick(race.round)}>
-                                        <Flag country={getFlagByNationality(props.flags, "",
-                                            race.Circuit.Location.country)}
-                                            size={30} />{race.raceName}
+                                    <td onClick={() => handleClick(race.round)}>
+                                        <div className="link">
+                                            <Flag country={getFlagByNationality(props.flags, "",
+                                                race.Circuit.Location.country)}
+                                                size={30} />{race.raceName}
+                                        </div>
                                     </td>
                                     <td>{race.Circuit.circuitName}</td>
                                     <td>{race.date}</td>
