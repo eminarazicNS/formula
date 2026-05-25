@@ -9,7 +9,9 @@ export default function Home(props) {
         props.setCol2IsVisible(false);
     }, []);
 
-    return (    
-        <BackgroundVideo />              
+    return (  
+        <div className="wrapper">
+        <BackgroundVideo />      
+        </div>          
     );
 }
