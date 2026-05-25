@@ -81,9 +81,9 @@ export default function App() {
 
             <div className="vNav">
               <ul>
-                <Link to="/drivers"><li><div><img src="../img/Kaciga.png" alt="Drivers logo" /></div><div>Drivers</div></li></Link>
-                <Link to="/teams"><li><img src="../img/Teams.png" alt="Teams logo" />Teams</li></Link>
-                <Link to="/races"><li><img src="../img/Races1.png" alt="Races logo" />Races</li></Link>
+                <Link to="/drivers"><li><img src="../img/Kaciga.png" alt="Drivers logo" /><div className="menuIcons">Drivers</div></li></Link>
+                <Link to="/teams"><li><img src="../img/Teams.png" alt="Teams logo" /><div className="menuIcons">Teams</div></li></Link>
+                <Link to="/races"><li><img src="../img/Races1.png" alt="Races logo" /><div className="menuIcons">Races</div></li></Link>
               </ul>
             </div>
           </nav>
