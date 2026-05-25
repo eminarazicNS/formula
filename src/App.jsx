@@ -9,6 +9,8 @@ import RaceDetails from "./components/RaceDetails";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { TextField, Box, InputLabel, MenuItem, FormControl, Select, colors } from "@mui/material";
+import { grey } from "@mui/material/colors";
+
 
 export default function App() {
   const [flags, setFlags] = useState([]);
@@ -46,14 +48,21 @@ export default function App() {
   return (
     <BrowserRouter>
       <div className="wrapper">
+        {/* <div>
+          <video loop autoPlay muted id="bg-video"
+            src="./public/home-video/clip-race.mp4" type="video/mp4"
+            poster="./public/home-video/video-poster.jpg"
+          >
+          </video>
+        </div> */}
         <div className="col1">
           <nav>
             <div>
               <img src="../img/logo.png" alt="Logo" />
             </div>
 
-            <div style={selectIsVisible ? {visibility: "visible"} : {visibility: "hidden"}}> 
-               <FormControl sx={{ m: 1, minWidth: 120 }} >
+            <div style={selectIsVisible ? { visibility: "visible" } : { visibility: "hidden" }}>
+              <FormControl sx={{ m: 1, minWidth: 120 }} >
                 <InputLabel id="selectLabelId">Season</InputLabel>
                 <Select
                   labelId="selectId"
@@ -67,18 +76,19 @@ export default function App() {
                     );
                   })}
                 </Select>
-              </FormControl>                        
-            </div>             
-             <div style={searchIsVisible ? {visibility: "visible"} : {visibility: "hidden"}}> 
-                <FormControl sx={{ m: 1, minWidth: 120 }} >
-                  <TextField id="searchId"
-                    label="Search table:" type="search"
-                    value={search}
-                    onChange={(e) => setSearch(e.target.value)}
-
-                  />
-                </FormControl>             
+              </FormControl>
             </div>
+            <div style={searchIsVisible ? { visibility: "visible" } : { visibility: "hidden" }}>
+              <FormControl sx={{ m: 1, minWidth: 120 }} >
+                <TextField id="searchId"
+                  label="Search table:" type="search"
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+
+                />
+              </FormControl>
+            </div>
+
             <div className="vNav">
               <ul>
                 <Link to="/drivers"><li><img src="../img/Kaciga.png" alt="Drivers logo" /><div className="menuIcons">Drivers</div></li></Link>
@@ -89,25 +99,25 @@ export default function App() {
           </nav>
         </div>
         {/* <div className="col2" style={col2IsVisible ? {opacity: "0.0"} : {opacity:"1.0"}}> */}
-        {/* <div className="col2" style={col2IsVisible ? {visibility: "visible"} : {visibility: "hidden"}}> */}        
-         <div className="col2">
+        {/* <div className="col2" style={col2IsVisible ? {visibility: "visible"} : {visibility: "hidden"}}> */}
+        <div className="col2">
           <Routes>
-            <Route path="/" element={<Home 
-             setSearchIsVisible={setSearchIsVisible} setSelectIsVisible={setSelectIsVisible} setCol2IsVisible={setCol2IsVisible} />} />
+            <Route path="/" element={<Home
+              setSearchIsVisible={setSearchIsVisible} setSelectIsVisible={setSelectIsVisible} setCol2IsVisible={setCol2IsVisible} />} />
             <Route path="/drivers" element={<AllDrivers flags={flags} year={selectedYear}
               search={search} setSearch={setSearch} setSearchIsVisible={setSearchIsVisible} setSelectIsVisible={setSelectIsVisible} setCol2IsVisible={setCol2IsVisible} />} />
             <Route path="/teams" element={<AllTeams flags={flags} year={selectedYear}
-              search={search} setSearch={setSearch} setSearchIsVisible={setSearchIsVisible} setSelectIsVisible={setSelectIsVisible}  setCol2IsVisible={setCol2IsVisible}/>} />
+              search={search} setSearch={setSearch} setSearchIsVisible={setSearchIsVisible} setSelectIsVisible={setSelectIsVisible} setCol2IsVisible={setCol2IsVisible} />} />
             <Route path="/races" element={<AllRaces flags={flags} year={selectedYear}
-              search={search} setSearch={setSearch} setSearchIsVisible={setSearchIsVisible}  setSelectIsVisible={setSelectIsVisible} setCol2IsVisible={setCol2IsVisible}/>} />
+              search={search} setSearch={setSearch} setSearchIsVisible={setSearchIsVisible} setSelectIsVisible={setSelectIsVisible} setCol2IsVisible={setCol2IsVisible} />} />
             <Route path="/driverDetails/:id" element={<DriverDetails flags={flags} year={selectedYear}
-              search={search} setSearch={setSearch} setSearchIsVisible={setSearchIsVisible}  setSelectIsVisible={setSelectIsVisible} setCol2IsVisible={setCol2IsVisible}/>} />
+              search={search} setSearch={setSearch} setSearchIsVisible={setSearchIsVisible} setSelectIsVisible={setSelectIsVisible} setCol2IsVisible={setCol2IsVisible} />} />
             <Route path="/driverRaces/:id" element={<DriverDetails flags={flags} year={selectedYear}
-              search={search} setSearch={setSearch} setSearchIsVisible={setSearchIsVisible}  setSelectIsVisible={setSelectIsVisible} setCol2IsVisible={setCol2IsVisible}/>} />
+              search={search} setSearch={setSearch} setSearchIsVisible={setSearchIsVisible} setSelectIsVisible={setSelectIsVisible} setCol2IsVisible={setCol2IsVisible} />} />
             <Route path="/teamDetails/:id" element={<TeamDetails flags={flags} year={selectedYear}
-              search={search} setSearch={setSearch} setSearchIsVisible={setSearchIsVisible}  setSelectIsVisible={setSelectIsVisible} setCol2IsVisible={setCol2IsVisible}/>} />
+              search={search} setSearch={setSearch} setSearchIsVisible={setSearchIsVisible} setSelectIsVisible={setSelectIsVisible} setCol2IsVisible={setCol2IsVisible} />} />
             <Route path="/raceDetails/:id" element={<RaceDetails flags={flags} year={selectedYear}
-              search={search} setSearch={setSearch} setSearchIsVisible={setSearchIsVisible}  setSelectIsVisible={setSelectIsVisible} setCol2IsVisible={setCol2IsVisible}/>} />
+              search={search} setSearch={setSearch} setSearchIsVisible={setSearchIsVisible} setSelectIsVisible={setSelectIsVisible} setCol2IsVisible={setCol2IsVisible} />} />
           </Routes>
         </div>
       </div>
