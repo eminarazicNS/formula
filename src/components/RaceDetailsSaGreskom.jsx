@@ -1,40 +1,37 @@
 //Ne radi pretraga po Search polju, pa je taj deo zakomentarisan.
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router";
+import { useParams } from "react-router";
 import Loader from "./Loader";
 import { getFlagByNationality } from "../helper/getFlag";
 import Flag from "react-flagkit";
 import { getColorByPosition } from "../helper/getColor";
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import BasicBreadcrumbs from "./BasicBreadcrumbs";
-import { DashboardRounded } from "@mui/icons-material";
 
 export default function RaceDetails(props) {
     const [qualifying, setQualifying] = useState(null);
     const [races, setRaces] = useState(null);
     const [loading, setLoading] = useState(true);
     const [isError, setIsError] = useState(false);
-    /*    const [filteredQualifying, setFilteredQualifying] = useState([]);
-        const [filteredRaces, setFilteredRaces] = useState([]);
-    */
+    const [filteredQualifying, setFilteredQualifying] = useState([]);
+    const [filteredRaces, setFilteredRaces] = useState([]);
+
+    const params = useParams();
+    console.log("params", params);
 
     useEffect(() => {
         props.setSearch("");
-        props.setSearchIsVisible(false);
+        props.setSearchIsVisible(true);
     }, []);
 
     useEffect(() => {
         getRaceDetails();
     }, [props.year]);
-    /*
-        useEffect(() => {        
-            getFilteredData();            
-        }, [props.search]);
-    */
 
-    const params = useParams();
-    console.log("params", params);
+    useEffect(() => {
+        getFilteredData();
+    }, [props.search, qualifying, races]);
 
     const getRaceDetails = async () => {
         setIsError(false);
@@ -45,13 +42,11 @@ export default function RaceDetails(props) {
             const qualifyingResponse = await axios.get(qualifyingUrl);
             const racesResponse = await axios.get(racesUrl);
 
-            console.log("qualifying Response", qualifyingResponse.data.MRData.RaceTable.Races[0]);
+            console.log("qualifying Response", qualifyingResponse.data.MRData.RaceTable.Races[0].QualifyingResults);
             console.log("races Response", racesResponse.data.MRData.RaceTable.Races[0]);
 
-            setQualifying(qualifyingResponse.data.MRData.RaceTable.Races[0]);
+            setQualifying(qualifyingResponse.data.MRData.RaceTable.Races[0].QualifyingResults);
             setRaces(racesResponse.data.MRData.RaceTable.Races[0]);
-
-            setLoading(false);
         } catch (e) {
             console.error("error ", e);
             setIsError(true);
@@ -73,37 +68,24 @@ export default function RaceDetails(props) {
     };
 
     // bestTime(430,200,556);
-    /*
-        const getFilteredData = () => {  
-    
-            setFilteredQualifying(qualifying);
-            setFilteredRaces(races);
-    
-            console.log("getFilteredData qualifying ",qualifying);
-    
-            if(props.search===""){
-                return;
-            }
-    
-            if(qualifying!=null){
-                const resultQ = resultQ.filter((item) =>  
-                      item.Driver.familyName.toLowerCase().includes( props.search.toLowerCase() ) ||
-                      item.Constructor.name.toLowerCase().includes( props.search.toLowerCase() ) 
-                 );   
-               setFilteredQualifying(resultQ);
-            }    
-            
-            console.log("getFilteredData races ",races);
-    
-            if(races!=null){
-                const resultR = resultR.filter((item) =>  
-                      item.Driver.familyName.toLowerCase().includes( props.search.toLowerCase() ) ||
-                      item.Constructor.name.toLowerCase().includes( props.search.toLowerCase() ) 
-                 );               
-                setFilteredRaces(resultR);
-            }           
-        }
-    */
+
+    const getFilteredData = () => {
+
+        const resultQ = qualifying.filter((item) =>
+            item.Driver.familyName.toLowerCase().includes(props.search.toLowerCase()) ||
+            item.Constructor.name.toLowerCase().includes(props.search.toLowerCase())
+        );
+
+        const resultR = races.Results?.filter((item) =>
+            item.Driver.familyName.toLowerCase().includes(props.search.toLowerCase()) ||
+            item.Constructor.name.toLowerCase().includes(props.search.toLowerCase())
+        );
+
+        setFilteredQualifying(resultQ);
+        setFilteredRaces(resultR);
+
+    }
+
 
     if (loading) {
         return <Loader />
@@ -122,8 +104,9 @@ export default function RaceDetails(props) {
         ];
     }
 
+    console.log("filteredRaces ", filteredRaces);
+    console.log("filteredQualifying ", filteredQualifying);
 
-    //    if (isError || (filteredQualifying.QualifyingResults===null) || (filteredRaces.Results===null)) {  
     if (isError) {
         return (
             <div className="wrapper">
@@ -131,16 +114,7 @@ export default function RaceDetails(props) {
                 <div className="dd-col2">
                     <div className="details">
                         <BasicBreadcrumbs crumbs={crumbs} />
-
-                        {/* <Flag 
-                        country={getFlagByNationality(props.flags, "", qualifying.Circuit.Location.country)}
-                        size={200} /> */}
                         <p><b>Race round: <span className="race-round">{params.id}</span></b></p>
-                        {/* <p><b>{qualifying.raceName}</b></p>
-                        <p>Location: {qualifying.Circuit.Location.locality} </p>
-                        <p>Date: {qualifying.date}</p>
-                        <p>Full Report <a href={qualifying?.url} target="_blank"><OpenInNewIcon /></a></p> */}
-
                     </div>
 
                     <div className="results">
@@ -186,8 +160,7 @@ export default function RaceDetails(props) {
                             </tr>
                         </thead>
                         <tbody>
-                            {/* {filteredQualifying.QualifyingResults.map((qualifier) => { */}
-                            {qualifying.QualifyingResults.map((qualifier) => {
+                            {filteredQualifying.map((qualifier) => {
                                 return (
                                     <tr key={qualifier.position}>
                                         <td>{qualifier.position}</td>
@@ -218,8 +191,8 @@ export default function RaceDetails(props) {
                             </tr>
                         </thead>
                         <tbody>
-                            {/* {filteredRaces.Results.map((race) => { */}
-                            {races.Results.map((race) => {
+                            {filteredRaces?.map((race) => {
+                                // {races.Results.map((race) => {
                                 return (
                                     <tr key={race.position}>
                                         <td>{race.position}</td>
