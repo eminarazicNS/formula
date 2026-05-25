@@ -1,4 +1,5 @@
 import { BrowserRouter, Link, Route, Routes } from "react-router";
+import Home from "./components/Home";
 import AllDrivers from "./components/AllDrivers";
 import AllTeams from "./components/AllTeams";
 import AllRaces from "./components/AllRaces";
@@ -49,38 +50,38 @@ export default function App() {
               <img src="../img/logo.png" alt="Logo" />
             </div>
 
-           <div>
-            <FormControl sx={{ m: 1, minWidth: 120 }} >
-              <InputLabel id="selectLabelId">Season</InputLabel>
-              <Select
-                labelId="selectId"
-                value={selectedYear}
-                label="Season"
-                onChange={(e) => setSelectedYear(e.target.value)}
-              >
-                {years.map((year) => {
-                  return (
-                    <MenuItem value={year}>{year}</MenuItem>
-                  );
-                })}
-              </Select>
-            </FormControl>
+            <div>
+              <FormControl sx={{ m: 1, minWidth: 120 }} >
+                <InputLabel id="selectLabelId">Season</InputLabel>
+                <Select
+                  labelId="selectId"
+                  value={selectedYear}
+                  label="Season"
+                  onChange={(e) => setSelectedYear(e.target.value)}
+                >
+                  {years.map((year) => {
+                    return (
+                      <MenuItem value={year}>{year}</MenuItem>
+                    );
+                  })}
+                </Select>
+              </FormControl>
             </div>
-            {searchIsVisible && 
-            ( 
-            <FormControl sx={{ m: 1, minWidth: 120 }} >
-              <TextField id="searchId"
-                label="Search table:" type="search"
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-                
-              />
-            </FormControl>
-            )}          
+            {searchIsVisible &&
+              (
+                <FormControl sx={{ m: 1, minWidth: 120 }} >
+                  <TextField id="searchId"
+                    label="Search table:" type="search"
+                    value={search}
+                    onChange={(e) => setSearch(e.target.value)}
+
+                  />
+                </FormControl>
+              )}
 
             <div className="vNav">
               <ul>
-                <Link to="/"><li><div><img src="../img/Kaciga.png" alt="Drivers logo" /></div><div>Drivers</div></li></Link>
+                <Link to="/drivers"><li><div><img src="../img/Kaciga.png" alt="Drivers logo" /></div><div>Drivers</div></li></Link>
                 <Link to="/teams"><li><img src="../img/Teams.png" alt="Teams logo" />Teams</li></Link>
                 <Link to="/races"><li><img src="../img/Races1.png" alt="Races logo" />Races</li></Link>
               </ul>
@@ -89,20 +90,21 @@ export default function App() {
         </div>
         <div className="col2">
           <Routes>
-            <Route path="/" element={<AllDrivers flags={flags} year={selectedYear} 
-                search={search} setSearch={setSearch} setSearchIsVisible={setSearchIsVisible} />} />
+            <Route path="/" element={<Home />} />
+            <Route path="/drivers" element={<AllDrivers flags={flags} year={selectedYear}
+              search={search} setSearch={setSearch} setSearchIsVisible={setSearchIsVisible} />} />
             <Route path="/teams" element={<AllTeams flags={flags} year={selectedYear}
-                search={search} setSearch={setSearch}  setSearchIsVisible={setSearchIsVisible} />} />
+              search={search} setSearch={setSearch} setSearchIsVisible={setSearchIsVisible} />} />
             <Route path="/races" element={<AllRaces flags={flags} year={selectedYear}
-                search={search} setSearch={setSearch} setSearchIsVisible={setSearchIsVisible} />} />
-            <Route path="/driverDetails/:id" element={<DriverDetails flags={flags} year={selectedYear} 
-                search={search} setSearch={setSearch} setSearchIsVisible={setSearchIsVisible} />} />
-            <Route path="/driverRaces/:id" element={<DriverDetails flags={flags} year={selectedYear} 
-                search={search} setSearch={setSearch} setSearchIsVisible={setSearchIsVisible} />} />
+              search={search} setSearch={setSearch} setSearchIsVisible={setSearchIsVisible} />} />
+            <Route path="/driverDetails/:id" element={<DriverDetails flags={flags} year={selectedYear}
+              search={search} setSearch={setSearch} setSearchIsVisible={setSearchIsVisible} />} />
+            <Route path="/driverRaces/:id" element={<DriverDetails flags={flags} year={selectedYear}
+              search={search} setSearch={setSearch} setSearchIsVisible={setSearchIsVisible} />} />
             <Route path="/teamDetails/:id" element={<TeamDetails flags={flags} year={selectedYear}
-                search={search} setSearch={setSearch} setSearchIsVisible={setSearchIsVisible} />} />
+              search={search} setSearch={setSearch} setSearchIsVisible={setSearchIsVisible} />} />
             <Route path="/raceDetails/:id" element={<RaceDetails flags={flags} year={selectedYear}
-                search={search} setSearch={setSearch} setSearchIsVisible={setSearchIsVisible} />} />
+              search={search} setSearch={setSearch} setSearchIsVisible={setSearchIsVisible} />} />
           </Routes>
         </div>
       </div>

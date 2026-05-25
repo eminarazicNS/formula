@@ -16,17 +16,17 @@ export default function AllDrivers(props) {
     useEffect(() => {
         props.setSearch("");
         props.setSearchIsVisible(true);
-    }, []);    
+    }, []);
 
     useEffect(() => {
         getDrivers();
     }, [props.year]);
 
     useEffect(() => {
-         getFilteredData();
+        getFilteredData();
     }, [drivers, props.search]);
 
-   
+
     const getDrivers = async () => {
         const url = `https://api.jolpi.ca/ergast/f1/${props.year}/driverStandings.json`;
         console.log("drivers url ", url)
@@ -41,12 +41,12 @@ export default function AllDrivers(props) {
         console.log("getFilteredData");
         let result = drivers;
         //console.log("getFilteredData result ", result);
-        result = result.filter((item) =>  
-            item.Driver.givenName.toLowerCase().includes( props.search.toLowerCase() ) ||
-            item.Driver.familyName.toLowerCase().includes( props.search.toLowerCase() ) ||
-            item.Constructors[0].name.toLowerCase().includes( props.search.toLowerCase() )
+        result = result.filter((item) =>
+            item.Driver.givenName.toLowerCase().includes(props.search.toLowerCase()) ||
+            item.Driver.familyName.toLowerCase().includes(props.search.toLowerCase()) ||
+            item.Constructors[0].name.toLowerCase().includes(props.search.toLowerCase())
         );
-        
+
         setFilteredData(result);
     }
 
@@ -60,7 +60,7 @@ export default function AllDrivers(props) {
     }
 
     const crumbs = [
-        { label: "Drivers", path: "/" }
+        { label: "Drivers", path: "/drivers" }
     ];
 
     return (
@@ -76,15 +76,15 @@ export default function AllDrivers(props) {
                             <th></th>
                             <th>Driver</th>
                             <th>Team</th>
-                            <th>Points</th>                           
+                            <th>Points</th>
                         </tr>
                     </thead>
-                    <tbody>                        
-                        {filteredData.map((driver,i) => {                        
+                    <tbody>
+                        {filteredData.map((driver, i) => {
                             return (
                                 <tr key={i}>
                                     <td>{driver.position}</td>
-                                    <td style={{textAlign: "right"}}>
+                                    <td style={{ textAlign: "right" }}>
                                         <Flag country={
                                             getFlagByNationality(props.flags, driver.Driver.nationality)}
                                             size={30} />

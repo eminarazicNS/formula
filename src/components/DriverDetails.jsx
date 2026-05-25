@@ -16,18 +16,18 @@ export default function DriverDetails(props) {
     const [isError, setIsError] = useState(false);
     const [filteredData, setFilteredData] = useState([]);
 
-    
+
     useEffect(() => {
         props.setSearch("");
         props.setSearchIsVisible(true);
-    }, []);    
+    }, []);
 
     useEffect(() => {
         getDriverDetails();
     }, [props.year]);
-    
-    useEffect(() => {        
-        getFilteredData();            
+
+    useEffect(() => {
+        getFilteredData();
     }, [driverRaces, props.search]);
 
     const params = useParams();
@@ -56,16 +56,16 @@ export default function DriverDetails(props) {
         }
     }
 
-    
-    const getFilteredData = () => {       
+
+    const getFilteredData = () => {
         //console.log("getFilteredData driverRaces", driverRaces);
-        if(driverRaces!=null){
-            const result = driverRaces.filter((item) =>  
-                  item.raceName.toLowerCase().includes( props.search.toLowerCase() ) ||
-                  item.Results[0].Constructor.name.toLowerCase().includes( props.search.toLowerCase() ) 
-             );
-           setFilteredData(result);      
-        }             
+        if (driverRaces != null) {
+            const result = driverRaces.filter((item) =>
+                item.raceName.toLowerCase().includes(props.search.toLowerCase()) ||
+                item.Results[0].Constructor.name.toLowerCase().includes(props.search.toLowerCase())
+            );
+            setFilteredData(result);
+        }
     }
 
 
@@ -75,11 +75,11 @@ export default function DriverDetails(props) {
 
 
     let crumbs = [
-        { label: "Drivers", path: "/" },
+        { label: "Drivers", path: "/drivers" },
         { label: `${driverDetails.Driver.givenName} ${driverDetails.Driver.familyName}`, path: "" }
     ];
 
-    if (isError || (filteredData===null)) {        
+    if (isError || (filteredData === null)) {
         return (
             <div className="wrapper">
                 <div className="dd-col2">
@@ -112,7 +112,7 @@ export default function DriverDetails(props) {
                     <div className="results">
                         <div className="no-data-div">
                             <img src="../img/emoji-faces-sad-emoji.png" alt="sad-emoji" />
-                       </div>                        
+                        </div>
                     </div>
 
 

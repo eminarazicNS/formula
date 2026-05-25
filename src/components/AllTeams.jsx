@@ -17,14 +17,14 @@ export default function AllTeams(props) {
     useEffect(() => {
         props.setSearch("");
         props.setSearchIsVisible(true);
-    }, []);    
+    }, []);
 
     useEffect(() => {
         getTeams();
     }, [props.year]);
-    
+
     useEffect(() => {
-         getFilteredData();
+        getFilteredData();
     }, [teams, props.search]);
 
     const getTeams = async () => {
@@ -37,15 +37,15 @@ export default function AllTeams(props) {
         setLoading(false);
     };
 
-    
+
     const getFilteredData = () => {
         console.log("getFilteredData");
         let result = teams;
         //console.log("getFilteredData result ", result);
-        result = result.filter((item) =>  
-            item.Constructor.name.toLowerCase().includes( props.search.toLowerCase() ) 
+        result = result.filter((item) =>
+            item.Constructor.name.toLowerCase().includes(props.search.toLowerCase())
         );
-        
+
         setFilteredData(result);
     }
 
@@ -61,7 +61,7 @@ export default function AllTeams(props) {
 
     const crumbs = [
         { label: "Teams", path: "/teams" }
-    ];  
+    ];
 
 
     return (
@@ -86,7 +86,7 @@ export default function AllTeams(props) {
                                 <tr key={i}>
                                     {/* <td>{team.position}</td> ne postoji u starim godinama */}
                                     <td>{i + 1}</td>
-                                    <td style={{textAlign: "right"}}><Flag country={getFlagByNationality(props.flags,
+                                    <td style={{ textAlign: "right" }}><Flag country={getFlagByNationality(props.flags,
                                         team.Constructor.nationality)}
                                         size={30} /></td>
                                     <td className="link"

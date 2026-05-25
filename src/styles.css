@@ -89,9 +89,10 @@ img:hover {
     background-color: lightgray;
     font-family: Arial, Helvetica, sans-serif;
 }
+
 /* rd - RaceDetails */
 .rd-details {
-    padding:5px;
+    padding: 5px;
 }
 
 .results {
@@ -104,20 +105,20 @@ img:hover {
     border-radius: 30px;
 }
 
-.results .no-data-div{
+.results .no-data-div {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.results .no-data-div img{
+.results .no-data-div img {
     width: 500px;
 }
 
 .results h2 {
     text-align: left;
     font-family: Arial, Helvetica, sans-serif;
-     text-transform: uppercase;
+    text-transform: uppercase;
 }
 
 /* rd - RaceDetails */
@@ -139,7 +140,7 @@ table {
 
 .results th,
 td {
-    /* text-align: center; */    
+    /* text-align: center; */
     text-align: left;
     border: 1px solid lightblue;
     font-family: Arial, Helvetica, sans-serif;
@@ -147,7 +148,7 @@ td {
 }
 
 /* rd - RaceDetails */
-.rd-results th {    
+.rd-results th {
     /* font-size: 15px; */
     white-space: nowrap;
     overflow: hidden;
@@ -205,14 +206,14 @@ tr:nth-child(even) {
 
 
 .breadcrumbs-wrapper .last {
-    background-color:cyan;
+    background-color: cyan;
     /* plum; */
 }
 
 /* end Breadcrumbs */
 
 .race-round {
-     border:10px solid cyan;
+    border: 10px solid lightskyblue;
     border-radius: 100%;
     padding: 10px;
     margin: 25px;
