@@ -15,23 +15,23 @@ export default function RaceDetails(props) {
     const [races, setRaces] = useState(null);
     const [loading, setLoading] = useState(true);
     const [isError, setIsError] = useState(false);
-    const [filteredQualifying, setFilteredQualifying] = useState([]);
-    const [filteredRaces, setFilteredRaces] = useState([]);
-
+    /*    const [filteredQualifying, setFilteredQualifying] = useState([]);
+        const [filteredRaces, setFilteredRaces] = useState([]);
+    */
 
     useEffect(() => {
         props.setSearch("");
-        props.setSearchIsVisible(true);
+        props.setSearchIsVisible(false);
     }, []);
 
     useEffect(() => {
         getRaceDetails();
     }, [props.year]);
-
-    useEffect(() => {
-        getFilteredData();
-    }, [props.search]);
-
+    /*
+        useEffect(() => {        
+            getFilteredData();            
+        }, [props.search]);
+    */
 
     const params = useParams();
     console.log("params", params);
@@ -57,8 +57,6 @@ export default function RaceDetails(props) {
             setIsError(true);
         } finally {
             setLoading(false);
-            setFilteredQualifying(qualifying);
-            setFilteredRaces(races);
         }
 
     }
@@ -75,34 +73,37 @@ export default function RaceDetails(props) {
     };
 
     // bestTime(430,200,556);
-
-    const getFilteredData = () => {
-
-        console.log("getFilteredData qualifying ", qualifying);
-
-        if (qualifying != null) {
-            const resultQ = qualifying.filter((item) =>
-                item.Driver.familyName.toLowerCase().includes(props.search.toLowerCase()) ||
-                item.Constructor.name.toLowerCase().includes(props.search.toLowerCase())
-            );
-            setFilteredQualifying(resultQ);
+    /*
+        const getFilteredData = () => {  
+    
+            setFilteredQualifying(qualifying);
+            setFilteredRaces(races);
+    
+            console.log("getFilteredData qualifying ",qualifying);
+    
+            if(props.search===""){
+                return;
+            }
+    
+            if(qualifying!=null){
+                const resultQ = resultQ.filter((item) =>  
+                      item.Driver.familyName.toLowerCase().includes( props.search.toLowerCase() ) ||
+                      item.Constructor.name.toLowerCase().includes( props.search.toLowerCase() ) 
+                 );   
+               setFilteredQualifying(resultQ);
+            }    
+            
+            console.log("getFilteredData races ",races);
+    
+            if(races!=null){
+                const resultR = resultR.filter((item) =>  
+                      item.Driver.familyName.toLowerCase().includes( props.search.toLowerCase() ) ||
+                      item.Constructor.name.toLowerCase().includes( props.search.toLowerCase() ) 
+                 );               
+                setFilteredRaces(resultR);
+            }           
         }
-        console.log("getFilteredData filteredQualifying ", filteredQualifying);
-
-
-        console.log("getFilteredData races ", races);
-
-        if (races != null) {
-            const resultR = races.filter((item) =>
-                item.Driver.familyName.toLowerCase().includes(props.search.toLowerCase()) ||
-                item.Constructor.name.toLowerCase().includes(props.search.toLowerCase())
-            );
-            setFilteredRaces(resultR);
-        }
-
-        console.log("getFilteredData filteredRaces ", filteredRaces);
-    }
-
+    */
 
     if (loading) {
         return <Loader />
@@ -122,7 +123,7 @@ export default function RaceDetails(props) {
     }
 
 
-    //if (isError || (filteredQualifying === null) || (filteredRaces === null)) {
+    //    if (isError || (filteredQualifying.QualifyingResults===null) || (filteredRaces.Results===null)) {  
     if (isError) {
         return (
             <div className="wrapper">
@@ -130,7 +131,16 @@ export default function RaceDetails(props) {
                 <div className="dd-col2">
                     <div className="details">
                         <BasicBreadcrumbs crumbs={crumbs} />
+
+                        {/* <Flag 
+                        country={getFlagByNationality(props.flags, "", qualifying.Circuit.Location.country)}
+                        size={200} /> */}
                         <p><b>Race round: <span className="race-round">{params.id}</span></b></p>
+                        {/* <p><b>{qualifying.raceName}</b></p>
+                        <p>Location: {qualifying.Circuit.Location.locality} </p>
+                        <p>Date: {qualifying.date}</p>
+                        <p>Full Report <a href={qualifying?.url} target="_blank"><OpenInNewIcon /></a></p> */}
+
                     </div>
 
                     <div className="results">
@@ -176,8 +186,8 @@ export default function RaceDetails(props) {
                             </tr>
                         </thead>
                         <tbody>
-                            {filteredQualifying.QualifyingResults.map((qualifier) => {
-                                {/* {qualifying.QualifyingResults.map((qualifier) => { */ }
+                            {/* {filteredQualifying.QualifyingResults.map((qualifier) => { */}
+                            {qualifying.QualifyingResults.map((qualifier) => {
                                 return (
                                     <tr key={qualifier.position}>
                                         <td>{qualifier.position}</td>
@@ -208,8 +218,8 @@ export default function RaceDetails(props) {
                             </tr>
                         </thead>
                         <tbody>
-                            {filteredRaces.Results.map((race) => {
-                                // {races.Results.map((race) => {
+                            {/* {filteredRaces.Results.map((race) => { */}
+                            {races.Results.map((race) => {
                                 return (
                                     <tr key={race.position}>
                                         <td>{race.position}</td>
