@@ -179,7 +179,6 @@ export default function RaceDetails(props) {
                         <thead>
                             <tr>
                                 <th>Pos</th>
-                                <th></th>
                                 <th>Driver</th>
                                 <th>Team</th>
                                 <th>Result</th>
@@ -191,10 +190,13 @@ export default function RaceDetails(props) {
                                 return (
                                     <tr key={race.position}>
                                         <td>{race.position}</td>
-                                        <td><Flag country={getFlagByNationality(props.flags,
-                                            race.Driver.nationality)}
-                                            size={30} /></td>
-                                        <td>{race.Driver.familyName}</td>
+                                        <td>
+                                            <div className="flag">
+                                                <Flag country={getFlagByNationality(props.flags,
+                                                    race.Driver.nationality)}
+                                                    size={30} />{race.Driver.familyName}
+                                            </div>
+                                        </td>
                                         <td>{race.Constructor.name}</td>
                                         <td>{race?.Time?.time || "DNQ"}</td>
                                         <td style={{ backgroundColor: getColorByPosition(race.position) }}>{race.points}</td>
