@@ -147,7 +147,6 @@ export default function RaceDetails(props) {
                         <thead>
                             <tr>
                                 <th>Pos</th>
-                                <th></th>
                                 <th>Driver</th>
                                 <th>Team</th>
                                 <th>Best time</th>
@@ -158,10 +157,13 @@ export default function RaceDetails(props) {
                                 return (
                                     <tr key={qualifier.position}>
                                         <td>{qualifier.position}</td>
-                                        <td><Flag country={getFlagByNationality(props.flags,
-                                            qualifier.Driver.nationality)}
-                                            size={30} /></td>
-                                        <td>{qualifier.Driver.familyName}</td>
+                                        <td>
+                                            <div className="flag">
+                                                <Flag country={getFlagByNationality(props.flags,
+                                                    qualifier.Driver.nationality)}
+                                                    size={30} />{qualifier.Driver.familyName}
+                                            </div>
+                                        </td>
                                         <td>{qualifier.Constructor.name}</td>
                                         <td>{bestTime(qualifier.Q1, qualifier.Q2, qualifier.Q3)}</td>
                                     </tr>
