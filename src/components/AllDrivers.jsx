@@ -73,7 +73,6 @@ export default function AllDrivers(props) {
                     <thead>
                         <tr>
                             <th>Position</th>
-                            <th></th>
                             <th>Driver</th>
                             <th>Team</th>
                             <th>Points</th>
@@ -84,14 +83,14 @@ export default function AllDrivers(props) {
                             return (
                                 <tr key={i}>
                                     <td>{driver.position}</td>
-                                    <td style={{ textAlign: "right" }}>
-                                        <Flag country={
+                                    <td
+                                        onClick={() => handleClick(driver.Driver.driverId)}>
+                                        <div className="link"><Flag country={
                                             getFlagByNationality(props.flags, driver.Driver.nationality)}
                                             size={30} />
+                                            {driver.Driver.givenName} {driver.Driver.familyName}
+                                        </div>
                                     </td>
-                                    <td className="link"
-                                        onClick={() => handleClick(driver.Driver.driverId)}>
-                                        {driver.Driver.givenName} {driver.Driver.familyName}</td>
                                     <td>{driver.Constructors[0].name}</td>
                                     <td>{driver.points}</td>
                                 </tr>

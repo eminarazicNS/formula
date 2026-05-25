@@ -74,7 +74,6 @@ export default function AllTeams(props) {
                     <thead>
                         <tr>
                             <th>Position</th>
-                            <th></th>
                             <th>Team</th>
                             <th>Details</th>
                             <th>Points</th>
@@ -86,12 +85,13 @@ export default function AllTeams(props) {
                                 <tr key={i}>
                                     {/* <td>{team.position}</td> ne postoji u starim godinama */}
                                     <td>{i + 1}</td>
-                                    <td style={{ textAlign: "right" }}><Flag country={getFlagByNationality(props.flags,
-                                        team.Constructor.nationality)}
-                                        size={30} /></td>
-                                    <td className="link"
-                                        onClick={() => handleClick(team.Constructor.constructorId)}
-                                    >{team.Constructor.name}</td>
+                                    <td onClick={() => handleClick(team.Constructor.constructorId)}>
+                                        <div className="link">
+                                            <Flag country={getFlagByNationality(props.flags,
+                                                team.Constructor.nationality)}
+                                                size={30} />{team.Constructor.name}
+                                        </div>
+                                    </td>
                                     <td>Details
                                         <a href={team.Constructor.url} target="_blank"><OpenInNewIcon /></a>
                                     </td>

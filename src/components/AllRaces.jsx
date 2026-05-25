@@ -13,18 +13,18 @@ export default function AllRaces(props) {
 
     const navigate = useNavigate();
 
-     useEffect(() => {
+    useEffect(() => {
         props.setSearch("");
         props.setSearchIsVisible(true);
-    }, []);    
+    }, []);
 
     useEffect(() => {
         getRaces();
     }, [props.year]);
 
-    
+
     useEffect(() => {
-         getFilteredData();
+        getFilteredData();
     }, [races, props.search]);
 
 
@@ -35,17 +35,17 @@ export default function AllRaces(props) {
         setRaces(response.data.MRData.RaceTable.Races);
         setLoading(false);
     }
-    
-      const getFilteredData = () => {
+
+    const getFilteredData = () => {
         console.log("getFilteredData");
         let result = races;
         //console.log("getFilteredData result ", result);
-        result = result.filter((item) =>  
-            item.raceName.toLowerCase().includes( props.search.toLowerCase() ) ||
-            item.Circuit.circuitName.toLowerCase().includes( props.search.toLowerCase() ) ||
-            item.Results[0].Driver.familyName.toLowerCase().includes( props.search.toLowerCase() )
+        result = result.filter((item) =>
+            item.raceName.toLowerCase().includes(props.search.toLowerCase()) ||
+            item.Circuit.circuitName.toLowerCase().includes(props.search.toLowerCase()) ||
+            item.Results[0].Driver.familyName.toLowerCase().includes(props.search.toLowerCase())
         );
-        
+
         setFilteredData(result);
     }
 
@@ -74,7 +74,6 @@ export default function AllRaces(props) {
                     <thead>
                         <tr >
                             <th>Round</th>
-                            <th></th>
                             <th>Grand Prix</th>
                             <th>Circuit</th>
                             <th>Date</th>
@@ -86,10 +85,11 @@ export default function AllRaces(props) {
                             return (
                                 <tr key={index}>
                                     <td>{race.round}</td>
-                                    <td style={{textAlign: "right"}}><Flag country={getFlagByNationality(props.flags, "",
-                                        race.Circuit.Location.country)}
-                                        size={30} /></td>
-                                    <td className="link" onClick={() => handleClick(race.round)}>{race.raceName}</td>
+                                    <td className="link" onClick={() => handleClick(race.round)}>
+                                        <Flag country={getFlagByNationality(props.flags, "",
+                                            race.Circuit.Location.country)}
+                                            size={30} />{race.raceName}
+                                    </td>
                                     <td>{race.Circuit.circuitName}</td>
                                     <td>{race.date}</td>
                                     <td>{race.Results[0].Driver.familyName}</td>

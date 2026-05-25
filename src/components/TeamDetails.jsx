@@ -22,14 +22,14 @@ export default function TeamDetails(props) {
     useEffect(() => {
         props.setSearch("");
         props.setSearchIsVisible(true);
-    }, []);   
+    }, []);
 
     useEffect(() => {
         getTeams();
     }, [props.year]);
 
-    useEffect(() => {        
-        getFilteredData();            
+    useEffect(() => {
+        getFilteredData();
     }, [teamRaces, props.search]);
 
     const params = useParams();
@@ -75,14 +75,14 @@ export default function TeamDetails(props) {
         }
     }
 
-    
-    const getFilteredData = () => {    
-        if(teamRaces!=null){
-           const result = teamRaces.filter((item) => item.raceName.toLowerCase().includes( props.search.toLowerCase() ) );
-           setFilteredData(result);      
-        }             
+
+    const getFilteredData = () => {
+        if (teamRaces != null) {
+            const result = teamRaces.filter((item) => item.raceName.toLowerCase().includes(props.search.toLowerCase()));
+            setFilteredData(result);
+        }
     }
-    
+
 
     if (loading) {
         return <Loader />
@@ -93,7 +93,7 @@ export default function TeamDetails(props) {
         { label: `${teamDetails.Constructor.name}`, path: "" }
     ];
 
-    if (isError || (filteredData===null)) {  
+    if (isError || (filteredData === null)) {
         return (
             <div className="wrapper">
 
@@ -115,10 +115,10 @@ export default function TeamDetails(props) {
                         </a></p>
                     </div>
 
-                    <div className="results">                       
+                    <div className="results">
                         <div className="no-data-div">
                             <img src="../img/emoji-faces-sad-emoji.png" alt="sad-emoji" />
-                       </div>                        
+                        </div>
                     </div>
 
                 </div>
@@ -156,7 +156,6 @@ export default function TeamDetails(props) {
                         <thead>
                             <tr>
                                 <th>Round</th>
-                                <th></th>
                                 <th>Grand Prix</th>
                                 <th>{firstDriver}</th>
                                 <th>{secondDriver}</th>
@@ -168,10 +167,13 @@ export default function TeamDetails(props) {
                                 return (
                                     <tr key={race.round}>
                                         <td>{race.round}</td>
-                                        <td><Flag country={getFlagByNationality(props.flags, "",
-                                            race.Circuit.Location.country)}
-                                            size={30} /></td>
-                                        <td>{race.raceName}</td>
+                                        <td>
+                                            <div className="flag">
+                                                <Flag country={getFlagByNationality(props.flags, "",
+                                                    race.Circuit.Location.country)}
+                                                    size={30} />{race.raceName}
+                                            </div>
+                                        </td>
                                         <td style={{ backgroundColor: getColorByPosition(race.Results[0].position) }}
                                         >{race.Results[0].position}</td>
                                         <td style={{ backgroundColor: getColorByPosition(race.Results[1].position) }}

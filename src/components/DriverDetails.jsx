@@ -158,7 +158,6 @@ export default function DriverDetails(props) {
                         <thead>
                             <tr>
                                 <th>Round</th>
-                                <th></th>
                                 <th>Grand Prix</th>
                                 <th>Team</th>
                                 <th>Grid</th>
@@ -170,10 +169,13 @@ export default function DriverDetails(props) {
                                 return (
                                     <tr key={race.round}>
                                         <td>{race.round}</td>
-                                        <td><Flag country={getFlagByNationality(props.flags, "",
-                                            race.Circuit.Location.country)}
-                                            size={30} /></td>
-                                        <td>{race.raceName}</td>
+                                        <td>
+                                            <div className="flag">
+                                                <Flag country={getFlagByNationality(props.flags, "",
+                                                    race.Circuit.Location.country)}
+                                                    size={30} />{race.raceName}
+                                            </div>
+                                        </td>
                                         <td>{race.Results[0].Constructor.name}</td>
                                         <td>{race.Results[0].grid}</td>
                                         <td
