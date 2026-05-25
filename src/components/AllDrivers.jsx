@@ -5,6 +5,7 @@ import { useNavigate } from "react-router";
 import { getFlagByNationality } from "../helper/getFlag";
 import Flag from "react-flagkit";
 import BasicBreadcrumbs from "./BasicBreadcrumbs";
+import BackgroundVideo from "./BackgroundVideo";
 
 export default function AllDrivers(props) {
     const [drivers, setDrivers] = useState([]);
@@ -16,6 +17,8 @@ export default function AllDrivers(props) {
     useEffect(() => {
         props.setSearch("");
         props.setSearchIsVisible(true);
+        props.setSelectIsVisible(true);
+        props.setCol2IsVisible(true);
     }, []);
 
     useEffect(() => {
@@ -65,7 +68,6 @@ export default function AllDrivers(props) {
 
     return (
         <div className="wrapper">
-
             <div className="col2" className="results">
                 <BasicBreadcrumbs crumbs={crumbs} />
                 <h2>DRIVERS CHAMPIONSHIP - {props.year}</h2>

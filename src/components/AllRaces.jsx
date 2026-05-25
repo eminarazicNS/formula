@@ -16,6 +16,8 @@ export default function AllRaces(props) {
     useEffect(() => {
         props.setSearch("");
         props.setSearchIsVisible(true);
+        props.setSelectIsVisible(true);
+        props.setCol2IsVisible(true);
     }, []);
 
     useEffect(() => {
