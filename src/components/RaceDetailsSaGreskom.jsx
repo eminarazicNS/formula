@@ -10,8 +10,8 @@ import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import BasicBreadcrumbs from "./BasicBreadcrumbs";
 
 export default function RaceDetails(props) {
-    const [qualifying, setQualifying] = useState([]);
-    const [races, setRaces] = useState([]);
+    const [qualifying, setQualifying] = useState(null);
+    const [races, setRaces] = useState(null);
     const [loading, setLoading] = useState(true);
     const [isError, setIsError] = useState(false);
     const [filteredQualifying, setFilteredQualifying] = useState([]);
@@ -31,11 +31,10 @@ export default function RaceDetails(props) {
 
     useEffect(() => {
         getFilteredData();
-    }, [props.search, qualifying, races])
+    }, [props.search, qualifying, races]);
 
     const getRaceDetails = async () => {
         setIsError(false);
-
         try {
             const qualifyingUrl = `https://api.jolpi.ca/ergast/f1/${props.year}/${params.id}/qualifying.json`;
             const racesUrl = `https://api.jolpi.ca/ergast/f1/${props.year}/${params.id}/results.json`;
@@ -54,6 +53,7 @@ export default function RaceDetails(props) {
         } finally {
             setLoading(false);
         }
+
     }
 
     const bestTime = (q1, q2, q3) => {
@@ -70,6 +70,7 @@ export default function RaceDetails(props) {
     // bestTime(430,200,556);
 
     const getFilteredData = () => {
+
         const resultQ = qualifying.filter((item) =>
             item.Driver.familyName.toLowerCase().includes(props.search.toLowerCase()) ||
             item.Constructor.name.toLowerCase().includes(props.search.toLowerCase())
@@ -82,6 +83,7 @@ export default function RaceDetails(props) {
 
         setFilteredQualifying(resultQ);
         setFilteredRaces(resultR);
+
     }
 
 
@@ -93,7 +95,7 @@ export default function RaceDetails(props) {
     try {
         crumbs = [
             { label: "Races", path: "/races" },
-            { label: `${races.raceName}`, path: "" }
+            { label: `${qualifying.raceName}`, path: "" }
         ];
     } catch (e) {
         console.error("error ", e);
@@ -129,16 +131,20 @@ export default function RaceDetails(props) {
 
     return (
         <div className="wrapper">
+
             <div className="dd-col2">
+                {/* <h2>RaceDetails</h2> */}
                 <div className="details rd-details">
                     <BasicBreadcrumbs crumbs={crumbs} />
-                    <Flag country={getFlagByNationality(props.flags, "", races.Circuit.Location.country)}
+                    {/* <img src="../img/Kaciga.png" alt="Country picture" style={{ width: 200 }} /> */}
+                    <Flag country={getFlagByNationality(props.flags, "", qualifying.Circuit.Location.country)}
                         size={200} />
+                    {/* <p><b>Race round: {params.id}</b></p> */}
                     <p><b>Race round: <span className="race-round">{params.id}</span></b></p>
-                    <p><b>{races.raceName}</b></p>
-                    <p>Location: {races.Circuit.Location.locality} </p>
-                    <p>Date: {races.date}</p>
-                    <p>Full Report <a href={races.url} target="_blank"><OpenInNewIcon /></a></p>
+                    <p><b>{qualifying.raceName}</b></p>
+                    <p>Location: {qualifying.Circuit.Location.locality} </p>
+                    <p>Date: {qualifying.date}</p>
+                    <p>Full Report <a href={qualifying.url} target="_blank"><OpenInNewIcon /></a></p>
                 </div>
 
                 <div className="results rd-results">
@@ -165,7 +171,7 @@ export default function RaceDetails(props) {
                                         <td>{qualifier.Constructor.name}</td>
                                         <td>{bestTime(qualifier.Q1, qualifier.Q2, qualifier.Q3)}</td>
                                     </tr>
-                                );
+                                )
                             })}
                         </tbody>
                     </table>
@@ -186,6 +192,7 @@ export default function RaceDetails(props) {
                         </thead>
                         <tbody>
                             {filteredRaces?.map((race) => {
+                                // {races.Results.map((race) => {
                                 return (
                                     <tr key={race.position}>
                                         <td>{race.position}</td>
@@ -197,7 +204,7 @@ export default function RaceDetails(props) {
                                         <td>{race?.Time?.time || "DNQ"}</td>
                                         <td style={{ backgroundColor: getColorByPosition(race.position) }}>{race.points}</td>
                                     </tr>
-                                );
+                                )
                             })}
                         </tbody>
                     </table>
@@ -205,5 +212,7 @@ export default function RaceDetails(props) {
 
             </div>
         </div>
+
+
     );
 }

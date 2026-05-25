@@ -18,7 +18,6 @@ export default function RaceDetails(props) {
     const [filteredRaces, setFilteredRaces] = useState([]);
 
     const params = useParams();
-    console.log("params", params);
 
     useEffect(() => {
         props.setSearch("");
@@ -43,9 +42,6 @@ export default function RaceDetails(props) {
             const qualifyingResponse = await axios.get(qualifyingUrl);
             const racesResponse = await axios.get(racesUrl);
 
-            console.log("qualifying Response", qualifyingResponse.data.MRData.RaceTable.Races[0].QualifyingResults);
-            console.log("races Response", racesResponse.data.MRData.RaceTable.Races[0]);
-
             setQualifying(qualifyingResponse.data.MRData.RaceTable.Races[0].QualifyingResults);
             setRaces(racesResponse.data.MRData.RaceTable.Races[0]);
         } catch (e) {
@@ -66,8 +62,6 @@ export default function RaceDetails(props) {
         }
         return min;
     };
-
-    // bestTime(430,200,556);
 
     const getFilteredData = () => {
         const resultQ = qualifying.filter((item) =>
@@ -93,7 +87,7 @@ export default function RaceDetails(props) {
     try {
         crumbs = [
             { label: "Races", path: "/races" },
-            { label: `${races.raceName}`, path: "" }
+            { label: `${qualifying.raceName}`, path: "" }
         ];
     } catch (e) {
         console.error("error ", e);
@@ -103,7 +97,6 @@ export default function RaceDetails(props) {
     }
 
     console.log("filteredRaces ", filteredRaces);
-    console.log("filteredQualifying ", filteredQualifying);
 
     if (isError) {
         return (
