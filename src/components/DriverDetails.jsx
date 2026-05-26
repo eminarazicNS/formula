@@ -185,11 +185,11 @@ export default function DriverDetails(props) {
                                         >
                                             <div className="race-column">
                                                 {race.Results[0].position}
-                                                {race.Results[0].position > race.Results[0].grid ?
-                                                    <span className="down">(-{race.Results[0].position - race.Results[0].grid})</span> :
+                                                {parseInt(race.Results[0].position) > parseInt(race.Results[0].grid) ?
+                                                    <span className="down">({parseInt(race.Results[0].grid) - parseInt(race.Results[0].position)})</span> :
                                                     <></>}
-                                                {race.Results[0].position < race.Results[0].grid ?
-                                                    <span className="up">(+{race.Results[0].grid - race.Results[0].position})</span> :
+                                                {parseInt(race.Results[0].position) < parseInt(race.Results[0].grid) ?
+                                                    <span className="up">(+{parseInt(race.Results[0].grid) - parseInt(race.Results[0].position)})</span> :
                                                     <></>}
                                             </div>
                                         </td>
