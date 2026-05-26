@@ -58,14 +58,14 @@ export default function App() {
         <div className="col1">
           <nav>
             <div>
-              <img src="../img/logo.png" alt="Logo" />
+              <img style={{backgroundColor: "darkgray", borderRadius: "15px"}} 
+              src="../img/logo.png" alt="Logo" />
             </div>
 
             <div style={selectIsVisible ? { visibility: "visible" } : { visibility: "hidden" }}  >
-              <FormControl sx={{ m: 1, minWidth: 120 }} >
+              <FormControl className="select-search" sx={{ m: 1, minWidth: 120 }} >
                 <InputLabel id="selectLabelId" className="menuIcons">Season</InputLabel>
                 <Select
-                  className="select-search"
                   labelId="selectId"
                   value={selectedYear}
                   label="Season"
@@ -81,7 +81,7 @@ export default function App() {
             </div>
             <div style={searchIsVisible ? { visibility: "visible" } : { visibility: "hidden" }} >
               <FormControl sx={{ m: 1, minWidth: 120 }} >
-                <span className="select-search" style={{ borderRadius: "0" }} >
+                <span className="select-search">
                   <TextField
                     id="searchId"
                     label="Search table:"

@@ -31,8 +31,8 @@ a {
 }
 
 .wrapper .col1 img {
-    width: 150px;
-    height: 150px;
+    width: 200px;
+    height: 200px;
 }
 
 .menuIcons {
@@ -141,7 +141,7 @@ img:hover {
     align-items: stretch;
     flex: 1;
     padding: 5px 20px;
-    border-radius: 30px;
+    border-radius: 15px;
 }
 
 .results .no-data-div {
