@@ -1,38 +1,61 @@
+//Ne radi pretraga po Search polju, pa je taj deo zakomentarisan.
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router";
+import { useParams } from "react-router";
 import Loader from "./Loader";
 import { getFlagByNationality } from "../helper/getFlag";
 import Flag from "react-flagkit";
 import { getColorByPosition } from "../helper/getColor";
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
+import BasicBreadcrumbs from "./BasicBreadcrumbs";
 
 export default function RaceDetails(props) {
-    const [qualifying, setQualifying] = useState(null);
-    const [races, setRaces] = useState(null);
+    const [qualifying, setQualifying] = useState([]);
+    const [races, setRaces] = useState([]);
     const [loading, setLoading] = useState(true);
-
-    useEffect(() => {
-        getRaceDetails();
-    }, []);
+    const [isError, setIsError] = useState(false);
+    const [filteredQualifying, setFilteredQualifying] = useState([]);
+    const [filteredRaces, setFilteredRaces] = useState([]);
 
     const params = useParams();
     console.log("params", params);
 
+    useEffect(() => {
+        props.setSearch("");
+        props.setSearchIsVisible(true);
+        props.setSelectIsVisible(true);
+        props.setCol2IsVisible(true);
+    }, []);
+
+    useEffect(() => {
+        getRaceDetails();
+    }, [props.year]);
+
+    useEffect(() => {
+        getFilteredData();
+    }, [props.search, qualifying, races])
+
     const getRaceDetails = async () => {
-        const qualifyingUrl = `https://api.jolpi.ca/ergast/f1/2013/${params.id}/qualifying.json`;
-        const racesUrl = `https://api.jolpi.ca/ergast/f1/2013/${params.id}/results.json`;
+        setIsError(false);
 
-        const qualifyingResponse = await axios.get(qualifyingUrl);
-        const racesResponse = await axios.get(racesUrl);
+        try {
+            const qualifyingUrl = `https://api.jolpi.ca/ergast/f1/${props.year}/${params.id}/qualifying.json`;
+            const racesUrl = `https://api.jolpi.ca/ergast/f1/${props.year}/${params.id}/results.json`;
 
-        console.log("qualifying Response", qualifyingResponse.data.MRData.RaceTable.Races[0]);
-        console.log("races Response", racesResponse.data.MRData.RaceTable.Races[0]);
+            const qualifyingResponse = await axios.get(qualifyingUrl);
+            const racesResponse = await axios.get(racesUrl);
 
-        setQualifying(qualifyingResponse.data.MRData.RaceTable.Races[0]);
-        setRaces(racesResponse.data.MRData.RaceTable.Races[0]);
+            console.log("qualifying Response", qualifyingResponse.data.MRData.RaceTable.Races[0].QualifyingResults);
+            console.log("races Response", racesResponse.data.MRData.RaceTable.Races[0]);
 
-        setLoading(false);
+            setQualifying(qualifyingResponse.data.MRData.RaceTable.Races[0].QualifyingResults);
+            setRaces(racesResponse.data.MRData.RaceTable.Races[0]);
+        } catch (e) {
+            console.error("error ", e);
+            setIsError(true);
+        } finally {
+            setLoading(false);
+        }
     }
 
     const bestTime = (q1, q2, q3) => {
@@ -48,62 +71,116 @@ export default function RaceDetails(props) {
 
     // bestTime(430,200,556);
 
+    const getFilteredData = () => {
+        const resultQ = qualifying.filter((item) =>
+            item.Driver.familyName.toLowerCase().includes(props.search.toLowerCase()) ||
+            item.Constructor.name.toLowerCase().includes(props.search.toLowerCase())
+        );
+
+        const resultR = races.Results?.filter((item) =>
+            item.Driver.familyName.toLowerCase().includes(props.search.toLowerCase()) ||
+            item.Constructor.name.toLowerCase().includes(props.search.toLowerCase())
+        );
+
+        setFilteredQualifying(resultQ);
+        setFilteredRaces(resultR);
+    }
+
+
     if (loading) {
         return <Loader />
     }
 
+    let crumbs = [];
+    try {
+        crumbs = [
+            { label: "Races", path: "/races" },
+            { label: `${races.raceName}`, path: "" }
+        ];
+    } catch (e) {
+        console.error("error ", e);
+        crumbs = [
+            { label: "Races", path: "/races" }
+        ];
+    }
+
+    console.log("filteredRaces ", filteredRaces);
+    console.log("filteredQualifying ", filteredQualifying);
+
+    if (isError) {
+        return (
+            <div className="wrapper">
+
+                <div className="dd-col2">
+                    <div className="details">
+                        <BasicBreadcrumbs crumbs={crumbs} />
+                        <p><b>Race round: <span className="race-round">{params.id}</span></b></p>
+                    </div>
+
+                    <div className="results">
+                        <div className="no-data-div">
+                            <img src="../img/emoji-faces-sad-emoji.png" alt="sad-emoji" />
+                        </div>
+                    </div>
+
+                </div>
+            </div >
+
+        );
+    }
+
     return (
         <div className="wrapper">
-
             <div className="dd-col2">
-                {/* <h2>RaceDetails</h2> */}
-                <div className="details">
-                    {/* <img src="../img/Kaciga.png" alt="Country picture" style={{ width: 200 }} /> */}
-                    <Flag country={getFlagByNationality(props.flags, "", qualifying.Circuit.Location.country)}
+                <div className="details rd-details">
+                    <BasicBreadcrumbs crumbs={crumbs} />
+                    <Flag country={getFlagByNationality(props.flags, "", races.Circuit.Location.country)}
                         size={200} />
-                    <p><b>{qualifying.raceName}</b></p>
-                    <p>Location: {qualifying.Circuit.Location.locality} </p>
-                    <p>Date: {qualifying.date}</p>
-                    <p>Full Report <a href={qualifying.url} target="_blank"><OpenInNewIcon /></a></p>
+                    <p><b>Race round: <span className="race-round">{params.id}</span></b></p>
+                    <p><b>{races.raceName}</b></p>
+                    <p>Location: {races.Circuit.Location.locality} </p>
+                    <p>Date: {races.date}</p>
+                    <p>Full Report <a href={races.url} target="_blank"><OpenInNewIcon /></a></p>
                 </div>
 
-                <div className="results">
-                    <h2>Qualifying Results</h2>
+                <div className="results rd-results">
+                    <h2 style={{ textWrap: "nowrap" }}>Qualifying Results - {props.year}</h2>
                     <table>
                         <thead>
                             <tr>
                                 <th>Pos</th>
-                                <th></th>
                                 <th>Driver</th>
                                 <th>Team</th>
                                 <th>Best time</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {qualifying.QualifyingResults.map((qualifier) => {
+                            {filteredQualifying.map((qualifier) => {
                                 return (
                                     <tr key={qualifier.position}>
                                         <td>{qualifier.position}</td>
-                                        <td><Flag country={getFlagByNationality(props.flags,
-                                            qualifier.Driver.nationality)}
-                                            size={30} /></td>
-                                        <td>{qualifier.Driver.familyName}</td>
+                                        <td>
+                                            <div className="flag">
+                                                <Flag country={getFlagByNationality(props.flags,
+                                                    qualifier.Driver.nationality)}
+                                                    size={30} />{qualifier.Driver.familyName}
+                                            </div>
+                                        </td>
                                         <td>{qualifier.Constructor.name}</td>
                                         <td>{bestTime(qualifier.Q1, qualifier.Q2, qualifier.Q3)}</td>
                                     </tr>
-                                )
+                                );
                             })}
                         </tbody>
                     </table>
                 </div>
 
-                <div className="results">
-                    <h2>Race Results</h2>
+                <div className="results rd-results">
+                    <h2>Race Results - {props.year}</h2>
                     <table>
                         <thead>
                             <tr>
                                 <th>Pos</th>
-                                <th></th>
                                 <th>Driver</th>
                                 <th>Team</th>
                                 <th>Result</th>
@@ -111,19 +188,22 @@ export default function RaceDetails(props) {
                             </tr>
                         </thead>
                         <tbody>
-                            {races.Results.map((race) => {
+                            {filteredRaces?.map((race) => {
                                 return (
                                     <tr key={race.position}>
                                         <td>{race.position}</td>
-                                        <td><Flag country={getFlagByNationality(props.flags,
-                                            race.Driver.nationality)}
-                                            size={30} /></td>
-                                        <td>{race.Driver.familyName}</td>
+                                        <td>
+                                            <div className="flag">
+                                                <Flag country={getFlagByNationality(props.flags,
+                                                    race.Driver.nationality)}
+                                                    size={30} />{race.Driver.familyName}
+                                            </div>
+                                        </td>
                                         <td>{race.Constructor.name}</td>
                                         <td>{race?.Time?.time || "DNQ"}</td>
                                         <td style={{ backgroundColor: getColorByPosition(race.position) }}>{race.points}</td>
                                     </tr>
-                                )
+                                );
                             })}
                         </tbody>
                     </table>
@@ -131,7 +211,5 @@ export default function RaceDetails(props) {
 
             </div>
         </div>
-
-
     );
 }

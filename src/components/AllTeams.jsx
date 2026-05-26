@@ -5,28 +5,55 @@ import { useNavigate } from "react-router";
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import { getFlagByNationality } from "../helper/getFlag";
 import Flag from "react-flagkit";
-
+import BasicBreadcrumbs from "./BasicBreadcrumbs";
 
 export default function AllTeams(props) {
-    const [teams, setTeams] = useState({});
+    const [teams, setTeams] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [filteredData, setFilteredData] = useState([]);
 
     const navigate = useNavigate();
 
     useEffect(() => {
-        getTeams();
+        props.setSearch("");
+        props.setSearchIsVisible(true);
+        props.setSelectIsVisible(true);
+        props.setCol2IsVisible(true);
     }, []);
 
+    useEffect(() => {
+        getTeams();
+    }, [props.year]);
+
+    useEffect(() => {
+        getFilteredData();
+    }, [teams, props.search]);
+
     const getTeams = async () => {
-        const url = "https://api.jolpi.ca/ergast/f1/2013/constructorStandings.json";
+        const url = `https://api.jolpi.ca/ergast/f1/${props.year}/constructorStandings.json`;
         const response = await axios.get(url);
         //console.log("response", response);
         console.log("teams", response.data.MRData.StandingsTable.StandingsLists[0].ConstructorStandings);
+<<<<<<< HEAD
 
+=======
+>>>>>>> e3de27e5edf95076d0f0a8eb06b1df2cb96b4352
 
         setTeams(response.data.MRData.StandingsTable.StandingsLists[0].ConstructorStandings);
         setLoading(false);
     };
+
+
+    const getFilteredData = () => {
+        console.log("getFilteredData");
+        let result = teams;
+        //console.log("getFilteredData result ", result);
+        result = result.filter((item) =>
+            item.Constructor.name.toLowerCase().includes(props.search.toLowerCase())
+        );
+
+        setFilteredData(result);
+    }
 
 
     const handleClick = (id) => {
@@ -37,30 +64,40 @@ export default function AllTeams(props) {
     if (loading) {
         return <Loader />;
     }
+
+    const crumbs = [
+        { label: "Teams", path: "/teams" }
+    ];
+
+
     return (
-
-
         <div className="wrapper">
 
-            <div className="col2">
-                <h2>CONSTRUCTORS CHAMPIONSHIP</h2>
+            <div className="col2" className="results">
+                <BasicBreadcrumbs crumbs={crumbs} />
+                <h2>CONSTRUCTORS CHAMPIONSHIP - {props.year}</h2>
                 <table>
                     <thead>
                         <tr>
-                            <td colSpan={4}>Constructors Shampionship Standings - 2013</td>
+                            <th>Position</th>
+                            <th>Team</th>
+                            <th>Details</th>
+                            <th>Points</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {teams.map((team) => {
+                        {filteredData.map((team, i) => {
                             return (
-                                <tr key={team.position}>
-                                    <td>{team.position}</td>
-                                    <td><Flag country={getFlagByNationality(props.flags,
-                                        team.Constructor.nationality)}
-                                        size={30} /></td>
-                                    <td className="link"
-                                        onClick={() => handleClick(team.Constructor.constructorId)}
-                                    >{team.Constructor.constructorId}</td>
+                                <tr key={i}>
+                                    {/* <td>{team.position}</td> ne postoji u starim godinama */}
+                                    <td>{i + 1}</td>
+                                    <td onClick={() => handleClick(team.Constructor.constructorId)}>
+                                        <div className="link">
+                                            <Flag country={getFlagByNationality(props.flags,
+                                                team.Constructor.nationality)}
+                                                size={30} />{team.Constructor.name}
+                                        </div>
+                                    </td>
                                     <td>Details
                                         <a href={team.Constructor.url} target="_blank"><OpenInNewIcon /></a>
                                     </td>
@@ -75,5 +112,8 @@ export default function AllTeams(props) {
     );
 }
 
+<<<<<<< HEAD
 // https://api.jolpi.ca/ergast/f1/2013/constructorStandings.json
 // https://raw.githubusercontent.com/Imagin-io/country-nationality-list/refs/heads/master/countries.json
+=======
+>>>>>>> e3de27e5edf95076d0f0a8eb06b1df2cb96b4352
