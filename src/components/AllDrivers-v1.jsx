@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Loader from "./Loader";
-import { Link, useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 import { getFlagByNationality } from "../helper/getFlag";
 import Flag from "react-flagkit";
 import BasicBreadcrumbs from "./BasicBreadcrumbs";
@@ -34,21 +34,31 @@ export default function AllDrivers(props) {
     }, [filteredData, sortByCollName]);
 
     const sortData = (collName) => {
-        console.log("sortData collName", collName); 
+        console.log("sortData collName", collName);
+        //setFilteredCountries(result.sort((a, b) => a.name.localeCompare(b.name)));
         let result = filteredData;
         switch (collName) {
-            case "position": result = result.sort((a, b) => Number(a.position) - Number(b.position));                
+            case "position": result = result.sort((a, b) => a.position - b.position);
+                console.log("sort by ", result);
+                setFilteredData(result);
                 break;
             case "driver": result = result.sort((a, b) =>
                 (a.Driver.givenName+a.Driver.familyName).toLowerCase().localeCompare((b.Driver.givenName+b.Driver.familyName).toLowerCase()));
+                //    result = result.sort((a, b) => 
+                //       a.Driver.familyName.toLowerCase().localeCompare(b.Driver.familyName.toLowerCase()));
+                console.log("sort by ", result);
+                setFilteredData(result);
                 break;
             case "team": result = result.sort((a, b) =>
                 a.Constructors[0].name.toLowerCase().localeCompare(b.Constructors[0].name.toLowerCase()));
+                console.log("sort by ", result);
+                setFilteredData(result);
                 break;
-            case "points": result = result.sort((a, b) => Number(a.points) - Number(b.points));
+            case "points": result = result.sort((a, b) => a.points - b.points);
+                console.log("sort by ", result);
+                setFilteredData(result);
                 break;
         }
-        setFilteredData(result);
     }
 
 /*    
@@ -62,6 +72,38 @@ export default function AllDrivers(props) {
     items.sort(dynamicSort('name', 'asc'))
 */
 
+/*
+
+    const sortData = (collName) => {
+        console.log("sortData collName", collName);
+        //setFilteredCountries(result.sort((a, b) => a.name.localeCompare(b.name)));
+        let result = filteredData;
+        switch (collName) {
+            case "position": result = result.sort((a, b) =>
+                a.position.localeCompare(b.position));
+                console.log("sort by ", result);
+                setFilteredData(result);
+                break;
+            case "driver": result = result.sort((a, b) =>
+                a.Driver.givenName.toLowerCase().localeCompare(b.Driver.givenName.toLowerCase()));
+                //    result = result.sort((a, b) => 
+                //       a.Driver.familyName.toLowerCase().localeCompare(b.Driver.familyName.toLowerCase()));
+                console.log("sort by ", result);
+                setFilteredData(result);
+                break;
+            case "team": result = result.sort((a, b) =>
+                a.Constructors[0].name.toLowerCase().localeCompare(b.Constructors[0].name.toLowerCase()));
+                console.log("sort by ", result);
+                setFilteredData(result);
+                break;
+            case "points": result = result.sort((a, b) =>
+                a.points.localeCompare(b.points));
+                console.log("sort by ", result);
+                setFilteredData(result);
+                break;
+        }
+    }
+*/
 
     const getDrivers = async () => {
         const url = `https://api.jolpi.ca/ergast/f1/${props.year}/driverStandings.json`;
@@ -108,18 +150,10 @@ export default function AllDrivers(props) {
                 <table>
                     <thead>
                         <tr>
-                            <th onClick={() => setSortByCollName("position")} 
-                                style={sortByCollName==="position"? {backgroundColor:"red"} : {backgroundColor:"lightgrey"}}
-                                ><Link>Position</Link></th>
-                            <th onClick={() => setSortByCollName("driver")}
-                                style={sortByCollName==="driver"? {backgroundColor:"red"} : {backgroundColor:"lightgrey"}}
-                                ><Link>Driver</Link></th>
-                            <th onClick={() => setSortByCollName("team")}
-                                style={sortByCollName==="team"? {backgroundColor:"red"} : {backgroundColor:"lightgrey"}}
-                                ><Link>Team</Link></th>
-                            <th onClick={() => setSortByCollName("points")}
-                                style={sortByCollName==="points"? {backgroundColor:"red"} : {backgroundColor:"lightgrey"}}
-                                ><Link>Points</Link></th>
+                            <th onClick={() => setSortByCollName("position")}>Position</th>
+                            <th onClick={() => setSortByCollName("driver")}>Driver</th>
+                            <th onClick={() => setSortByCollName("team")}>Team</th>
+                            <th onClick={() => setSortByCollName("points")}>Points</th>
                         </tr>
                     </thead>
                     <tbody>
