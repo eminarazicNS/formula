@@ -2,10 +2,13 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import Loader from "./Loader";
 import axios from "axios";
-import { Link } from "react-router";
+import { getFlagByNationality } from "../helper/getFlag";
+import Flag from "react-flagkit";
+import { getColorByPosition } from "../helper/getColor";
+import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 
 
-export default function DriverDetails() {
+export default function DriverDetails(props) {
     const [driverDetails, setDriverDetails] = useState(null);
     const [driverRaces, setDriverRaces] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -26,8 +29,8 @@ export default function DriverDetails() {
         const driverStandingsResponse = await axios.get(driverStandingsUrl);
         const driverRacesResponse = await axios.get(driverRacesUrl);
 
-        console.log("DriverStandings", driverStandingsResponse.data.MRData.StandingsTable.StandingsLists[0].DriverStandings[0]);
-        console.log("DriverRaces", driverRacesResponse.data.MRData.RaceTable.Races);
+        //console.log("DriverStandings", driverStandingsResponse.data.MRData.StandingsTable.StandingsLists[0].DriverStandings[0]);
+        //console.log("DriverRaces", driverRacesResponse.data.MRData.RaceTable.Races);
 
         setDriverDetails(driverStandingsResponse.data.MRData.StandingsTable.StandingsLists[0].DriverStandings[0]);
         setDriverRaces(driverRacesResponse.data.MRData.RaceTable.Races);
@@ -44,25 +47,26 @@ export default function DriverDetails() {
     return (
         <div className="wrapper">
 
-            <div className="col1">
-                <img src="../img/logo.png" alt="Logo" />
-                <div className="vNav">
-                    <ul>
-                        <li><Link to="/">Drivers</Link></li>
-                        <li><Link to="/teams">Teams</Link></li>
-                        <li><Link to="/races">Races</Link></li>
-                    </ul>
-                </div>
-            </div>
-
             <div className="dd-col2">
                 {/* <h2>DRIVERS DETAILS</h2> */}
                 <div className="details">
-                    <img src="../img/avatar.png" alt="Driver picture" style={{width: 200}}/>
+                    <div style={{ display: "flex" }}>
+                        <img src={`../public/img/${driverDetails.Driver.familyName}.jpg`}
+                            alt={driverDetails.Driver.familyName}
+                            style={{ width: 150 }} />
+                        <div style={{ padding: "5px", textAlign: "left" }}>
+                            <Flag country={getFlagByNationality(props.flags, driverDetails.Driver.nationality)}
+                                size={30} />
+                            <b> <p>{driverDetails.Driver.givenName}</p>
+                                <p>{driverDetails.Driver.familyName}</p>
+                            </b>
+                        </div>
+                    </div>
+
                     <p>Country: {driverDetails.Driver.nationality}</p>
                     <p>Team: {driverDetails.Constructors[0].name} </p>
                     <p>Birth: {driverDetails.Driver.dateOfBirth}</p>
-                    <a href={driverDetails.Driver.url} target="blanc">History</a>
+                    <p>History: <a href={driverDetails.Driver.url} target="_blank"><OpenInNewIcon /></a></p>
                 </div>
 
                 <div className="results">
@@ -71,6 +75,7 @@ export default function DriverDetails() {
                         <thead>
                             <tr>
                                 <th>Round</th>
+                                <th></th>
                                 <th>Grand Prix</th>
                                 <th>Team</th>
                                 <th>Grid</th>
@@ -82,10 +87,15 @@ export default function DriverDetails() {
                                 return (
                                     <tr key={race.round}>
                                         <td>{race.round}</td>
+                                        <td><Flag country={getFlagByNationality(props.flags, "",
+                                            race.Circuit.Location.country)}
+                                            size={30} /></td>
                                         <td>{race.raceName}</td>
                                         <td>{race.Results[0].Constructor.name}</td>
                                         <td>{race.Results[0].grid}</td>
-                                        <td>{race.Results[0].position}</td>
+                                        <td
+                                            style={{ backgroundColor: getColorByPosition(race.Results[0].position) }}
+                                        >{race.Results[0].position}</td>
                                     </tr>
                                 )
                             })}

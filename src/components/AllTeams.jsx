@@ -1,10 +1,13 @@
 import { useState, useEffect } from "react";
 import Loader from "./Loader";
 import axios from "axios";
-import { useNavigate, Link } from "react-router";
+import { useNavigate } from "react-router";
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
+import { getFlagByNationality } from "../helper/getFlag";
+import Flag from "react-flagkit";
 
-export default function AllTeams() {
+
+export default function AllTeams(props) {
     const [teams, setTeams] = useState({});
     const [loading, setLoading] = useState(true);
 
@@ -39,17 +42,6 @@ export default function AllTeams() {
 
         <div className="wrapper">
 
-            <div className="col1">
-                <img src="../img/logo.png" alt="Logo" />
-                <div className="vNav">
-                    <ul>
-                        <li><Link to="/">Drivers</Link></li>
-                        <li><Link to="/teams">Teams</Link></li>
-                        <li><Link to="/races">Races</Link></li>
-                    </ul>
-                </div>
-            </div>
-
             <div className="col2">
                 <h2>CONSTRUCTORS CHAMPIONSHIP</h2>
                 <table>
@@ -63,6 +55,9 @@ export default function AllTeams() {
                             return (
                                 <tr key={team.position}>
                                     <td>{team.position}</td>
+                                    <td><Flag country={getFlagByNationality(props.flags,
+                                        team.Constructor.nationality)}
+                                        size={30} /></td>
                                     <td className="link"
                                         onClick={() => handleClick(team.Constructor.constructorId)}
                                     >{team.Constructor.constructorId}</td>

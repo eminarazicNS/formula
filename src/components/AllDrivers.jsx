@@ -2,9 +2,10 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Loader from "./Loader";
 import { useNavigate } from "react-router";
-import { Link } from "react-router";
+import { getFlagByNationality } from "../helper/getFlag";
+import Flag from "react-flagkit";
 
-export default function AllDrivers() {
+export default function AllDrivers(props) {
     const [drivers, setDrivers] = useState({});
     const [loading, setLoading] = useState(true);
 
@@ -34,40 +35,32 @@ export default function AllDrivers() {
     return (
         <div className="wrapper">
 
-            <div className="col1">
-                <img src="../img/logo.png" alt="Logo" />
-                <div className="vNav">
-                    <ul>
-                        <li><Link to="/">Drivers</Link></li>
-                        <li><Link to="/teams">Teams</Link></li>
-                        <li><Link to="/races">Races</Link></li>
-                    </ul>
-                </div>
-            </div>
-
             <div className="col2">
                 <h2>DRIVERS CHAMPIONSHIP</h2>
-                 <table>
+                <table>
                     <thead>
                         <tr>
                             <td colSpan={3}>Drivers Shampionship Standings - 2013</td>
                         </tr>
                     </thead>
-                    <tbody>                        
+                    <tbody>
                         {drivers.map((driver) => {
                             return (
                                 <tr key={driver.position}
-                                 className="link"
-                                 onClick={() => handleClick(driver.Driver.driverId)}
-                                 >
+                                    
+                                >
                                     <td>{driver.position}</td>
-                                    <td >{driver.Driver.givenName} {driver.Driver.familyName}</td>
+                                    <td><Flag country={getFlagByNationality(props.flags, driver.Driver.nationality)}
+                                        size={30} />
+                                    </td>
+                                    <td className="link"
+                                    onClick={() => handleClick(driver.Driver.driverId)}>{driver.Driver.givenName} {driver.Driver.familyName}</td>
                                     <td>{driver.Constructors[0].name}</td>
                                     <td>{driver.points}</td>
                                 </tr>
                             )
                         })}
-                    </tbody> 
+                    </tbody>
                 </table>
             </div>
         </div>
