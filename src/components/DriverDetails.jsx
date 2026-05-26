@@ -182,7 +182,17 @@ export default function DriverDetails(props) {
                                         <td>{race.Results[0].grid}</td>
                                         <td
                                             style={{ backgroundColor: getColorByPosition(race.Results[0].position) }}
-                                        >{race.Results[0].position}</td>
+                                        >
+                                            <div className="race-column">
+                                                {race.Results[0].position}
+                                                {race.Results[0].position > race.Results[0].grid ?
+                                                    <span className="down">(-{race.Results[0].position - race.Results[0].grid})</span> :
+                                                    <></>}
+                                                {race.Results[0].position < race.Results[0].grid ?
+                                                    <span className="up">(+{race.Results[0].grid - race.Results[0].position})</span> :
+                                                    <></>}
+                                            </div>
+                                        </td>
                                     </tr>
                                 )
                             })}
