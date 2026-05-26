@@ -19,7 +19,7 @@ export default function App() {
   const [search, setSearch] = useState(""); //za input text
   const [searchIsVisible, setSearchIsVisible] = useState(false);
   const [selectIsVisible, setSelectIsVisible] = useState(false);
-  const [col2IsVisible, setCol2IsVisible] = useState(true);
+  const [col2IsVisible, setCol2IsVisible] = useState(false);
 
   useEffect(() => {
     getFlags();
@@ -48,23 +48,24 @@ export default function App() {
   return (
     <BrowserRouter>
       <div className="wrapper">
-        {/* <div>
+        <div>
           <video loop autoPlay muted id="bg-video"
             src="./public/home-video/clip-race.mp4" type="video/mp4"
             poster="./public/home-video/video-poster.jpg"
           >
           </video>
-        </div> */}
+        </div>
         <div className="col1">
           <nav>
             <div>
               <img src="../img/logo.png" alt="Logo" />
             </div>
 
-            <div style={selectIsVisible ? { visibility: "visible" } : { visibility: "hidden" }}>
+            <div style={selectIsVisible ? { visibility: "visible" } : { visibility: "hidden" }}  >
               <FormControl sx={{ m: 1, minWidth: 120 }} >
-                <InputLabel id="selectLabelId">Season</InputLabel>
+                <InputLabel id="selectLabelId" className="menuIcons">Season</InputLabel>
                 <Select
+                  className="select-search"
                   labelId="selectId"
                   value={selectedYear}
                   label="Season"
@@ -78,14 +79,18 @@ export default function App() {
                 </Select>
               </FormControl>
             </div>
-            <div style={searchIsVisible ? { visibility: "visible" } : { visibility: "hidden" }}>
+            <div style={searchIsVisible ? { visibility: "visible" } : { visibility: "hidden" }} >
               <FormControl sx={{ m: 1, minWidth: 120 }} >
-                <TextField id="searchId"
-                  label="Search table:" type="search"
-                  value={search}
-                  onChange={(e) => setSearch(e.target.value)}
+                <span className="select-search" style={{ borderRadius: "0" }} >
+                  <TextField
+                    id="searchId"
+                    label="Search table:"
+                    type="search"
+                    value={search}
+                    onChange={(e) => setSearch(e.target.value)}
 
-                />
+                  />
+                </span>
               </FormControl>
             </div>
 
@@ -98,9 +103,7 @@ export default function App() {
             </div>
           </nav>
         </div>
-        {/* <div className="col2" style={col2IsVisible ? {opacity: "0.0"} : {opacity:"1.0"}}> */}
-        {/* <div className="col2" style={col2IsVisible ? {visibility: "visible"} : {visibility: "hidden"}}> */}
-        <div className="col2">
+        <div className={col2IsVisible ? "col2" : "col3"}>
           <Routes>
             <Route path="/" element={<Home
               setSearchIsVisible={setSearchIsVisible} setSelectIsVisible={setSelectIsVisible} setCol2IsVisible={setCol2IsVisible} />} />

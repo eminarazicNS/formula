@@ -5,7 +5,6 @@ import { useNavigate } from "react-router";
 import { getFlagByNationality } from "../helper/getFlag";
 import Flag from "react-flagkit";
 import BasicBreadcrumbs from "./BasicBreadcrumbs";
-import BackgroundVideo from "./BackgroundVideo";
 
 export default function AllDrivers(props) {
     const [drivers, setDrivers] = useState([]);

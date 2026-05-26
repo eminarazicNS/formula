@@ -40,8 +40,19 @@ a {
     font-size: 20px;
     font-weight: bold;
     font-style: italic;
+    background-color: darkgray;
+
 }
 
+.select-search {
+    text-transform: uppercase;
+    font-size: 20px;
+    font-weight: bold;
+    font-style: italic;
+    background-color: darkgray;
+    width: 200px;
+    border-radius: 15px;
+}
 
 .wrapper .col2 {
     width: 80%;
@@ -237,7 +248,7 @@ tr:nth-child(even) {
 }
 
 /* Home */
-#bg-video{
+#bg-video {
     object-fit: cover;
     width: 100vw;
     height: 100vh;
