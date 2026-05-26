@@ -66,7 +66,7 @@ export default function App() {
               <FormControl className="select-search" sx={{ m: 1, minWidth: 120 }} >
                 <InputLabel id="selectLabelId" className="menuIcons">Season</InputLabel>
                 <Select
-                  variant="standard"
+                  variant="filled" //variant="standard"
                   inputprops={{
                       disableUnderline: true
                     }}
@@ -88,7 +88,7 @@ export default function App() {
               sx={{ m: 1, minWidth: 120 }} >
                 <span className="select-search">
                   <TextField
-                    variant="standard" 
+                    variant="filled" //variant="standard"
                     inputprops={{
                       disableUnderline: true
                     }}
