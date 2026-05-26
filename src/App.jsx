@@ -58,8 +58,8 @@ export default function App() {
         <div className="col1">
           <nav>
             <div>
-              <img style={{backgroundColor: "darkgray", borderRadius: "15px"}} 
-              src="../img/logo.png" alt="Logo" />
+              <img style={{ backgroundColor: "darkgray", borderRadius: "15px" }}
+                src="../img/logo.png" alt="Logo" />
             </div>
 
             <div style={selectIsVisible ? { visibility: "visible" } : { visibility: "hidden" }}  >
@@ -124,6 +124,12 @@ export default function App() {
           </Routes>
         </div>
       </div>
+      <footer>
+        <p>&copy; 2026 Green classroom group II. All rights reserved.</p>
+        <address>
+          Contact us at <a href="mailto:school@smartschool.rs">school@smartschool.rs</a>
+        </address>
+      </footer>
     </BrowserRouter>
   );
 }

@@ -274,3 +274,11 @@ tr:nth-child(even) {
     left: 0;
     z-index: -1;
 }
+
+footer {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+}
