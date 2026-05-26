@@ -66,6 +66,10 @@ export default function App() {
               <FormControl className="select-search" sx={{ m: 1, minWidth: 120 }} >
                 <InputLabel id="selectLabelId" className="menuIcons">Season</InputLabel>
                 <Select
+                  variant="standard"
+                  inputprops={{
+                      disableUnderline: true
+                    }}
                   labelId="selectId"
                   value={selectedYear}
                   label="Season"
@@ -80,9 +84,14 @@ export default function App() {
               </FormControl>
             </div>
             <div style={searchIsVisible ? { visibility: "visible" } : { visibility: "hidden" }} >
-              <FormControl sx={{ m: 1, minWidth: 120 }} >
+              <FormControl 
+              sx={{ m: 1, minWidth: 120 }} >
                 <span className="select-search">
                   <TextField
+                    variant="standard" 
+                    inputprops={{
+                      disableUnderline: true
+                    }}
                     id="searchId"
                     label="Search table:"
                     type="search"
