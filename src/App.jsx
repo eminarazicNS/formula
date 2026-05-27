@@ -49,7 +49,7 @@ export default function App() {
         <div>
           <video loop autoPlay muted id="bg-video"
             // src="./public/home-video/clip-race.mp4" 
-            src="./home-video/clip-race.mp4" 
+             src={`${import.meta.env.BASE_URL}clip-race.mp4`}
             type="video/mp4"
             poster="./public/home-video/video-poster.jpg"
           >
