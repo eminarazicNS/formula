@@ -34,10 +34,6 @@ export default function AllTeams(props) {
         const response = await axios.get(url);
         //console.log("response", response);
         console.log("teams", response.data.MRData.StandingsTable.StandingsLists[0].ConstructorStandings);
-<<<<<<< HEAD
-
-=======
->>>>>>> e3de27e5edf95076d0f0a8eb06b1df2cb96b4352
 
         setTeams(response.data.MRData.StandingsTable.StandingsLists[0].ConstructorStandings);
         setLoading(false);
@@ -112,8 +108,3 @@ export default function AllTeams(props) {
     );
 }
 
-<<<<<<< HEAD
-// https://api.jolpi.ca/ergast/f1/2013/constructorStandings.json
-// https://raw.githubusercontent.com/Imagin-io/country-nationality-list/refs/heads/master/countries.json
-=======
->>>>>>> e3de27e5edf95076d0f0a8eb06b1df2cb96b4352
