@@ -92,7 +92,7 @@ export default function DriverDetails(props) {
                             <img src={`${import.meta.env.BASE_URL}img/${driverDetails.Driver.driverId}.jpg`}                           
                                 onError={(e) => {                                  
                                     if (e.target.src !== `${import.meta.env.BASE_URL}img/${driverDetails.Driver.driverId}.jpg`) {
-                                        e.target.src = "${import.meta.env.BASE_URL}img/avatar.png";
+                                        e.target.src = `${import.meta.env.BASE_URL}img/avatar.png`;
                                     }
                                 }}
                                 alt={driverDetails.Driver.familyName}
