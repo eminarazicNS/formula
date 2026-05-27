@@ -52,7 +52,7 @@ export default function App() {
              src={`${import.meta.env.BASE_URL}home-video/clip-race.mp4`}
             type="video/mp4"
             // poster="./public/home-video/video-poster.jpg"
-            poster={`${import.meta.env.BASE_URL}video-poster.jpg`}
+            poster={`${import.meta.env.BASE_URL}home-video/video-poster.jpg`}
           >
           </video>
         </div>
