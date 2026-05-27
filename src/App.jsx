@@ -48,7 +48,9 @@ export default function App() {
       <div className="wrapper">
         <div>
           <video loop autoPlay muted id="bg-video"
-            src="./public/home-video/clip-race.mp4" type="video/mp4"
+            // src="./public/home-video/clip-race.mp4" 
+            src="./home-video/clip-race.mp4" 
+            type="video/mp4"
             poster="./public/home-video/video-poster.jpg"
           >
           </video>
