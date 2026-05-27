@@ -6,131 +6,104 @@ import { getFlagByNationality } from "../helper/getFlag";
 import Flag from "react-flagkit";
 import BasicBreadcrumbs from "./BasicBreadcrumbs";
 
-<<<<<<< HEAD
-=======
 export default function AllRaces(props) {
     const [races, setRaces] = useState([]);
     const [loading, setLoading] = useState(true);
     const [filteredData, setFilteredData] = useState([]);
->>>>>>> e3de27e5edf95076d0f0a8eb06b1df2cb96b4352
 
-export default function AllRaces() {
-    export default function AllRaces(props) {
-        const [races, setRaces] = useState([]);
-        const [loading, setLoading] = useState(true);
+    export default function AllRaces() {
+        export default function AllRaces(props) {
+            const [races, setRaces] = useState([]);
+            const [loading, setLoading] = useState(true);
 
-<<<<<<< HEAD
-        const navigate = useNavigate();
+            useEffect(() => {
+                props.setSearch("");
+                props.setSearchIsVisible(true);
+                props.setSelectIsVisible(true);
+                props.setCol2IsVisible(true);
+            }, []);
 
-        useEffect(() => {
-            getRaces();
-        }, []);
-
-        const getRaces = async () => {
-            const url = "https://api.jolpi.ca/ergast/f1/2013/results/1.json";
-            const response = await axios.get(url);
-            //console.log("races", response.data.MRData.RaceTable.Races);
-            setRaces(response.data.MRData.RaceTable.Races);
-            setLoading(false);
-        }
-
-        const handleClick = (id) => {
-            console.log("id", id);
-            navigate(`/raceDetails/${id}`);
-        }
-
-        if (loading) {
-            return <Loader />;
-=======
-    useEffect(() => {
-        props.setSearch("");
-        props.setSearchIsVisible(true);
-        props.setSelectIsVisible(true);
-        props.setCol2IsVisible(true);
-    }, []);
-
-    useEffect(() => {
-        getRaces();
-    }, [props.year]);
+            useEffect(() => {
+                getRaces();
+            }, [props.year]);
 
 
-    useEffect(() => {
-        getFilteredData();
-    }, [races, props.search]);
+            useEffect(() => {
+                getFilteredData();
+            }, [races, props.search]);
 
 
-    const getRaces = async () => {
-        const url = `https://api.jolpi.ca/ergast/f1/${props.year}/results/1.json`;
-        const response = await axios.get(url);
-        //console.log("races", response.data.MRData.RaceTable.Races);
-        setRaces(response.data.MRData.RaceTable.Races);
-        setLoading(false);
-    }
+            const getRaces = async () => {
+                const url = `https://api.jolpi.ca/ergast/f1/${props.year}/results/1.json`;
+                const response = await axios.get(url);
+                //console.log("races", response.data.MRData.RaceTable.Races);
+                setRaces(response.data.MRData.RaceTable.Races);
+                setLoading(false);
+            }
 
-    const getFilteredData = () => {
-        console.log("getFilteredData");
-        let result = races;
-        //console.log("getFilteredData result ", result);
-        result = result.filter((item) =>
-            item.raceName.toLowerCase().includes(props.search.toLowerCase()) ||
-            item.Circuit.circuitName.toLowerCase().includes(props.search.toLowerCase()) ||
-            item.Results[0].Driver.familyName.toLowerCase().includes(props.search.toLowerCase())
-        );
+            const getFilteredData = () => {
+                console.log("getFilteredData");
+                let result = races;
+                //console.log("getFilteredData result ", result);
+                result = result.filter((item) =>
+                    item.raceName.toLowerCase().includes(props.search.toLowerCase()) ||
+                    item.Circuit.circuitName.toLowerCase().includes(props.search.toLowerCase()) ||
+                    item.Results[0].Driver.familyName.toLowerCase().includes(props.search.toLowerCase())
+                );
 
-        setFilteredData(result);
-    }
+                setFilteredData(result);
+            }
 
-    const handleClick = (id) => {
-        console.log("id", id);
-        navigate(`/raceDetails/${id}`);
-    }
+            const handleClick = (id) => {
+                console.log("id", id);
+                navigate(`/raceDetails/${id}`);
+            }
 
-    if (loading) {
-        return <Loader />;
-    }
+            if (loading) {
+                return <Loader />;
+            }
 
-    const crumbs = [
-        { label: "Races", path: "/races" }
-    ];
+            const crumbs = [
+                { label: "Races", path: "/races" }
+            ];
 
-    return (
-        // <h2>AllRaces</h2>
-        <div className="wrapper">
->>>>>>> e3de27e5edf95076d0f0a8eb06b1df2cb96b4352
+            return (
+                // <h2>AllRaces</h2>
+                <div className="wrapper">
 
         }
-        return (
+                    return (
             // <h2>AllRaces</h2>
-            <div className="wrapper">
+                    <div className="wrapper">
 
 <<<<<<< HEAD
 
-                <div className="col2">
-                    <h2>RACE CALENDAR</h2>
-                    <table>
-                        <thead>
-                            <tr>
-                                <td colSpan={3}>Race Calendar - 2013</td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {races.map((race, index) => {
-                                return (
-                                    <tr key={index}>
-                                        <td>{race.round}</td>
-                                        <td><Flag country={getFlagByNationality(props.flags, "",
-                                            race.Circuit.Location.country)}
-                                            size={30} /></td>
-                                        <td className="link" onClick={() => handleClick(race.round)}>{race.raceName}</td>
-                                        <td>{race.Circuit.circuitName}</td>
-                                        <td>{race.date}</td>
-                                        <td>{race.Results[0].Driver.familyName}</td>
-                                    </tr>
-                                )
-                            })}
-                        </tbody>
-                    </table>
-                </div>
+            <div className="col2">
+                <h2>RACE CALENDAR</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <td colSpan={3}>Race Calendar - 2013</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {races.map((race, index) => {
+                            return (
+                                <tr key={index}>
+                                    <td>{race.round}</td>
+                                    <td><Flag country={getFlagByNationality(props.flags, "",
+                                        race.Circuit.Location.country)}
+                                        size={30} /></td>
+                                    <td className="link" onClick={() => handleClick(race.round)}>{race.raceName}</td>
+                                    <td>{race.Circuit.circuitName}</td>
+                                    <td>{race.date}</td>
+                                    <td>{race.Results[0].Driver.familyName}</td>
+                                </tr>
+                            )
+                        })}
+                    </tbody>
+                </table>
+            </div>
 =======
             <div className="col2" className="results">
                 <BasicBreadcrumbs crumbs={crumbs} />
@@ -166,7 +139,7 @@ export default function AllRaces() {
                     </tbody>
                 </table>
 >>>>>>> e3de27e5edf95076d0f0a8eb06b1df2cb96b4352
-            </div>
+            </div >
         );
-    }
+        }
 
