@@ -89,11 +89,12 @@ export default function DriverDetails(props) {
                         <BasicBreadcrumbs crumbs={crumbs} />
                         <div style={{ display: "flex" }}>
                             {/* <img src={`../public/img/${driverDetails.Driver.driverId}.jpg`} */}
-                            <img src={`${import.meta.env.BASE_URL}img/${driverDetails.Driver.driverId}.jpg`}                           
-                                onError={(e) => {  
-                                    console.log("driverDetails.Driver.driverId ",driverDetails.Driver.driverId);    
-                                    e.target.onerror = null;                            
-                                    e.target.src = `${import.meta.env.BASE_URL}img/avatar.png`;
+                            {/* <img src={`${import.meta.env.BASE_URL}img/${driverDetails.Driver.driverId}.jpg`}                            */}
+                            <img src={`/img/${driverDetails.Driver.driverId}.jpg`}
+                                onError={(e) => {
+                                    console.log("driverDetails.Driver.driverId ", driverDetails.Driver.driverId);
+                                    e.target.onerror = null;
+                                    e.target.src = `/img/avatar.png`;
                                 }}
                                 alt={driverDetails.Driver.familyName}
                                 style={{ width: 150 }} />
@@ -134,11 +135,12 @@ export default function DriverDetails(props) {
                     <BasicBreadcrumbs crumbs={crumbs} />
                     <div style={{ display: "flex" }}>
                         {/* <img src={`../public/img/${driverDetails.Driver.familyName}.jpg`} */}
-                        <img src={`${import.meta.env.BASE_URL}img/${driverDetails.Driver.familyName}.jpg`}
+                        {/* <img src={`${import.meta.env.BASE_URL}img/${driverDetails.Driver.driverId}.jpg`} */}
+                        <img src={`/img/${driverDetails.Driver.familyName}.jpg`}
                             onError={(e) => {
-                                if (e.target.src !== `${import.meta.env.BASE_URL}img/${driverDetails.Driver.familyName}.jpg`) {
-                                    // e.target.src = "../public/img/avatar.png";
-                                    e.target.src = `${import.meta.env.BASE_URL}img/avatar.png`};                                
+                                console.log("driverDetails.Driver.driverId ", driverDetails.Driver.driverId);
+                                e.target.onerror = null;
+                                e.target.src = `/img/avatar.png`;
                             }}
                             alt={driverDetails.Driver.familyName}
                             style={{ width: 150 }} />
