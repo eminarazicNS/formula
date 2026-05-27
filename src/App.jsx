@@ -3,7 +3,7 @@ import Home from "./components/Home";
 import AllDrivers from "./components/AllDrivers";
 import AllTeams from "./components/AllTeams";
 import AllRaces from "./components/AllRaces";
-import DriverDetails from "./components/DriverDetails";
+import DriverDetails from "./components/DriverDetailsE";
 import TeamDetails from "./components/TeamDetails";
 import RaceDetails from "./components/RaceDetails";
 import { useEffect, useState } from "react";
@@ -38,10 +38,8 @@ export default function App() {
     const years = [];
     let y = new Date().getFullYear();
     for (let i = 0; i < 30; i++) {
-      years.push(y);
-      y--;
+      years.push(y--);
     }
-    //console.log("years ",years);
     setYears(years);
   }
 
