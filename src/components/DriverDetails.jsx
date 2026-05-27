@@ -89,8 +89,7 @@ export default function DriverDetails(props) {
                         <BasicBreadcrumbs crumbs={crumbs} />
                         <div style={{ display: "flex" }}>
                             {/* <img src={`../public/img/${driverDetails.Driver.familyName}.jpg`} */}
-                            {/* <img src={`${import.meta.env.BASE_URL}img/${driverDetails.Driver.driverId}.jpg`} */}
-                            <img src={`../img/${driverDetails.Driver.driverId}.jpg`}
+                            <img src={`${import.meta.env.BASE_URL}img/${driverDetails.Driver.driverId}.jpg`}                           
                                 onError={(e) => {
                                     if (e.target.src !== `${import.meta.env.BASE_URL}img/${driverDetails.Driver.driverId}.jpg`) {
                                         e.target.src = "${import.meta.env.BASE_URL}img/avatar.png";
