@@ -90,7 +90,7 @@ export default function DriverDetails(props) {
                         <div style={{ display: "flex" }}>
                             {/* <img src={`../public/img/${driverDetails.Driver.driverId}.jpg`} */}
                             <img src={`${import.meta.env.BASE_URL}img/${driverDetails.Driver.driverId}.jpg`}                           
-                                onError={(e) => {
+                                onError={(e) => {                                  
                                     if (e.target.src !== `${import.meta.env.BASE_URL}img/${driverDetails.Driver.driverId}.jpg`) {
                                         e.target.src = "${import.meta.env.BASE_URL}img/avatar.png";
                                     }
