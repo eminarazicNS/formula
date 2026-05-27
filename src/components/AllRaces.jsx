@@ -26,29 +26,22 @@ export default function AllRaces(props) {
 
 
     useEffect(() => {
-        getFilteredData();
-    }, [races, props.search]);
-
-
-    const getRaces = async () => {
-        const url = `https://api.jolpi.ca/ergast/f1/${props.year}/results/1.json`;
-        const response = await axios.get(url);
-        //console.log("races", response.data.MRData.RaceTable.Races);
-        setRaces(response.data.MRData.RaceTable.Races);
-        setLoading(false);
-    }
-
-    const getFilteredData = () => {
-        console.log("getFilteredData");
-        let result = races;
-        //console.log("getFilteredData result ", result);
-        result = result.filter((item) =>
+        const result = races.filter((item) =>
             item.raceName.toLowerCase().includes(props.search.toLowerCase()) ||
             item.Circuit.circuitName.toLowerCase().includes(props.search.toLowerCase()) ||
             item.Results[0].Driver.familyName.toLowerCase().includes(props.search.toLowerCase())
         );
 
         setFilteredData(result);
+    }, [races, props.search]);
+
+
+    const getRaces = async () => {
+        const url = `https://api.jolpi.ca/ergast/f1/${props.year}/results/1.json`;
+        const response = await axios.get(url);
+        console.log("races", response.data.MRData.RaceTable.Races);
+        setRaces(response.data.MRData.RaceTable.Races);
+        setLoading(false);
     }
 
     const handleClick = (id) => {
@@ -96,7 +89,12 @@ export default function AllRaces(props) {
                                     </td>
                                     <td>{race.Circuit.circuitName}</td>
                                     <td>{race.date}</td>
-                                    <td>{race.Results[0].Driver.familyName}</td>
+                                    <td 
+                                    onClick={() => navigate(`/driverDetails/${race.Results[0].Driver.driverId}`)}>
+                                        <div className="link"> 
+                                        {race.Results[0].Driver.familyName}
+                                        </div>
+                                    </td>
                                 </tr>
                             )
                         })}

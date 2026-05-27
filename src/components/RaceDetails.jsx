@@ -1,7 +1,7 @@
 //Ne radi pretraga po Search polju, pa je taj deo zakomentarisan.
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router";
+import { useParams, useNavigate } from "react-router";
 import Loader from "./Loader";
 import { getFlagByNationality } from "../helper/getFlag";
 import Flag from "react-flagkit";
@@ -20,6 +20,8 @@ export default function RaceDetails(props) {
     const params = useParams();
     console.log("params", params);
 
+    const navigate = useNavigate();
+
     useEffect(() => {
         props.setSearch("");
         props.setSearchIsVisible(true);
@@ -32,7 +34,18 @@ export default function RaceDetails(props) {
     }, [props.year]);
 
     useEffect(() => {
-        getFilteredData();
+        const resultQ = qualifying.filter((item) =>
+            item.Driver.familyName.toLowerCase().includes(props.search.toLowerCase()) ||
+            item.Constructor.name.toLowerCase().includes(props.search.toLowerCase())
+        );
+
+        const resultR = races.Results?.filter((item) =>
+            item.Driver.familyName.toLowerCase().includes(props.search.toLowerCase()) ||
+            item.Constructor.name.toLowerCase().includes(props.search.toLowerCase())
+        );
+
+        setFilteredQualifying(resultQ);
+        setFilteredRaces(resultR);
     }, [props.search, qualifying, races])
 
     const getRaceDetails = async () => {
@@ -45,8 +58,8 @@ export default function RaceDetails(props) {
             const qualifyingResponse = await axios.get(qualifyingUrl);
             const racesResponse = await axios.get(racesUrl);
 
-            console.log("qualifying Response", qualifyingResponse.data.MRData.RaceTable.Races[0].QualifyingResults);
-            console.log("races Response", racesResponse.data.MRData.RaceTable.Races[0]);
+            // console.log("qualifying", qualifyingResponse.data.MRData.RaceTable.Races[0].QualifyingResults);
+            console.log("races", racesResponse.data.MRData.RaceTable.Races[0]);
 
             setQualifying(qualifyingResponse.data.MRData.RaceTable.Races[0].QualifyingResults);
             setRaces(racesResponse.data.MRData.RaceTable.Races[0]);
@@ -71,20 +84,6 @@ export default function RaceDetails(props) {
 
     // bestTime(430,200,556);
 
-    const getFilteredData = () => {
-        const resultQ = qualifying.filter((item) =>
-            item.Driver.familyName.toLowerCase().includes(props.search.toLowerCase()) ||
-            item.Constructor.name.toLowerCase().includes(props.search.toLowerCase())
-        );
-
-        const resultR = races.Results?.filter((item) =>
-            item.Driver.familyName.toLowerCase().includes(props.search.toLowerCase()) ||
-            item.Constructor.name.toLowerCase().includes(props.search.toLowerCase())
-        );
-
-        setFilteredQualifying(resultQ);
-        setFilteredRaces(resultR);
-    }
 
 
     if (loading) {
@@ -159,14 +158,23 @@ export default function RaceDetails(props) {
                                 return (
                                     <tr key={qualifier.position}>
                                         <td>{qualifier.position}</td>
-                                        <td>
-                                            <div className="flag">
+                                        <td
+                                            onClick={() => navigate(`/driverDetails/${qualifier.Driver.driverId}`)}
+                                        >
+                                            <div className="flag link">
                                                 <Flag country={getFlagByNationality(props.flags,
                                                     qualifier.Driver.nationality)}
-                                                    size={30} />{qualifier.Driver.familyName}
+                                                    size={30} />
+                                                {qualifier.Driver.familyName}
                                             </div>
                                         </td>
-                                        <td>{qualifier.Constructor.name}</td>
+                                        <td
+                                            onClick={() => navigate(`/teamDetails/${qualifier.Constructor.constructorId}`)}
+                                        >
+                                            <div className="link">
+                                                {qualifier.Constructor.name}
+                                            </div>
+                                        </td>
                                         <td>{bestTime(qualifier.Q1, qualifier.Q2, qualifier.Q3)}</td>
                                     </tr>
                                 );
@@ -192,14 +200,21 @@ export default function RaceDetails(props) {
                                 return (
                                     <tr key={race.position}>
                                         <td>{race.position}</td>
-                                        <td>
-                                            <div className="flag">
+                                        <td
+                                            onClick={() => navigate(`/driverDetails/${race.Driver.driverId}`)}
+                                        >
+                                            <div className="flag link">
                                                 <Flag country={getFlagByNationality(props.flags,
                                                     race.Driver.nationality)}
                                                     size={30} />{race.Driver.familyName}
                                             </div>
                                         </td>
-                                        <td>{race.Constructor.name}</td>
+                                        <td
+                                            onClick={() => navigate(`/teamDetails/${race.Constructor.constructorId}`)}>
+                                            <div className="link">
+                                                {race.Constructor.name}
+                                            </div>
+                                        </td>
                                         <td>{race?.Time?.time || "DNQ"}</td>
                                         <td style={{ backgroundColor: getColorByPosition(race.position) }}>{race.points}</td>
                                     </tr>

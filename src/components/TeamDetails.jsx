@@ -31,7 +31,10 @@ export default function TeamDetails(props) {
     }, [props.year]);
 
     useEffect(() => {
-        getFilteredData();
+         if (teamRaces != null) {
+            const result = teamRaces.filter((item) => item.raceName.toLowerCase().includes(props.search.toLowerCase()));
+            setFilteredData(result);
+        }
     }, [teamRaces, props.search]);
 
     const params = useParams();
@@ -77,13 +80,6 @@ export default function TeamDetails(props) {
         }
     }
 
-
-    const getFilteredData = () => {
-        if (teamRaces != null) {
-            const result = teamRaces.filter((item) => item.raceName.toLowerCase().includes(props.search.toLowerCase()));
-            setFilteredData(result);
-        }
-    }
 
 
     if (loading) {

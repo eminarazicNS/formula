@@ -1,9 +1,9 @@
-import { BrowserRouter, Link, Route, Routes } from "react-router";
+import { BrowserRouter, NavLink, Route, Routes } from "react-router";
 import Home from "./components/Home";
 import AllDrivers from "./components/AllDrivers";
 import AllTeams from "./components/AllTeams";
 import AllRaces from "./components/AllRaces";
-import DriverDetails from "./components/DriverDetailsE";
+import DriverDetails from "./components/DriverDetails";
 import TeamDetails from "./components/TeamDetails";
 import RaceDetails from "./components/RaceDetails";
 import { useEffect, useState } from "react";
@@ -49,7 +49,7 @@ export default function App() {
         <div>
           <video loop autoPlay muted id="bg-video"
             // src="./public/home-video/clip-race.mp4" 
-             src={`${import.meta.env.BASE_URL}home-video/clip-race.mp4`}
+            src={`${import.meta.env.BASE_URL}home-video/clip-race.mp4`}
             type="video/mp4"
             // poster="./public/home-video/video-poster.jpg"
             poster={`${import.meta.env.BASE_URL}home-video/video-poster.jpg`}
@@ -69,8 +69,8 @@ export default function App() {
                 <Select
                   variant="filled" //variant="standard"
                   inputprops={{
-                      disableUnderline: true
-                    }}
+                    disableUnderline: true
+                  }}
                   labelId="selectId"
                   value={selectedYear}
                   label="Season"
@@ -85,8 +85,8 @@ export default function App() {
               </FormControl>
             </div>
             <div style={searchIsVisible ? { visibility: "visible" } : { visibility: "hidden" }} >
-              <FormControl 
-              sx={{ m: 1, minWidth: 120 }} >
+              <FormControl
+                sx={{ m: 1, minWidth: 120 }} >
                 <span className="select-search">
                   <TextField
                     variant="filled" //variant="standard"
@@ -106,9 +106,19 @@ export default function App() {
 
             <div className="vNav">
               <ul>
-                <Link to="/drivers"><li><img src="../img/Kaciga.png" alt="Drivers logo" /><div className="menuIcons">Drivers</div></li></Link>
+                <NavLink to="/drivers"
+                  className={({ isActive, isPending }) =>
+                  isPending ? "pending" : isActive ? "active" : ""}
+                ><li><img src="../img/Kaciga.png" alt="Drivers logo" /><div className="menuIcons">Drivers</div></li></NavLink>
+                <NavLink to="/teams" className={({ isActive, isPending }) =>
+                  isPending ? "pending" : isActive ? "active" : ""}
+                ><li><img src="../img/Teams.png" alt="Teams logo" /><div className="menuIcons">Teams</div></li></NavLink>
+                <NavLink to="/races" className={({ isActive, isPending }) =>
+                  isPending ? "pending" : isActive ? "active" : ""}
+                ><li><img src="../img/Races1.png" alt="Races logo" /><div className="menuIcons">Races</div></li></NavLink>
+                {/* <Link to="/drivers"><li><img src="../img/Kaciga.png" alt="Drivers logo" /><div className="menuIcons">Drivers</div></li></Link>
                 <Link to="/teams"><li><img src="../img/Teams.png" alt="Teams logo" /><div className="menuIcons">Teams</div></li></Link>
-                <Link to="/races"><li><img src="../img/Races1.png" alt="Races logo" /><div className="menuIcons">Races</div></li></Link>
+                <Link to="/races"><li><img src="../img/Races1.png" alt="Races logo" /><div className="menuIcons">Races</div></li></Link> */}
               </ul>
             </div>
           </nav>

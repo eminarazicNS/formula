@@ -26,8 +26,14 @@ export default function AllTeams(props) {
     }, [props.year]);
 
     useEffect(() => {
-        getFilteredData();
+        const result = teams.filter((item) =>
+            item.Constructor.name.toLowerCase().includes(props.search.toLowerCase())
+        );
+
+        setFilteredData(result);
     }, [teams, props.search]);
+
+    
 
     const getTeams = async () => {
         const url = `https://api.jolpi.ca/ergast/f1/${props.year}/constructorStandings.json`;
@@ -38,24 +44,6 @@ export default function AllTeams(props) {
         setTeams(response.data.MRData.StandingsTable.StandingsLists[0].ConstructorStandings);
         setLoading(false);
     };
-
-
-    const getFilteredData = () => {
-        console.log("getFilteredData");
-        let result = teams;
-        //console.log("getFilteredData result ", result);
-        result = result.filter((item) =>
-            item.Constructor.name.toLowerCase().includes(props.search.toLowerCase())
-        );
-
-        setFilteredData(result);
-    }
-
-
-    const handleClick = (id) => {
-        console.log("id ", id);
-        navigate(`/teamDetails/${id}`);
-    }
 
     if (loading) {
         return <Loader />;
@@ -87,7 +75,7 @@ export default function AllTeams(props) {
                                 <tr key={i}>
                                     {/* <td>{team.position}</td> ne postoji u starim godinama */}
                                     <td>{i + 1}</td>
-                                    <td onClick={() => handleClick(team.Constructor.constructorId)}>
+                                    <td onClick={() =>  navigate(`/teamDetails/${team.Constructor.constructorId}`)}>
                                         <div className="link">
                                             <Flag country={getFlagByNationality(props.flags,
                                                 team.Constructor.nationality)}

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router";
+import { useParams, useNavigate } from "react-router";
 import Loader from "./Loader";
 import axios from "axios";
 import { getFlagByNationality } from "../helper/getFlag";
@@ -16,6 +16,8 @@ export default function DriverDetails(props) {
     const [isError, setIsError] = useState(false);
     const [filteredData, setFilteredData] = useState([]);
 
+    const navigate = useNavigate();
+
 
     useEffect(() => {
         props.setSearch("");
@@ -29,7 +31,13 @@ export default function DriverDetails(props) {
     }, [props.year]);
 
     useEffect(() => {
-        getFilteredData();
+        if (driverRaces != null) { //mora uslov za sada
+            const result = driverRaces.filter((item) =>
+                item.raceName.toLowerCase().includes(props.search.toLowerCase()) ||
+                item.Results[0].Constructor.name.toLowerCase().includes(props.search.toLowerCase())
+            );
+            setFilteredData(result);
+        }
     }, [driverRaces, props.search]);
 
     const params = useParams();
@@ -46,7 +54,7 @@ export default function DriverDetails(props) {
             const driverRacesResponse = await axios.get(driverRacesUrl);
 
             //console.log("DriverStandings", driverStandingsResponse.data.MRData.StandingsTable.StandingsLists[0].DriverStandings[0]);
-            //console.log("DriverRaces", driverRacesResponse.data.MRData.RaceTable.Races);
+            console.log("DriverRaces", driverRacesResponse.data.MRData.RaceTable.Races);
 
             setDriverDetails(driverStandingsResponse.data.MRData.StandingsTable.StandingsLists[0].DriverStandings[0]);
             setDriverRaces(driverRacesResponse.data.MRData.RaceTable.Races);
@@ -58,17 +66,6 @@ export default function DriverDetails(props) {
         }
     }
 
-
-    const getFilteredData = () => {
-        //console.log("getFilteredData driverRaces", driverRaces);
-        if (driverRaces != null) {
-            const result = driverRaces.filter((item) =>
-                item.raceName.toLowerCase().includes(props.search.toLowerCase()) ||
-                item.Results[0].Constructor.name.toLowerCase().includes(props.search.toLowerCase())
-            );
-            setFilteredData(result);
-        }
-    }
 
 
     if (loading) {
@@ -90,10 +87,10 @@ export default function DriverDetails(props) {
                         <div style={{ display: "flex" }}>
                             {/* <img src={`../public/img/${driverDetails.Driver.driverId}.jpg`} */}
                             {/* <img src={`/img/${driverDetails.Driver.driverId}.jpg`} */}
-                            <img src={`${import.meta.env.BASE_URL}img/${driverDetails.Driver.driverId}.jpg`}                                                       
+                            <img src={`${import.meta.env.BASE_URL}img/${driverDetails.Driver.driverId}.jpg`}
                                 onError={(e) => {
                                     console.log("driverDetails.Driver.driverId ", driverDetails.Driver.driverId);
-                                   // e.target.onerror = null;
+                                    // e.target.onerror = null;
                                     // e.target.src = `/img/avatar.png`;
                                     e.target.src = `${import.meta.env.BASE_URL}img/avatar.png`;
                                 }}
@@ -129,7 +126,7 @@ export default function DriverDetails(props) {
     }
 
 
-    
+
 
     return (
 
@@ -140,7 +137,7 @@ export default function DriverDetails(props) {
                     <div style={{ display: "flex" }}>
                         {/* <img src={`../public/img/${driverDetails.Driver.familyName}.jpg`} */}
                         {/* <img src={`/img/${driverDetails.Driver.familyName}.jpg`} */}
-                        <img src={`${import.meta.env.BASE_URL}img/${driverDetails.Driver.driverId}.jpg`}                        
+                        <img src={`${import.meta.env.BASE_URL}img/${driverDetails.Driver.driverId}.jpg`}
                             onError={(e) => {
                                 console.log("driverDetails.Driver.driverId ", driverDetails.Driver.driverId);
                                 //e.target.onerror = null;
@@ -158,7 +155,7 @@ export default function DriverDetails(props) {
                     </div>
 
                     <p>Country: {driverDetails.Driver.nationality}</p>
-                    <p>Team: {driverDetails.Constructors[0].name} </p>
+                    <p>Team: {driverDetails.Constructors[0].name}</p>
                     <p>Birth: {driverDetails.Driver.dateOfBirth}</p>
                     <p>History: <a href={driverDetails.Driver.url} target="_blank"><OpenInNewIcon /></a></p>
                 </div>
@@ -187,7 +184,13 @@ export default function DriverDetails(props) {
                                                     size={30} />{race.raceName}
                                             </div>
                                         </td>
-                                        <td>{race.Results[0].Constructor.name}</td>
+                                        <td
+                                            onClick={() => navigate(`/teamDetails/${race.Results[0].Constructor.constructorId}`)}
+                                        >
+                                            <div className="link">
+                                                {race.Results[0].Constructor.name}
+                                            </div>
+                                        </td>
                                         <td>{race.Results[0].grid}</td>
                                         <td
                                             style={{ backgroundColor: getColorByPosition(race.Results[0].position) }}

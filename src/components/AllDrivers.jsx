@@ -26,21 +26,27 @@ export default function AllDrivers(props) {
     }, [props.year]);
 
     useEffect(() => {
-        getFilteredData();
+        const result = drivers.filter((item) =>
+            item.Driver.givenName.toLowerCase().includes(props.search.toLowerCase()) ||
+            item.Driver.familyName.toLowerCase().includes(props.search.toLowerCase()) ||
+            item.Constructors[0].name.toLowerCase().includes(props.search.toLowerCase())
+        );
+
+        setFilteredData(result);
     }, [drivers, props.search]);
 
     useEffect(() => {
-        sortData(sortByCollName);        
+        sortData(sortByCollName);
     }, [filteredData, sortByCollName]);
 
     const sortData = (collName) => {
-        console.log("sortData collName", collName); 
+        console.log("sortData collName", collName);
         let result = filteredData;
         switch (collName) {
-            case "position": result = result.sort((a, b) => Number(a.position) - Number(b.position));                
+            case "position": result = result.sort((a, b) => Number(a.position) - Number(b.position));
                 break;
             case "driver": result = result.sort((a, b) =>
-                (a.Driver.givenName+a.Driver.familyName).toLowerCase().localeCompare((b.Driver.givenName+b.Driver.familyName).toLowerCase()));
+                (a.Driver.givenName + a.Driver.familyName).toLowerCase().localeCompare((b.Driver.givenName + b.Driver.familyName).toLowerCase()));
                 break;
             case "team": result = result.sort((a, b) =>
                 a.Constructors[0].name.toLowerCase().localeCompare(b.Constructors[0].name.toLowerCase()));
@@ -51,40 +57,28 @@ export default function AllDrivers(props) {
         setFilteredData(result);
     }
 
-/*    
-    const dynamicSort = (property, order = 'asc') => {
-        return (a, b) => {
-            const comparison = a[property].localeCompare(b[property])
-            return order === 'desc' ? -comparison : comparison
+    /*    
+        const dynamicSort = (property, order = 'asc') => {
+            return (a, b) => {
+                const comparison = a[property].localeCompare(b[property])
+                return order === 'desc' ? -comparison : comparison
+            }
         }
-    }
-
-    items.sort(dynamicSort('name', 'asc'))
-*/
+    
+        items.sort(dynamicSort('name', 'asc'))
+    */
 
 
     const getDrivers = async () => {
         const url = `https://api.jolpi.ca/ergast/f1/${props.year}/driverStandings.json`;
-        console.log("drivers url ", url)
+        //console.log("drivers url ", url)
         const response = await axios.get(url);
-        console.log("response.data", response.data);
+        //console.log("response.data", response.data);
+        console.log("drivers", response.data.MRData.StandingsTable.StandingsLists[0].DriverStandings);
         setDrivers(response.data.MRData.StandingsTable.StandingsLists[0].DriverStandings);
         setLoading(false);
     };
 
-
-    const getFilteredData = () => {
-        console.log("getFilteredData");
-        let result = drivers;
-        //console.log("getFilteredData result ", result);
-        result = result.filter((item) =>
-            item.Driver.givenName.toLowerCase().includes(props.search.toLowerCase()) ||
-            item.Driver.familyName.toLowerCase().includes(props.search.toLowerCase()) ||
-            item.Constructors[0].name.toLowerCase().includes(props.search.toLowerCase())
-        );
-
-        setFilteredData(result);
-    }
 
     const handleClick = (id) => {
         console.log("id ", id);
@@ -108,18 +102,18 @@ export default function AllDrivers(props) {
                 <table>
                     <thead>
                         <tr>
-                            <th onClick={() => setSortByCollName("position")} 
-                                style={sortByCollName==="position"? {backgroundColor:"red"} : {backgroundColor:"lightgrey"}}
-                                ><Link>Position</Link></th>
+                            <th onClick={() => setSortByCollName("position")}
+                                style={sortByCollName === "position" ? { backgroundColor: "red" } : { backgroundColor: "lightgrey" }}
+                            ><Link>Position</Link></th>
                             <th onClick={() => setSortByCollName("driver")}
-                                style={sortByCollName==="driver"? {backgroundColor:"red"} : {backgroundColor:"lightgrey"}}
-                                ><Link>Driver</Link></th>
+                                style={sortByCollName === "driver" ? { backgroundColor: "red" } : { backgroundColor: "lightgrey" }}
+                            ><Link>Driver</Link></th>
                             <th onClick={() => setSortByCollName("team")}
-                                style={sortByCollName==="team"? {backgroundColor:"red"} : {backgroundColor:"lightgrey"}}
-                                ><Link>Team</Link></th>
+                                style={sortByCollName === "team" ? { backgroundColor: "red" } : { backgroundColor: "lightgrey" }}
+                            ><Link>Team</Link></th>
                             <th onClick={() => setSortByCollName("points")}
-                                style={sortByCollName==="points"? {backgroundColor:"red"} : {backgroundColor:"lightgrey"}}
-                                ><Link>Points</Link></th>
+                                style={sortByCollName === "points" ? { backgroundColor: "red" } : { backgroundColor: "lightgrey" }}
+                            ><Link>Points</Link></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -135,7 +129,12 @@ export default function AllDrivers(props) {
                                             {driver.Driver.givenName} {driver.Driver.familyName}
                                         </div>
                                     </td>
-                                    <td>{driver.Constructors[0].name}</td>
+                                    <td
+                                        onClick={() => navigate(`/teamDetails/${driver.Constructors[0].constructorId}`)}>
+                                        <div className="link">
+                                            {driver.Constructors[0].name}
+                                        </div>
+                                    </td>
                                     <td>{driver.points}</td>
                                 </tr>
                             )

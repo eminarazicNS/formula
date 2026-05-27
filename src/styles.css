@@ -43,7 +43,13 @@ a {
     background-color: darkgray;
 
 }
+.menuIcons .active {
+    color:red;
+}
 
+.menuIcons .pending {
+    color:blue;
+}
 .select-search {
     text-transform: uppercase;
     font-size: 20px;
