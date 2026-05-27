@@ -93,7 +93,7 @@ export default function DriverDetails(props) {
                             <img src={`${import.meta.env.BASE_URL}img/${driverDetails.Driver.driverId}.jpg`}                                                       
                                 onError={(e) => {
                                     console.log("driverDetails.Driver.driverId ", driverDetails.Driver.driverId);
-                                    e.target.onerror = null;
+                                   // e.target.onerror = null;
                                     // e.target.src = `/img/avatar.png`;
                                     e.target.src = `${import.meta.env.BASE_URL}img/avatar.png`;
                                 }}
@@ -143,7 +143,7 @@ export default function DriverDetails(props) {
                         <img src={`${import.meta.env.BASE_URL}img/${driverDetails.Driver.driverId}.jpg`}                        
                             onError={(e) => {
                                 console.log("driverDetails.Driver.driverId ", driverDetails.Driver.driverId);
-                                e.target.onerror = null;
+                                //e.target.onerror = null;
                                 e.target.src = `${import.meta.env.BASE_URL}img/avatar.png`;
                             }}
                             alt={driverDetails.Driver.familyName}
