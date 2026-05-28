@@ -90,10 +90,22 @@ export default function TeamDetails(props) {
                     <div className="details">
                         <BasicBreadcrumbs crumbs={crumbs} />
                         <div style={{ display: "flex" }}>
-                            {/* <img src={`../public/img/${teamDetails.Constructor.constructorId}.png`} */}
-                            <img src={`${import.meta.env.BASE_URL}img/${teamDetails.Constructor.constructorId}.png`}
+
+                            {/* <img src={`${import.meta.env.BASE_URL}img/${teamDetails.Constructor.constructorId}.png`}
                                 alt={teamDetails.Constructor.name}
+                                style={{ width: 150 }} /> */}
+
+                            <img src={`${import.meta.env.BASE_URL}img/${teamDetails.Constructor.constructorId}.png`}
+                                onError={(e) => {
+                                    console.log("teamDetails.Constructor.constructorId ", teamDetails.Constructor.constructorId);
+                                    // e.target.onerror = null;
+                                    e.target.src = `${import.meta.env.BASE_URL}img/F1-logo.png`;
+                                }}
+                                alt={teamDetails.Constructor.constructorId}
                                 style={{ width: 150 }} />
+
+
+
                             <div style={{ padding: "5px", textAlign: "left" }}>
                                 <Flag country={getFlagByNationality(props.flags, teamDetails.Constructor.nationality)}
                                     size={30} />
@@ -125,8 +137,17 @@ export default function TeamDetails(props) {
                 <div className="details">
                     <BasicBreadcrumbs crumbs={crumbs} />
                     <div style={{ display: "flex" }}>
-                        <img src={`${import.meta.env.BASE_URL}img/${teamDetails.Constructor.constructorId}.png`}
+                        {/* <img src={`${import.meta.env.BASE_URL}img/${teamDetails.Constructor.constructorId}.png`}
                             alt={teamDetails.Constructor.name}
+                            style={{ width: 150 }} /> */}
+
+                        <img src={`${import.meta.env.BASE_URL}img/${teamDetails.Constructor.constructorId}.png`}
+                            onError={(e) => {
+                                console.log("teamDetails.Constructor.constructorId ", teamDetails.Constructor.constructorId);
+                                // e.target.onerror = null;
+                                e.target.src = `${import.meta.env.BASE_URL}img/F1-logo.png`;
+                            }}
+                            alt={teamDetails.Constructor.constructorId}
                             style={{ width: 150 }} />
                         <div style={{ padding: "5px", textAlign: "left" }}>
                             <Flag country={getFlagByNationality(props.flags, teamDetails.Constructor.nationality)}
