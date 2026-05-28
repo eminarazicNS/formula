@@ -62,7 +62,7 @@ export default function App() {
                 onChange={(e) => setSelectedYear(e.target.value)}>
                 {years.map((year) => {
                   return (
-                    <option value={year}>{year}</option>
+                    <option key={year} value={year}>{year}</option>
                   );
                 })}
               </select>
