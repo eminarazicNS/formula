@@ -8,15 +8,13 @@ import TeamDetails from "./components/TeamDetails";
 import RaceDetails from "./components/RaceDetails";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { TextField, Box, InputLabel, MenuItem, FormControl, Select, colors } from "@mui/material";
 import { grey } from "@mui/material/colors";
-
 
 export default function App() {
   const [flags, setFlags] = useState([]);
   const [years, setYears] = useState([]);
-  const [selectedYear, setSelectedYear] = useState(new Date().getFullYear()); //defoltna godina
-  const [search, setSearch] = useState(""); //za input text
+  const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
+  const [search, setSearch] = useState("");
   const [searchIsVisible, setSearchIsVisible] = useState(false);
   const [selectIsVisible, setSelectIsVisible] = useState(false);
   const [col2IsVisible, setCol2IsVisible] = useState(false);
@@ -33,7 +31,6 @@ export default function App() {
   }
 
   const getYears = () => {
-    //uzima se poslednjih 30 godina
     const years = [];
     let y = new Date().getFullYear();
     for (let i = 0; i < 30; i++) {
@@ -47,10 +44,8 @@ export default function App() {
       <div className="wrapper">
         <div>
           <video loop autoPlay muted id="bg-video"
-            // src="./public/home-video/clip-race.mp4" 
             src={`${import.meta.env.BASE_URL}home-video/clip-race.mp4`}
             type="video/mp4"
-            // poster="./public/home-video/video-poster.jpg"
             poster={`${import.meta.env.BASE_URL}home-video/video-poster.jpg`}
           >
           </video>
@@ -63,44 +58,20 @@ export default function App() {
             </div>
 
             <div style={selectIsVisible ? { visibility: "visible" } : { visibility: "hidden" }}  >
-              <FormControl className="select-search" sx={{ m: 1, minWidth: 120 }} >
-                <InputLabel id="selectLabelId" className="menuIcons">Season</InputLabel>
-                <Select
-                  variant="filled" //variant="standard"
-                  inputprops={{
-                    disableUnderline: true
-                  }}
-                  labelId="selectId"
-                  value={selectedYear}
-                  label="Season"
-                  onChange={(e) => setSelectedYear(e.target.value)}
-                >
-                  {years.map((year) => {
-                    return (
-                      <MenuItem value={year}>{year}</MenuItem>
-                    );
-                  })}
-                </Select>
-              </FormControl>
+              <select className="select-search" name="year" id="year"
+                onChange={(e) => setSelectedYear(e.target.value)}>
+                {years.map((year) => {
+                  return (
+                    <option value={year}>{year}</option>
+                  );
+                })}
+              </select>
             </div>
             <div style={searchIsVisible ? { visibility: "visible" } : { visibility: "hidden" }} >
-              <FormControl
-                sx={{ m: 1, minWidth: 120 }} >
-                <span className="select-search">
-                  <TextField
-                    variant="filled" //variant="standard"
-                    inputprops={{
-                      disableUnderline: true
-                    }}
-                    id="searchId"
-                    label="Search table:"
-                    type="search"
-                    value={search}
-                    onChange={(e) => setSearch(e.target.value)}
-
-                  />
-                </span>
-              </FormControl>
+              <input className="select-search" type="search"
+                placeholder="Search table..." type="search"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)} />
             </div>
 
             <div className="vNav">
@@ -115,9 +86,6 @@ export default function App() {
                 <NavLink to="/races" className={({ isActive, isPending }) =>
                   isPending ? "pending" : isActive ? "active" : ""}
                 ><li><img src="../img/Races1.png" alt="Races logo" /><div className="menuIcons">Races</div></li></NavLink>
-                {/* <Link to="/drivers"><li><img src="../img/Kaciga.png" alt="Drivers logo" /><div className="menuIcons">Drivers</div></li></Link>
-                <Link to="/teams"><li><img src="../img/Teams.png" alt="Teams logo" /><div className="menuIcons">Teams</div></li></Link>
-                <Link to="/races"><li><img src="../img/Races1.png" alt="Races logo" /><div className="menuIcons">Races</div></li></Link> */}
               </ul>
             </div>
           </nav>

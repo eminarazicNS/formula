@@ -39,7 +39,6 @@ a {
     font-weight: bold;
     font-style: italic;
     background-color: darkgray;
-
 }
 
 .menuIcons .active {
@@ -51,13 +50,16 @@ a {
 }
 
 .select-search {
-    text-transform: uppercase;
-    font-size: 20px;
+    font-size: 20px;    
     font-weight: bold;
     font-style: italic;
     background-color: darkgray;
     width: 200px;
     border-radius: 15px;
+    text-align: center;
+    padding: 10px;
+    margin: 5px;
+    height: 70px;
 }
 
 .wrapper .col2 {
@@ -120,7 +122,6 @@ img:hover {
     color: red;
     font-size: 13px;
 }
-
 
 .wrapper .dd-col2 .results .up {
     color: green;
@@ -195,16 +196,13 @@ td {
 }
 
 .rd-results th {
-    /* font-size: 15px; */
     white-space: nowrap;
     overflow: hidden;
 }
 
-
 tr:nth-child(even) {
     background-color: #f2f2f2;
 }
-
 
 .vNav ul {
     display: flex;
@@ -243,7 +241,6 @@ tr:nth-child(even) {
     font-size: 12px;
 }
 
-
 .breadcrumbs-wrapper .last {
     background-color: cyan;
 }
@@ -267,5 +264,4 @@ footer {
     position: fixed;
     bottom: 0;
     width: 100%;
-
 }
