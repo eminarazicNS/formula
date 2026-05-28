@@ -9,7 +9,7 @@ import BasicBreadcrumbs from "./BasicBreadcrumbs";
 export default function AllDrivers(props) {
     const [drivers, setDrivers] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [filteredData, setFilteredData] = useState([]);
+    const [filteredDrivers, setFilteredDrivers] = useState([]);
     const [sortByCollName, setSortByCollName] = useState("");
 
     const navigate = useNavigate();
@@ -32,16 +32,16 @@ export default function AllDrivers(props) {
             item.Constructors[0].name.toLowerCase().includes(props.search.toLowerCase())
         );
 
-        setFilteredData(result);
+        setFilteredDrivers(result);
     }, [drivers, props.search]);
 
     useEffect(() => {
         sortData(sortByCollName);
-    }, [filteredData, sortByCollName]);
+    }, [filteredDrivers, sortByCollName]);
 
     const sortData = (collName) => {
         console.log("sortData collName", collName);
-        let result = filteredData;
+        let result = filteredDrivers;
         switch (collName) {
             case "position": result = result.sort((a, b) => Number(a.position) - Number(b.position));
                 break;
@@ -54,7 +54,7 @@ export default function AllDrivers(props) {
             case "points": result = result.sort((a, b) => Number(a.points) - Number(b.points));
                 break;
         }
-        setFilteredData(result);
+        setFilteredDrivers(result);
     }
 
     /*    
@@ -117,9 +117,9 @@ export default function AllDrivers(props) {
                         </tr>
                     </thead>
                     <tbody>
-                        {filteredData.map((driver, i) => {
+                        {filteredDrivers.map((driver) => {
                             return (
-                                <tr key={i}>
+                                <tr key={driver.position}>
                                     <td>{driver.position}</td>
                                     <td
                                         onClick={() => handleClick(driver.Driver.driverId)}>

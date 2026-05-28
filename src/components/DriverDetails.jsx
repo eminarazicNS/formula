@@ -14,7 +14,7 @@ export default function DriverDetails(props) {
     const [driverRaces, setDriverRaces] = useState([]);
     const [loading, setLoading] = useState(true);
     const [isError, setIsError] = useState(false);
-    const [filteredData, setFilteredData] = useState([]);
+    const [filteredDriverRaces, setFilteredDriverRaces] = useState([]);
 
     const navigate = useNavigate();
 
@@ -35,7 +35,7 @@ export default function DriverDetails(props) {
             item.raceName.toLowerCase().includes(props.search.toLowerCase()) ||
             item.Results[0].Constructor.name.toLowerCase().includes(props.search.toLowerCase())
         );
-        setFilteredData(result);
+        setFilteredDriverRaces(result);
     }, [driverRaces, props.search]);
 
     const params = useParams();
@@ -171,7 +171,7 @@ export default function DriverDetails(props) {
                             </tr>
                         </thead>
                         <tbody>
-                            {filteredData.map((race) => {
+                            {filteredDriverRaces.map((race) => {
                                 return (
                                     <tr key={race.round}>
                                         <td>{race.round}</td>

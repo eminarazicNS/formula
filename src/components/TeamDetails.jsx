@@ -13,7 +13,7 @@ export default function TeamDetails(props) {
     const [teamRaces, setTeamRaces] = useState([]);
     const [loading, setLoading] = useState(true);
     const [isError, setIsError] = useState(false);
-    const [filteredData, setFilteredData] = useState([]);
+    const [filteredTeamRaces, setFilteredTeamRaces] = useState([]);
 
     const navigate = useNavigate();
 
@@ -30,7 +30,7 @@ export default function TeamDetails(props) {
 
     useEffect(() => {
         const result = teamRaces.filter((item) => item.raceName.toLowerCase().includes(props.search.toLowerCase()));
-        setFilteredData(result);
+        setFilteredTeamRaces(result);
     }, [teamRaces, props.search]);
 
     const params = useParams();
@@ -153,7 +153,7 @@ export default function TeamDetails(props) {
                             </tr>
                         </thead>
                         <tbody>
-                            {filteredData.map((race) => {
+                            {filteredTeamRaces.map((race) => {
                                 return (
                                     <tr key={race.round}>
                                         <td>{race.round}</td>

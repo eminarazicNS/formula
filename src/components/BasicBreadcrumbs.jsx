@@ -23,28 +23,3 @@ export default function BasicBreadcrumbs(props) {
         </div>
     );
 }
-
-/*
-
-export default function BasicBreadcrumbs(props) {
-    return (
-        <div role="presentation">
-            <Breadcrumbs aria-label="breadcrumb" className='breadcrumbs'>
-                <Link to="/">Home</Link>
-                {props.crumbs.map((item, i) => {
-                    const isLast = i === props.crumbs.length - 1;
-                    return (
-                        <div>
-                            {isLast ?
-                                <div>{item.label}</div>
-                                :
-                                <Link key={i} to={item.path}>{item.label}</Link>
-                            }
-                        </div>
-                    );
-                })}
-            </Breadcrumbs>
-        </div>
-    );
-}
-*/

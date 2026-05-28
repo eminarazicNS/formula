@@ -10,7 +10,7 @@ import BasicBreadcrumbs from "./BasicBreadcrumbs";
 export default function AllTeams(props) {
     const [teams, setTeams] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [filteredData, setFilteredData] = useState([]);
+    const [filteredTeams, setFilteredTeams] = useState([]);
 
     const navigate = useNavigate();
 
@@ -30,7 +30,7 @@ export default function AllTeams(props) {
             item.Constructor.name.toLowerCase().includes(props.search.toLowerCase())
         );
 
-        setFilteredData(result);
+        setFilteredTeams(result);
     }, [teams, props.search]);
 
 
@@ -69,7 +69,7 @@ export default function AllTeams(props) {
                         </tr>
                     </thead>
                     <tbody>
-                        {filteredData.map((team) => {
+                        {filteredTeams.map((team) => {
                             return (
                                 <tr key={team.position}>
                                     <td>{team.position}</td>

@@ -9,7 +9,7 @@ import BasicBreadcrumbs from "./BasicBreadcrumbs";
 export default function AllRaces(props) {
     const [races, setRaces] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [filteredData, setFilteredData] = useState([]);
+    const [filteredRaces, setFilteredRaces] = useState([]);
 
     const navigate = useNavigate();
 
@@ -32,7 +32,7 @@ export default function AllRaces(props) {
             item.Results[0].Driver.familyName.toLowerCase().includes(props.search.toLowerCase())
         );
 
-        setFilteredData(result);
+        setFilteredRaces(result);
     }, [races, props.search]);
 
 
@@ -76,9 +76,9 @@ export default function AllRaces(props) {
                         </tr>
                     </thead>
                     <tbody>
-                        {filteredData.map((race, index) => {
+                        {filteredRaces.map((race) => {
                             return (
-                                <tr key={index}>
+                                <tr key={race.round}>
                                     <td>{race.round}</td>
                                     <td onClick={() => handleClick(race.round)}>
                                         <div className="link">
