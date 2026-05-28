@@ -56,16 +56,7 @@ export default function AllDrivers(props) {
         setFilteredDrivers(result);
     }
 
-    /*    
-        const dynamicSort = (property, order = 'asc') => {
-            return (a, b) => {
-                const comparison = a[property].localeCompare(b[property])
-                return order === 'desc' ? -comparison : comparison
-            }
-        }
-    
-        items.sort(dynamicSort('name', 'asc'))
-    */
+
 
 
     const getDrivers = async () => {

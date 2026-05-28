@@ -29,7 +29,6 @@ export default function App() {
   const getFlags = async () => {
     const url = "https://raw.githubusercontent.com/Imagin-io/country-nationality-list/refs/heads/master/countries.json";
     const response = await axios.get(url);
-    console.log("flags response ", response);
     setFlags(response.data);
   }
 
@@ -108,7 +107,7 @@ export default function App() {
               <ul>
                 <NavLink to="/drivers"
                   className={({ isActive, isPending }) =>
-                  isPending ? "pending" : isActive ? "active" : ""}
+                    isPending ? "pending" : isActive ? "active" : ""}
                 ><li><img src="../img/Kaciga.png" alt="Drivers logo" /><div className="menuIcons">Drivers</div></li></NavLink>
                 <NavLink to="/teams" className={({ isActive, isPending }) =>
                   isPending ? "pending" : isActive ? "active" : ""}
