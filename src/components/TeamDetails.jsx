@@ -57,7 +57,6 @@ export default function TeamDetails(props) {
 
             setLoading(false);
         } catch (e) {
-            console.error("error ", e);
             setIsError(true);
         } finally {
             setLoading(false);
