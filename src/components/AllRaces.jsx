@@ -39,13 +39,11 @@ export default function AllRaces(props) {
     const getRaces = async () => {
         const url = `https://api.jolpi.ca/ergast/f1/${props.year}/results/1.json`;
         const response = await axios.get(url);
-        console.log("races", response.data.MRData.RaceTable.Races);
         setRaces(response.data.MRData.RaceTable.Races);
         setLoading(false);
     }
 
     const handleClick = (id) => {
-        console.log("id", id);
         navigate(`/raceDetails/${id}`);
     }
 

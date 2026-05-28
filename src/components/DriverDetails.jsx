@@ -39,7 +39,6 @@ export default function DriverDetails(props) {
     }, [driverRaces, props.search]);
 
     const params = useParams();
-    console.log("params ", params);
 
     const getDriverDetails = async () => {
         setIsError(false);
@@ -51,8 +50,6 @@ export default function DriverDetails(props) {
             const driverStandingsResponse = await axios.get(driverStandingsUrl);
             const driverRacesResponse = await axios.get(driverRacesUrl);
 
-            console.log("DriverDetails", driverStandingsResponse.data.MRData.StandingsTable.StandingsLists[0].DriverStandings[0]);
-            console.log("DriverRaces", driverRacesResponse.data.MRData.RaceTable.Races);
 
             setDriverDetails(driverStandingsResponse.data.MRData.StandingsTable.StandingsLists[0].DriverStandings[0]);
             setDriverRaces(driverRacesResponse.data.MRData.RaceTable.Races);
@@ -87,7 +84,6 @@ export default function DriverDetails(props) {
                             {/* <img src={`/img/${driverDetails.Driver.driverId}.jpg`} */}
                             <img src={`${import.meta.env.BASE_URL}img/${driverDetails.Driver.driverId}.jpg`}
                                 onError={(e) => {
-                                    console.log("driverDetails.Driver.driverId ", driverDetails.Driver.driverId);
                                     // e.target.onerror = null;
                                     // e.target.src = `/img/avatar.png`;
                                     e.target.src = `${import.meta.env.BASE_URL}img/avatar.png`;
@@ -137,7 +133,6 @@ export default function DriverDetails(props) {
                         {/* <img src={`/img/${driverDetails.Driver.familyName}.jpg`} */}
                         <img src={`${import.meta.env.BASE_URL}img/${driverDetails.Driver.driverId}.jpg`}
                             onError={(e) => {
-                                console.log("driverDetails.Driver.driverId ", driverDetails.Driver.driverId);
                                 //e.target.onerror = null;
                                 e.target.src = `${import.meta.env.BASE_URL}img/avatar.png`;
                             }}

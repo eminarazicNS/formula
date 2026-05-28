@@ -40,7 +40,6 @@ export default function AllDrivers(props) {
     }, [filteredDrivers, sortByCollName]);
 
     const sortData = (collName) => {
-        console.log("sortData collName", collName);
         let result = filteredDrivers;
         switch (collName) {
             case "position": result = result.sort((a, b) => Number(a.position) - Number(b.position));
@@ -71,17 +70,13 @@ export default function AllDrivers(props) {
 
     const getDrivers = async () => {
         const url = `https://api.jolpi.ca/ergast/f1/${props.year}/driverStandings.json`;
-        //console.log("drivers url ", url)
         const response = await axios.get(url);
-        //console.log("response.data", response.data);
-        console.log("drivers", response.data.MRData.StandingsTable.StandingsLists[0].DriverStandings);
         setDrivers(response.data.MRData.StandingsTable.StandingsLists[0].DriverStandings);
         setLoading(false);
     };
 
 
     const handleClick = (id) => {
-        console.log("id ", id);
         navigate(`/driverDetails/${id}`)
     }
 

@@ -34,10 +34,8 @@ export default function TeamDetails(props) {
     }, [teamRaces, props.search]);
 
     const params = useParams();
-    console.log("team det params ", params);
 
     const getTeams = async () => {
-        console.log("getTeams");
         setIsError(false);
         try {
             const teamStandingUrl = `https://api.jolpi.ca/ergast/f1/${props.year}/constructors/${params.id}/constructorStandings.json`;
@@ -48,16 +46,11 @@ export default function TeamDetails(props) {
 
             const teamRacesResponse = await axios.get(teamRacesUrl);
 
-            //console.log("teamStandingResponse ", teamStandingResponse);
 
-            console.log("teamDetails ", teamStandingResponse.data.MRData.StandingsTable.StandingsLists[0].ConstructorStandings[0]);
 
             setTeamDetails(teamStandingResponse.data.MRData.StandingsTable.StandingsLists[0].ConstructorStandings[0]);
 
 
-            //console.log("teamRacesResponse ", teamRacesResponse);
-
-            console.log("teamRaces ", teamRacesResponse.data.MRData.RaceTable.Races);
 
 
             setTeamRaces(teamRacesResponse.data.MRData.RaceTable.Races);
@@ -97,7 +90,7 @@ export default function TeamDetails(props) {
 
                             <img src={`${import.meta.env.BASE_URL}img/${teamDetails.Constructor.constructorId}.png`}
                                 onError={(e) => {
-                                    console.log("teamDetails.Constructor.constructorId ", teamDetails.Constructor.constructorId);
+
                                     // e.target.onerror = null;
                                     e.target.src = `${import.meta.env.BASE_URL}img/F1-logo.png`;
                                 }}
@@ -143,7 +136,6 @@ export default function TeamDetails(props) {
 
                         <img src={`${import.meta.env.BASE_URL}img/${teamDetails.Constructor.constructorId}.png`}
                             onError={(e) => {
-                                console.log("teamDetails.Constructor.constructorId ", teamDetails.Constructor.constructorId);
                                 // e.target.onerror = null;
                                 e.target.src = `${import.meta.env.BASE_URL}img/F1-logo.png`;
                             }}
