@@ -10,8 +10,8 @@ import BasicBreadcrumbs from "./BasicBreadcrumbs";
 
 
 export default function DriverDetails(props) {
-    const [driverDetails, setDriverDetails] = useState(null);
-    const [driverRaces, setDriverRaces] = useState(null);
+    const [driverDetails, setDriverDetails] = useState([]);
+    const [driverRaces, setDriverRaces] = useState([]);
     const [loading, setLoading] = useState(true);
     const [isError, setIsError] = useState(false);
     const [filteredData, setFilteredData] = useState([]);
@@ -31,13 +31,11 @@ export default function DriverDetails(props) {
     }, [props.year]);
 
     useEffect(() => {
-        if (driverRaces != null) { //mora uslov za sada
-            const result = driverRaces.filter((item) =>
-                item.raceName.toLowerCase().includes(props.search.toLowerCase()) ||
-                item.Results[0].Constructor.name.toLowerCase().includes(props.search.toLowerCase())
-            );
-            setFilteredData(result);
-        }
+        const result = driverRaces.filter((item) =>
+            item.raceName.toLowerCase().includes(props.search.toLowerCase()) ||
+            item.Results[0].Constructor.name.toLowerCase().includes(props.search.toLowerCase())
+        );
+        setFilteredData(result);
     }, [driverRaces, props.search]);
 
     const params = useParams();
@@ -78,7 +76,7 @@ export default function DriverDetails(props) {
         { label: `${driverDetails.Driver.givenName} ${driverDetails.Driver.familyName}`, path: "" }
     ];
 
-    if (isError || (filteredData === null)) {
+    if (isError) {
         return (
             <div className="wrapper">
                 <div className="dd-col2">
@@ -177,7 +175,9 @@ export default function DriverDetails(props) {
                                 return (
                                     <tr key={race.round}>
                                         <td>{race.round}</td>
-                                        <td>
+                                        <td className="link"
+                                            onClick={() => navigate(`/raceDetails/${race.round}`)}
+                                        >
                                             <div className="flag">
                                                 <Flag country={getFlagByNationality(props.flags, "",
                                                     race.Circuit.Location.country)}

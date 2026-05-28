@@ -33,12 +33,11 @@ export default function AllTeams(props) {
         setFilteredData(result);
     }, [teams, props.search]);
 
-    
+
 
     const getTeams = async () => {
         const url = `https://api.jolpi.ca/ergast/f1/${props.year}/constructorStandings.json`;
         const response = await axios.get(url);
-        //console.log("response", response);
         console.log("teams", response.data.MRData.StandingsTable.StandingsLists[0].ConstructorStandings);
 
         setTeams(response.data.MRData.StandingsTable.StandingsLists[0].ConstructorStandings);
@@ -50,7 +49,7 @@ export default function AllTeams(props) {
     }
 
     const crumbs = [
-        { label: "Teams", path: "/teams" }
+        { label: "Teams", path: "" }
     ];
 
 
@@ -70,12 +69,11 @@ export default function AllTeams(props) {
                         </tr>
                     </thead>
                     <tbody>
-                        {filteredData.map((team, i) => {
+                        {filteredData.map((team) => {
                             return (
-                                <tr key={i}>
-                                    {/* <td>{team.position}</td> ne postoji u starim godinama */}
-                                    <td>{i + 1}</td>
-                                    <td onClick={() =>  navigate(`/teamDetails/${team.Constructor.constructorId}`)}>
+                                <tr key={team.position}>
+                                    <td>{team.position}</td>
+                                    <td onClick={() => navigate(`/teamDetails/${team.Constructor.constructorId}`)}>
                                         <div className="link">
                                             <Flag country={getFlagByNationality(props.flags,
                                                 team.Constructor.nationality)}

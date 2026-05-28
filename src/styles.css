@@ -43,13 +43,15 @@ a {
     background-color: darkgray;
 
 }
+
 .menuIcons .active {
-    color:red;
+    color: red;
 }
 
 .menuIcons .pending {
-    color:blue;
+    color: blue;
 }
+
 .select-search {
     text-transform: uppercase;
     font-size: 20px;
@@ -262,13 +264,6 @@ tr:nth-child(even) {
 
 /* end Breadcrumbs */
 
-/* RaceDetails */
-.race-round {
-    border: 10px solid lightskyblue;
-    border-radius: 100%;
-    padding: 10px;
-    margin: 25px;
-}
 
 /* Home */
 #bg-video {

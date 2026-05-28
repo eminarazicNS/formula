@@ -90,18 +90,10 @@ export default function RaceDetails(props) {
         return <Loader />
     }
 
-    let crumbs = [];
-    try {
-        crumbs = [
-            { label: "Races", path: "/races" },
-            { label: `${races.raceName}`, path: "" }
-        ];
-    } catch (e) {
-        console.error("error ", e);
-        crumbs = [
-            { label: "Races", path: "/races" }
-        ];
-    }
+    let crumbs = [
+        { label: "Races", path: "/races" },
+        { label: `${races.raceName}`, path: "" }
+    ];
 
     console.log("filteredRaces ", filteredRaces);
     console.log("filteredQualifying ", filteredQualifying);
@@ -113,7 +105,7 @@ export default function RaceDetails(props) {
                 <div className="dd-col2">
                     <div className="details">
                         <BasicBreadcrumbs crumbs={crumbs} />
-                        <p><b>Race round: <span className="race-round">{params.id}</span></b></p>
+                        <p><b>Race round: {params.id}</b></p>
                     </div>
 
                     <div className="results">
@@ -135,7 +127,7 @@ export default function RaceDetails(props) {
                     <BasicBreadcrumbs crumbs={crumbs} />
                     <Flag country={getFlagByNationality(props.flags, "", races.Circuit.Location.country)}
                         size={200} />
-                    <p><b>Race round: <span className="race-round">{params.id}</span></b></p>
+                    <p><b>Race round: {params.id}</b></p>
                     <p><b>{races.raceName}</b></p>
                     <p>Location: {races.Circuit.Location.locality} </p>
                     <p>Date: {races.date}</p>

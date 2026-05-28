@@ -9,11 +9,9 @@ import { getColorByPosition } from "../helper/getColor";
 import BasicBreadcrumbs from "./BasicBreadcrumbs";
 
 export default function TeamDetails(props) {
-    const [teamDetails, setTeamDetails] = useState(null);
-    const [teamRaces, setTeamRaces] = useState(null);
+    const [teamDetails, setTeamDetails] = useState([]);
+    const [teamRaces, setTeamRaces] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [firstDriver, setFirstDriver] = useState("");
-    const [secondDriver, setSecondDriver] = useState("");
     const [isError, setIsError] = useState(false);
     const [filteredData, setFilteredData] = useState([]);
 
@@ -31,10 +29,8 @@ export default function TeamDetails(props) {
     }, [props.year]);
 
     useEffect(() => {
-         if (teamRaces != null) {
-            const result = teamRaces.filter((item) => item.raceName.toLowerCase().includes(props.search.toLowerCase()));
-            setFilteredData(result);
-        }
+        const result = teamRaces.filter((item) => item.raceName.toLowerCase().includes(props.search.toLowerCase()));
+        setFilteredData(result);
     }, [teamRaces, props.search]);
 
     const params = useParams();
@@ -66,11 +62,6 @@ export default function TeamDetails(props) {
 
             setTeamRaces(teamRacesResponse.data.MRData.RaceTable.Races);
 
-            //table races header
-            setFirstDriver(teamRacesResponse.data.MRData.RaceTable.Races[0].Results[0].Driver.familyName);
-            setSecondDriver(teamRacesResponse.data.MRData.RaceTable.Races[0].Results[1].Driver.familyName);
-            //console.log("firstDriver ",firstDriver, " secondDriver ",secondDriver);
-
             setLoading(false);
         } catch (e) {
             console.error("error ", e);
@@ -91,7 +82,7 @@ export default function TeamDetails(props) {
         { label: `${teamDetails.Constructor.name}`, path: "" }
     ];
 
-    if (isError || (filteredData === null)) {
+    if (isError) {
         return (
             <div className="wrapper">
 
@@ -134,7 +125,6 @@ export default function TeamDetails(props) {
                 <div className="details">
                     <BasicBreadcrumbs crumbs={crumbs} />
                     <div style={{ display: "flex" }}>
-                        {/* <img src={`../public/img/${teamDetails.Constructor.constructorId}.png`} */}
                         <img src={`${import.meta.env.BASE_URL}img/${teamDetails.Constructor.constructorId}.png`}
                             alt={teamDetails.Constructor.name}
                             style={{ width: 150 }} />
@@ -157,8 +147,8 @@ export default function TeamDetails(props) {
                             <tr>
                                 <th>Round</th>
                                 <th>Grand Prix</th>
-                                <th>{firstDriver}</th>
-                                <th>{secondDriver}</th>
+                                <th>{teamRaces[0].Results[0].Driver.familyName}</th>
+                                <th>{teamRaces[0].Results[1].Driver.familyName}</th>
                                 <th>Points</th>
                             </tr>
                         </thead>
@@ -167,7 +157,8 @@ export default function TeamDetails(props) {
                                 return (
                                     <tr key={race.round}>
                                         <td>{race.round}</td>
-                                        <td>
+                                        <td className="link"
+                                            onClick={() => navigate(`/raceDetails/${race.round}`)}>
                                             <div className="flag">
                                                 <Flag country={getFlagByNationality(props.flags, "",
                                                     race.Circuit.Location.country)}

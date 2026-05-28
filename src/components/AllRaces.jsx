@@ -54,7 +54,7 @@ export default function AllRaces(props) {
     }
 
     const crumbs = [
-        { label: "Races", path: "/races" }
+        { label: "Races", path: "" }
     ];
 
     return (
@@ -89,10 +89,13 @@ export default function AllRaces(props) {
                                     </td>
                                     <td>{race.Circuit.circuitName}</td>
                                     <td>{race.date}</td>
-                                    <td 
-                                    onClick={() => navigate(`/driverDetails/${race.Results[0].Driver.driverId}`)}>
-                                        <div className="link"> 
-                                        {race.Results[0].Driver.familyName}
+                                    <td
+                                        onClick={() => navigate(`/driverDetails/${race.Results[0].Driver.driverId}`)}>
+                                        <div className="link">
+                                            <Flag country={
+                                                getFlagByNationality(props.flags, race.Results[0].Driver.nationality)}
+                                                size={30} />
+                                            {race.Results[0].Driver.familyName}
                                         </div>
                                     </td>
                                 </tr>
