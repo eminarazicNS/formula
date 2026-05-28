@@ -51,7 +51,7 @@ export default function DriverDetails(props) {
             const driverStandingsResponse = await axios.get(driverStandingsUrl);
             const driverRacesResponse = await axios.get(driverRacesUrl);
 
-            console.log("DriverDetails", driverStandingsResponse.data.MRData.StandingsTable.StandingsLists[0].DriverStandings[0]);
+            //console.log("DriverStandings", driverStandingsResponse.data.MRData.StandingsTable.StandingsLists[0].DriverStandings[0]);
             console.log("DriverRaces", driverRacesResponse.data.MRData.RaceTable.Races);
 
             setDriverDetails(driverStandingsResponse.data.MRData.StandingsTable.StandingsLists[0].DriverStandings[0]);
