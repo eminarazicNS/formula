@@ -80,12 +80,10 @@ export default function DriverDetails(props) {
                     <div className="details">
                         <BasicBreadcrumbs crumbs={crumbs} />
                         <div style={{ display: "flex" }}>
-                            {/* <img src={`../public/img/${driverDetails.Driver.driverId}.jpg`} */}
-                            {/* <img src={`/img/${driverDetails.Driver.driverId}.jpg`} */}
+
                             <img src={`${import.meta.env.BASE_URL}img/${driverDetails.Driver.driverId}.jpg`}
                                 onError={(e) => {
-                                    // e.target.onerror = null;
-                                    // e.target.src = `/img/avatar.png`;
+
                                     e.target.src = `${import.meta.env.BASE_URL}img/avatar.png`;
                                 }}
                                 alt={driverDetails.Driver.familyName}
@@ -107,7 +105,6 @@ export default function DriverDetails(props) {
 
                     <div className="results">
                         <div className="no-data-div">
-                            {/* <img src="../img/emoji-faces-sad-emoji.png" alt="sad-emoji" /> */}
                             <img src={`${import.meta.env.BASE_URL}img/emoji-faces-sad-emoji.png`} alt="sad-emoji" />
                         </div>
                     </div>
@@ -129,8 +126,6 @@ export default function DriverDetails(props) {
                 <div className="details">
                     <BasicBreadcrumbs crumbs={crumbs} />
                     <div style={{ display: "flex" }}>
-                        {/* <img src={`../public/img/${driverDetails.Driver.familyName}.jpg`} */}
-                        {/* <img src={`/img/${driverDetails.Driver.familyName}.jpg`} */}
                         <img src={`${import.meta.env.BASE_URL}img/${driverDetails.Driver.driverId}.jpg`}
                             onError={(e) => {
                                 //e.target.onerror = null;

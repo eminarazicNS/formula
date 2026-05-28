@@ -56,7 +56,6 @@ export default function AllRaces(props) {
     ];
 
     return (
-        // <h2>AllRaces</h2>
         <div className="wrapper">
 
 

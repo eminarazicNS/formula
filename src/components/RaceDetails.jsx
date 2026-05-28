@@ -18,7 +18,6 @@ export default function RaceDetails(props) {
     const [filteredRaces, setFilteredRaces] = useState([]);
 
     const params = useParams();
-    console.log("params", params);
 
     const navigate = useNavigate();
 
@@ -58,8 +57,6 @@ export default function RaceDetails(props) {
             const qualifyingResponse = await axios.get(qualifyingUrl);
             const racesResponse = await axios.get(racesUrl);
 
-            // console.log("qualifying", qualifyingResponse.data.MRData.RaceTable.Races[0].QualifyingResults);
-            console.log("races", racesResponse.data.MRData.RaceTable.Races[0]);
 
             setQualifying(qualifyingResponse.data.MRData.RaceTable.Races[0].QualifyingResults);
             setRaces(racesResponse.data.MRData.RaceTable.Races[0]);
@@ -95,8 +92,6 @@ export default function RaceDetails(props) {
         { label: `${races.raceName}`, path: "" }
     ];
 
-    console.log("filteredRaces ", filteredRaces);
-    console.log("filteredQualifying ", filteredQualifying);
 
     if (isError) {
         return (

@@ -1,6 +1,4 @@
 body {
-    /* margin: 0;
-    padding: 0; */
     background-color: lightblue;
 }
 
@@ -103,8 +101,6 @@ img:hover {
     color: red;
 }
 
-
-/* Start Details */
 .wrapper .dd-col2 {
     width: 80%;
     display: flex;
@@ -137,7 +133,6 @@ img:hover {
     font-family: Arial, Helvetica, sans-serif;
 }
 
-/* rd - RaceDetails */
 .rd-details {
     padding: 5px;
 }
@@ -168,7 +163,6 @@ img:hover {
     text-transform: uppercase;
 }
 
-/* rd - RaceDetails */
 .rd-results h2 {
     font-size: 20px;
 }
@@ -200,7 +194,6 @@ td {
     gap: 10px;
 }
 
-/* rd - RaceDetails */
 .rd-results th {
     /* font-size: 15px; */
     white-space: nowrap;
@@ -212,9 +205,7 @@ tr:nth-child(even) {
     background-color: #f2f2f2;
 }
 
-/* End Details */
 
-/* Start App vNav */
 .vNav ul {
     display: flex;
     flex-direction: column;
@@ -242,11 +233,6 @@ tr:nth-child(even) {
     height: 43.5px;
 }
 
-
-/* End App vNav */
-
-/* start Breadcrumbs */
-
 .breadcrumbs-wrapper .home,
 .middle,
 .last {
@@ -262,10 +248,6 @@ tr:nth-child(even) {
     background-color: cyan;
 }
 
-/* end Breadcrumbs */
-
-
-/* Home */
 #bg-video {
     object-fit: cover;
     width: 100vw;

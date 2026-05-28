@@ -84,14 +84,9 @@ export default function TeamDetails(props) {
                         <BasicBreadcrumbs crumbs={crumbs} />
                         <div style={{ display: "flex" }}>
 
-                            {/* <img src={`${import.meta.env.BASE_URL}img/${teamDetails.Constructor.constructorId}.png`}
-                                alt={teamDetails.Constructor.name}
-                                style={{ width: 150 }} /> */}
-
                             <img src={`${import.meta.env.BASE_URL}img/${teamDetails.Constructor.constructorId}.png`}
                                 onError={(e) => {
 
-                                    // e.target.onerror = null;
                                     e.target.src = `${import.meta.env.BASE_URL}img/F1-logo.png`;
                                 }}
                                 alt={teamDetails.Constructor.constructorId}
@@ -130,13 +125,9 @@ export default function TeamDetails(props) {
                 <div className="details">
                     <BasicBreadcrumbs crumbs={crumbs} />
                     <div style={{ display: "flex" }}>
-                        {/* <img src={`${import.meta.env.BASE_URL}img/${teamDetails.Constructor.constructorId}.png`}
-                            alt={teamDetails.Constructor.name}
-                            style={{ width: 150 }} /> */}
 
                         <img src={`${import.meta.env.BASE_URL}img/${teamDetails.Constructor.constructorId}.png`}
                             onError={(e) => {
-                                // e.target.onerror = null;
                                 e.target.src = `${import.meta.env.BASE_URL}img/F1-logo.png`;
                             }}
                             alt={teamDetails.Constructor.constructorId}
