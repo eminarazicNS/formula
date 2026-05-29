@@ -110,6 +110,12 @@ export default function App() {
               search={search} setSearch={setSearch} setSearchIsVisible={setSearchIsVisible} setSelectIsVisible={setSelectIsVisible} setCol2IsVisible={setCol2IsVisible} />} />
           </Routes>
         </div>
+        <footer>
+          <p>&copy; 2026 Green classroom group II. All rights reserved.</p>
+          <address>
+            Contact us at <a href="mailto:school@smartschool.rs">school@smartschool.rs</a>
+          </address>
+        </footer>
       </div>
     </BrowserRouter>
   );
