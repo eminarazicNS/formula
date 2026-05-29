@@ -1,4 +1,4 @@
-import { BrowserRouter, NavLink, Route, Routes } from "react-router";
+import { NavLink, Route, Routes, useLocation } from "react-router";
 import Home from "./components/Home";
 import AllDrivers from "./components/AllDrivers";
 import AllTeams from "./components/AllTeams";
@@ -19,10 +19,26 @@ export default function App() {
   const [selectIsVisible, setSelectIsVisible] = useState(false);
   const [col2IsVisible, setCol2IsVisible] = useState(false);
 
+  const location = useLocation();
+
   useEffect(() => {
     getFlags();
     getYears();
   }, []);
+
+  useEffect(() => {
+    console.log("Location: ", location);
+    if (location.pathname === "/") {
+      setSearchIsVisible(false);
+      setSelectIsVisible(false);
+      setCol2IsVisible(false);
+    } else {
+      setSearch("");
+      setSearchIsVisible(true);
+      setSelectIsVisible(true);
+      setCol2IsVisible(true);
+    }
+  }, [location.pathname]);
 
   const getFlags = async () => {
     const url = "https://raw.githubusercontent.com/Imagin-io/country-nationality-list/refs/heads/master/countries.json";
@@ -40,83 +56,80 @@ export default function App() {
   }
 
   return (
-    <BrowserRouter>
-      <div className="wrapper">
-        <div>
-          <video loop autoPlay muted id="bg-video"
-            src={`${import.meta.env.BASE_URL}home-video/clip-race.mp4`}
-            type="video/mp4"
-            poster={`${import.meta.env.BASE_URL}home-video/video-poster.jpg`}
-          >
-          </video>
-        </div>
-        <div className="col1">
-          <nav>
-            <div>
-              <img style={{ backgroundColor: "darkgray", borderRadius: "15px" }}
-                src="../img/logo.png" alt="Logo" />
-            </div>
-
-            <div style={selectIsVisible ? { visibility: "visible" } : { visibility: "hidden" }}  >
-              <select className="select-search" name="year" id="year"
-                onChange={(e) => setSelectedYear(e.target.value)}>
-                {years.map((year) => {
-                  return (
-                    <option key={year} value={year}>{year}</option>
-                  );
-                })}
-              </select>
-            </div>
-            <div style={searchIsVisible ? { visibility: "visible" } : { visibility: "hidden" }} >
-              <input className="select-search" type="search"
-                placeholder="Search table..." type="search"
-                value={search}
-                onChange={(e) => setSearch(e.target.value)} />
-            </div>
-
-            <div className="vNav">
-              <ul>
-                <NavLink to="/drivers"
-                  className={({ isActive, isPending }) =>
-                    isPending ? "pending" : isActive ? "active" : ""}
-                ><li><img src="../img/Kaciga.png" alt="Drivers logo" /><div className="menuIcons">Drivers</div></li></NavLink>
-                <NavLink to="/teams" className={({ isActive, isPending }) =>
-                  isPending ? "pending" : isActive ? "active" : ""}
-                ><li><img src="../img/Teams.png" alt="Teams logo" /><div className="menuIcons">Teams</div></li></NavLink>
-                <NavLink to="/races" className={({ isActive, isPending }) =>
-                  isPending ? "pending" : isActive ? "active" : ""}
-                ><li><img src="../img/Races1.png" alt="Races logo" /><div className="menuIcons">Races</div></li></NavLink>
-              </ul>
-            </div>
-          </nav>
-        </div>
-        <div className={col2IsVisible ? "col2" : "col3"}>
-          <Routes>
-            <Route path="/" element={<Home
-              setSearchIsVisible={setSearchIsVisible} setSelectIsVisible={setSelectIsVisible} setCol2IsVisible={setCol2IsVisible} />} />
-            <Route path="/drivers" element={<AllDrivers flags={flags} year={selectedYear}
-              search={search} setSearch={setSearch} setSearchIsVisible={setSearchIsVisible} setSelectIsVisible={setSelectIsVisible} setCol2IsVisible={setCol2IsVisible} />} />
-            <Route path="/teams" element={<AllTeams flags={flags} year={selectedYear}
-              search={search} setSearch={setSearch} setSearchIsVisible={setSearchIsVisible} setSelectIsVisible={setSelectIsVisible} setCol2IsVisible={setCol2IsVisible} />} />
-            <Route path="/races" element={<AllRaces flags={flags} year={selectedYear}
-              search={search} setSearch={setSearch} setSearchIsVisible={setSearchIsVisible} setSelectIsVisible={setSelectIsVisible} setCol2IsVisible={setCol2IsVisible} />} />
-            <Route path="/driverDetails/:id" element={<DriverDetails flags={flags} year={selectedYear}
-              search={search} setSearch={setSearch} setSearchIsVisible={setSearchIsVisible} setSelectIsVisible={setSelectIsVisible} setCol2IsVisible={setCol2IsVisible} />} />
-            <Route path="/driverRaces/:id" element={<DriverDetails flags={flags} year={selectedYear}
-              search={search} setSearch={setSearch} setSearchIsVisible={setSearchIsVisible} setSelectIsVisible={setSelectIsVisible} setCol2IsVisible={setCol2IsVisible} />} />
-            <Route path="/teamDetails/:id" element={<TeamDetails flags={flags} year={selectedYear}
-              search={search} setSearch={setSearch} setSearchIsVisible={setSearchIsVisible} setSelectIsVisible={setSelectIsVisible} setCol2IsVisible={setCol2IsVisible} />} />
-            <Route path="/raceDetails/:id" element={<RaceDetails flags={flags} year={selectedYear}
-              search={search} setSearch={setSearch} setSearchIsVisible={setSearchIsVisible} setSelectIsVisible={setSelectIsVisible} setCol2IsVisible={setCol2IsVisible} />} />
-          </Routes>
-        </div>
-        <footer>
-          <p>&copy; 2026 Green classroom group II. All rights reserved.</p>
-          <address>
-            Contact us at <a href="mailto:school@smartschool.rs">school@smartschool.rs</a>
-          </address>
-        </footer>
+    <div className="wrapper">
+      <div>
+        <video loop autoPlay muted id="bg-video"
+          src={`${import.meta.env.BASE_URL}home-video/clip-race.mp4`}
+          type="video/mp4"
+          poster={`${import.meta.env.BASE_URL}home-video/video-poster.jpg`}
+        >
+        </video>
       </div>
-    </BrowserRouter>
+      <div className="col1">
+        <nav>
+          <div>
+            <img style={{ backgroundColor: "darkgray", borderRadius: "15px" }}
+              src="../img/logo.png" alt="Logo" />
+          </div>
+
+          <div style={selectIsVisible ? { visibility: "visible" } : { visibility: "hidden" }}  >
+            <select className="select-search" name="year" id="year"
+              onChange={(e) => setSelectedYear(e.target.value)}>
+              {years.map((year) => {
+                return (
+                  <option key={year} value={year}>{year}</option>
+                );
+              })}
+            </select>
+          </div>
+          <div style={searchIsVisible ? { visibility: "visible" } : { visibility: "hidden" }} >
+            <input className="select-search" type="search"
+              placeholder="Search table..." type="search"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)} />
+          </div>
+
+          <div className="vNav">
+            <ul>
+              <NavLink to="/drivers"
+                className={({ isActive, isPending }) =>
+                  isPending ? "pending" : isActive ? "active" : ""}
+              ><li><img src="../img/Kaciga.png" alt="Drivers logo" /><div className="menuIcons">Drivers</div></li></NavLink>
+              <NavLink to="/teams" className={({ isActive, isPending }) =>
+                isPending ? "pending" : isActive ? "active" : ""}
+              ><li><img src="../img/Teams.png" alt="Teams logo" /><div className="menuIcons">Teams</div></li></NavLink>
+              <NavLink to="/races" className={({ isActive, isPending }) =>
+                isPending ? "pending" : isActive ? "active" : ""}
+              ><li><img src="../img/Races1.png" alt="Races logo" /><div className="menuIcons">Races</div></li></NavLink>
+            </ul>
+          </div>
+        </nav>
+      </div>
+      <div className={col2IsVisible ? "col2" : "col3"}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/drivers" element={<AllDrivers flags={flags} year={selectedYear}
+            search={search} />} />
+          <Route path="/teams" element={<AllTeams flags={flags} year={selectedYear}
+            search={search} />} />
+          <Route path="/races" element={<AllRaces flags={flags} year={selectedYear}
+            search={search} />} />
+          <Route path="/driverDetails/:id" element={<DriverDetails flags={flags} year={selectedYear}
+            search={search} />} />
+          <Route path="/driverRaces/:id" element={<DriverDetails flags={flags} year={selectedYear}
+            search={search} />} />
+          <Route path="/teamDetails/:id" element={<TeamDetails flags={flags} year={selectedYear}
+            search={search} />} />
+          <Route path="/raceDetails/:id" element={<RaceDetails flags={flags} year={selectedYear}
+            search={search} />} />
+        </Routes>
+      </div>
+      <footer>
+        <p>&copy; 2026 Green classroom group II. All rights reserved.</p>
+        <address>
+          Contact us at <a href="mailto:school@smartschool.rs">school@smartschool.rs</a>
+        </address>
+      </footer>
+    </div>
   );
 }

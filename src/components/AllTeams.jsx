@@ -15,13 +15,6 @@ export default function AllTeams(props) {
     const navigate = useNavigate();
 
     useEffect(() => {
-        props.setSearch("");
-        props.setSearchIsVisible(true);
-        props.setSelectIsVisible(true);
-        props.setCol2IsVisible(true);
-    }, []);
-
-    useEffect(() => {
         getTeams();
     }, [props.year]);
 

@@ -14,13 +14,6 @@ export default function AllRaces(props) {
     const navigate = useNavigate();
 
     useEffect(() => {
-        props.setSearch("");
-        props.setSearchIsVisible(true);
-        props.setSelectIsVisible(true);
-        props.setCol2IsVisible(true);
-    }, []);
-
-    useEffect(() => {
         getRaces();
     }, [props.year]);
 

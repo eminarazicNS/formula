@@ -22,13 +22,6 @@ export default function RaceDetails(props) {
     const navigate = useNavigate();
 
     useEffect(() => {
-        props.setSearch("");
-        props.setSearchIsVisible(true);
-        props.setSelectIsVisible(true);
-        props.setCol2IsVisible(true);
-    }, []);
-
-    useEffect(() => {
         getRaceDetails();
     }, [props.year]);
 

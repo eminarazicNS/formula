@@ -18,14 +18,6 @@ export default function DriverDetails(props) {
 
     const navigate = useNavigate();
 
-
-    useEffect(() => {
-        props.setSearch("");
-        props.setSearchIsVisible(true);
-        props.setSelectIsVisible(true);
-        props.setCol2IsVisible(true);
-    }, []);
-
     useEffect(() => {
         getDriverDetails();
     }, [props.year]);
