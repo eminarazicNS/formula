@@ -50,7 +50,7 @@ a {
 }
 
 .select-search {
-    font-size: 20px;    
+    font-size: 20px;
     font-weight: bold;
     font-style: italic;
     background-color: darkgray;
@@ -257,11 +257,11 @@ tr:nth-child(even) {
 
 footer {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     color: white;
     font-family: Arial, Helvetica, sans-serif;
     position: fixed;
     bottom: 0;
-    width: 100%;
+    width: 70%;
 }
